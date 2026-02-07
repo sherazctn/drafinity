@@ -1,56 +1,99 @@
 import { motion } from "framer-motion";
 import {
-  Ruler,
+  PenTool,
   Box,
   FileCheck,
   Building2,
   Layers,
-  PenTool,
+  Ruler,
+  TreePine,
+  Palette,
+  Calculator,
+  CuboidIcon as Cube,
+  FileText,
+  Zap,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import AnimatedIcon from "@/components/AnimatedIcon";
 
 const services = [
   {
     icon: PenTool,
+    animation: "draw" as const,
     title: "2D Floor Plans",
-    description:
-      "Accurate, code-compliant floor plans ready for permits and construction.",
+    description: "Accurate, code-compliant floor plans ready for permits and construction documents.",
   },
   {
     icon: Box,
+    animation: "float" as const,
     title: "3D Rendering",
-    description:
-      "Photorealistic 3D visuals that bring your designs to life for client presentations.",
+    description: "Photorealistic 3D visualizations that bring your designs to life.",
   },
   {
     icon: FileCheck,
+    animation: "pulse" as const,
     title: "Plan Stamping",
-    description:
-      "Certified, permit-ready plan stamping by licensed professionals across all US states.",
+    description: "Certified, permit-ready plan stamping by licensed professionals.",
   },
   {
     icon: Building2,
+    animation: "bounce" as const,
     title: "Structural Drafting",
-    description:
-      "Detailed structural drawings ensuring safety, compliance, and buildability.",
+    description: "Detailed structural drawings ensuring safety and compliance.",
   },
   {
     icon: Layers,
+    animation: "morph" as const,
     title: "MEP Drafting",
-    description:
-      "Mechanical, electrical, and plumbing plans coordinated for seamless construction.",
+    description: "Mechanical, electrical, and plumbing plans for seamless construction.",
   },
   {
     icon: Ruler,
+    animation: "swing" as const,
     title: "Site Plans",
-    description:
-      "Precise site layout drawings for zoning approvals and development permits.",
+    description: "Precise site layout drawings for zoning and development approvals.",
+  },
+  {
+    icon: Cube,
+    animation: "rotate" as const,
+    title: "BIM Modeling",
+    description: "Building Information Modeling for clash-free design coordination.",
+  },
+  {
+    icon: Palette,
+    animation: "wave" as const,
+    title: "Interior Design",
+    description: "Stunning interior visualizations with materials and lighting.",
+  },
+  {
+    icon: FileText,
+    animation: "glow" as const,
+    title: "Construction Documents",
+    description: "Complete CD sets for permitting, bidding, and construction.",
+  },
+  {
+    icon: TreePine,
+    animation: "float" as const,
+    title: "Landscape Design",
+    description: "Realistic landscape renderings with vegetation and hardscaping.",
+  },
+  {
+    icon: Calculator,
+    animation: "shake" as const,
+    title: "Material Estimation",
+    description: "Accurate quantity takeoffs to budget effectively and reduce waste.",
+  },
+  {
+    icon: Zap,
+    animation: "spin-pulse" as const,
+    title: "Permit Expediting",
+    description: "Fast-track your permits with our compliance-first approach.",
   },
 ];
 
 const ServiceBlocks = () => {
   return (
-    <section className="py-24 lg:py-32 blueprint-grid">
+    <section className="py-24 lg:py-32 blueprint-grid relative">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -58,7 +101,7 @@ const ServiceBlocks = () => {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-xs font-heading uppercase tracking-[0.2em] text-primary mb-4 block"
+            className="text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground mb-4 block"
           >
             What We Deliver
           </motion.span>
@@ -67,37 +110,73 @@ const ServiceBlocks = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl lg:text-5xl font-heading font-bold"
+            className="text-3xl lg:text-5xl font-heading font-bold mb-4"
           >
             Our Core Services
           </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-muted-foreground max-w-xl mx-auto"
+          >
+            12 specialized services covering every stage of your architectural project
+          </motion.p>
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {services.map((service, i) => (
             <motion.div
               key={service.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
+              transition={{ delay: i * 0.06 }}
             >
               <Link
                 to="/services"
-                className="group block bg-card border border-border rounded-lg p-8 h-full hover:border-primary/30 hover:bg-surface-elevated transition-all duration-500"
+                className="group block bg-card border border-border rounded-lg p-6 h-full card-hover"
               >
-                <service.icon className="w-8 h-8 text-primary mb-5 group-hover:scale-110 transition-transform duration-300" />
-                <h3 className="text-lg font-heading font-semibold mb-3">
+                <div className="mb-4">
+                  <AnimatedIcon
+                    icon={service.icon}
+                    variant={service.animation}
+                    size={28}
+                  />
+                </div>
+                <h3 className="text-sm font-heading font-semibold mb-2 group-hover:text-foreground transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-xs text-muted-foreground leading-relaxed">
                   {service.description}
                 </p>
               </Link>
             </motion.div>
           ))}
         </div>
+
+        {/* View All Link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-center mt-12"
+        >
+          <Link
+            to="/services"
+            className="text-sm font-heading uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2"
+          >
+            View All Services
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              →
+            </motion.span>
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
