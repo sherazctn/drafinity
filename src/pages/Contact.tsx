@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Send, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,8 +20,7 @@ const Contact = () => {
     e.preventDefault();
     toast({
       title: "Message Sent",
-      description:
-        "Thank you for reaching out! We'll get back to you within 24 hours.",
+      description: "Thank you for reaching out! We'll get back to you within 24 hours.",
     });
     setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
   };
@@ -40,7 +39,7 @@ const Contact = () => {
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-xs font-heading uppercase tracking-[0.2em] text-primary mb-4 block"
+            className="text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground mb-4 block"
           >
             Contact Us
           </motion.span>
@@ -52,7 +51,7 @@ const Contact = () => {
           >
             Let's Build
             <br />
-            <span className="text-gradient-gold">Something Together</span>
+            <span className="text-gradient-highlight">Something Together</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -71,21 +70,26 @@ const Contact = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
             {/* Contact Info */}
-            <div className="lg:col-span-2 space-y-8">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-2 space-y-8"
+            >
               <div>
-                <h3 className="text-sm font-heading uppercase tracking-[0.15em] text-primary mb-6">
+                <h3 className="text-xs font-heading uppercase tracking-[0.15em] text-foreground mb-6">
                   Get in Touch
                 </h3>
                 <ul className="space-y-5">
                   <li>
                     <a
                       href="tel:+19175401563"
-                      className="group flex items-start gap-4 text-foreground"
+                      className="group flex items-start gap-4"
                     >
-                      <Phone className="w-5 h-5 text-primary mt-0.5" />
+                      <Phone className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors mt-0.5" />
                       <div>
-                        <p className="text-sm text-muted-foreground">Phone</p>
-                        <p className="font-heading group-hover:text-primary transition-colors">
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider">Phone</p>
+                        <p className="font-heading group-hover:text-foreground transition-colors">
                           +1 (917) 540-1563
                         </p>
                       </div>
@@ -94,12 +98,12 @@ const Contact = () => {
                   <li>
                     <a
                       href="mailto:info@drafinity.com"
-                      className="group flex items-start gap-4 text-foreground"
+                      className="group flex items-start gap-4"
                     >
-                      <Mail className="w-5 h-5 text-primary mt-0.5" />
+                      <Mail className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors mt-0.5" />
                       <div>
-                        <p className="text-sm text-muted-foreground">Email</p>
-                        <p className="font-heading group-hover:text-primary transition-colors">
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider">Email</p>
+                        <p className="font-heading group-hover:text-foreground transition-colors">
                           info@drafinity.com
                         </p>
                       </div>
@@ -107,9 +111,9 @@ const Contact = () => {
                   </li>
                   <li>
                     <div className="flex items-start gap-4">
-                      <MapPin className="w-5 h-5 text-primary mt-0.5" />
+                      <MapPin className="w-5 h-5 text-muted-foreground mt-0.5" />
                       <div>
-                        <p className="text-sm text-muted-foreground">Location</p>
+                        <p className="text-xs text-muted-foreground uppercase tracking-wider">Location</p>
                         <p className="font-heading">New York, USA</p>
                       </div>
                     </div>
@@ -118,9 +122,10 @@ const Contact = () => {
               </div>
 
               <div className="bg-card border border-border rounded-lg p-6">
-                <h4 className="text-sm font-heading font-semibold mb-2">
-                  Business Hours
-                </h4>
+                <div className="flex items-center gap-2 mb-3">
+                  <Clock className="w-4 h-4 text-muted-foreground" />
+                  <h4 className="text-sm font-heading font-semibold">Business Hours</h4>
+                </div>
                 <p className="text-sm text-muted-foreground">
                   Monday – Friday: 9:00 AM – 6:00 PM EST
                 </p>
@@ -128,16 +133,21 @@ const Contact = () => {
                   Weekend: By appointment
                 </p>
               </div>
-            </div>
+            </motion.div>
 
             {/* Contact Form */}
-            <div className="lg:col-span-3">
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="lg:col-span-3"
+            >
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-heading text-muted-foreground mb-2"
+                      className="block text-xs font-heading uppercase tracking-wider text-muted-foreground mb-2"
                     >
                       Full Name *
                     </label>
@@ -154,7 +164,7 @@ const Contact = () => {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-heading text-muted-foreground mb-2"
+                      className="block text-xs font-heading uppercase tracking-wider text-muted-foreground mb-2"
                     >
                       Email *
                     </label>
@@ -174,7 +184,7 @@ const Contact = () => {
                   <div>
                     <label
                       htmlFor="phone"
-                      className="block text-sm font-heading text-muted-foreground mb-2"
+                      className="block text-xs font-heading uppercase tracking-wider text-muted-foreground mb-2"
                     >
                       Phone
                     </label>
@@ -190,7 +200,7 @@ const Contact = () => {
                   <div>
                     <label
                       htmlFor="subject"
-                      className="block text-sm font-heading text-muted-foreground mb-2"
+                      className="block text-xs font-heading uppercase tracking-wider text-muted-foreground mb-2"
                     >
                       Subject *
                     </label>
@@ -208,7 +218,7 @@ const Contact = () => {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-sm font-heading text-muted-foreground mb-2"
+                    className="block text-xs font-heading uppercase tracking-wider text-muted-foreground mb-2"
                   >
                     Project Details *
                   </label>
@@ -228,7 +238,7 @@ const Contact = () => {
                   <Send className="w-4 h-4" />
                 </Button>
               </form>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>

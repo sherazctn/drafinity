@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Menu, X } from "lucide-react";
+import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/drafinity-logo.png";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Software", href: "/software" },
+  { label: "Pricing", href: "/pricing" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -30,7 +35,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-lg"
+          ? "bg-background/95 backdrop-blur-md border-b border-border"
           : "bg-transparent"
       }`}
     >
@@ -41,34 +46,40 @@ const Navbar = () => {
             <img
               src={logo}
               alt="Drafinity LLC"
-              className="h-6 lg:h-7 w-auto invert"
+              className="h-5 lg:h-6 w-auto invert"
             />
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden xl:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-sm font-heading uppercase tracking-[0.15em] transition-colors duration-300 ${
+                className={`relative text-xs font-heading uppercase tracking-[0.15em] transition-colors duration-300 py-1 ${
                   location.pathname === link.href
-                    ? "text-primary"
+                    ? "text-foreground"
                     : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {link.label}
+                {location.pathname === link.href && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="absolute -bottom-0.5 left-0 right-0 h-px bg-foreground"
+                  />
+                )}
               </Link>
             ))}
           </div>
 
           {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-4">
+          <div className="hidden xl:flex items-center gap-4">
             <a
               href="tel:+19175401563"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+              className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
-              <Phone className="w-4 h-4" />
+              <Phone className="w-3.5 h-3.5" />
               <span className="font-heading tracking-wide">(917) 540-1563</span>
             </a>
             <Link to="/contact">
@@ -80,7 +91,7 @@ const Navbar = () => {
 
           {/* Mobile toggle */}
           <button
-            className="lg:hidden text-foreground p-2"
+            className="xl:hidden text-foreground p-2"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
           >
@@ -90,39 +101,53 @@ const Navbar = () => {
       </div>
 
       {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-background/98 backdrop-blur-xl border-b border-border">
-          <div className="container mx-auto px-4 py-6 flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`text-lg font-heading uppercase tracking-[0.15em] py-2 transition-colors ${
-                  location.pathname === link.href
-                    ? "text-primary"
-                    : "text-muted-foreground"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
-            <div className="pt-4 border-t border-border flex flex-col gap-3">
-              <a
-                href="tel:+19175401563"
-                className="flex items-center gap-2 text-muted-foreground"
-              >
-                <Phone className="w-4 h-4" />
-                <span>(917) 540-1563</span>
-              </a>
-              <Link to="/contact">
-                <Button variant="hero" className="w-full">
-                  Get a Free Quote
-                </Button>
-              </Link>
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="xl:hidden bg-background/98 backdrop-blur-xl border-b border-border overflow-hidden"
+          >
+            <div className="container mx-auto px-4 py-6 flex flex-col gap-3">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                >
+                  <Link
+                    to={link.href}
+                    className={`text-lg font-heading uppercase tracking-[0.15em] py-2 block transition-colors ${
+                      location.pathname === link.href
+                        ? "text-foreground"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+              <div className="pt-4 border-t border-border flex flex-col gap-3">
+                <a
+                  href="tel:+19175401563"
+                  className="flex items-center gap-2 text-muted-foreground"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>(917) 540-1563</span>
+                </a>
+                <Link to="/contact">
+                  <Button variant="hero" className="w-full">
+                    Get a Free Quote
+                  </Button>
+                </Link>
+              </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

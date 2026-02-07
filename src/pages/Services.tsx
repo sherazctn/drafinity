@@ -1,84 +1,114 @@
 import { motion } from "framer-motion";
 import {
-  PenTool,
-  Box,
-  FileCheck,
-  Building2,
-  Layers,
-  Ruler,
-  TreePine,
-  Palette,
-  Calculator,
+  PenTool, Box, FileCheck, Building2, Layers, Ruler,
+  TreePine, Palette, Calculator, CuboidIcon as Cube,
+  FileText, Zap, Warehouse, Compass, HardHat, Eye,
 } from "lucide-react";
+import AnimatedIcon from "@/components/AnimatedIcon";
 import CTASection from "@/components/CTASection";
 
 const serviceCategories = [
   {
     label: "Drafting & Design",
+    description: "Comprehensive drafting services from concept to construction-ready documents.",
     services: [
       {
-        icon: PenTool,
+        icon: PenTool, animation: "draw" as const,
         title: "2D Floor Plans",
-        description:
-          "Detailed, dimensioned floor plans for residential and commercial projects. Our plans are accurate, code-compliant, and ready for permit submissions.",
+        description: "Detailed, dimensioned floor plans for residential and commercial projects. Our plans are accurate, code-compliant, and ready for permit submissions across all 50 states.",
       },
       {
-        icon: Building2,
+        icon: Building2, animation: "bounce" as const,
         title: "Structural Drafting",
-        description:
-          "Comprehensive structural drawings including foundations, framing plans, and details. Engineered for safety and compliance with all applicable building codes.",
+        description: "Comprehensive structural drawings including foundations, framing plans, and details. Engineered for safety and compliance with all applicable building codes.",
       },
       {
-        icon: Ruler,
+        icon: Ruler, animation: "swing" as const,
         title: "Site Plans",
-        description:
-          "Precise site layout drawings showing property boundaries, setbacks, utilities, and grading — essential for zoning and development approvals.",
+        description: "Precise site layout drawings showing property boundaries, setbacks, utilities, and grading — essential for zoning and development approvals.",
       },
       {
-        icon: Layers,
+        icon: Layers, animation: "morph" as const,
         title: "MEP Drafting",
-        description:
-          "Coordinated mechanical, electrical, and plumbing drawings that integrate seamlessly with architectural and structural plans for clash-free construction.",
+        description: "Coordinated mechanical, electrical, and plumbing drawings that integrate seamlessly with architectural and structural plans for clash-free construction.",
       },
     ],
   },
   {
     label: "3D & Visualization",
+    description: "Photorealistic visuals and immersive experiences that sell your designs.",
     services: [
       {
-        icon: Box,
+        icon: Box, animation: "float" as const,
         title: "3D Rendering",
-        description:
-          "Photorealistic exterior and interior renderings that help you present winning designs. Perfect for marketing materials, client approvals, and pre-sales.",
+        description: "Photorealistic exterior and interior renderings that help you present winning designs. Perfect for marketing materials, client approvals, and pre-sales.",
       },
       {
-        icon: Palette,
+        icon: Palette, animation: "wave" as const,
         title: "Interior Visualization",
-        description:
-          "Stunning interior 3D visuals showcasing material selections, lighting design, and spatial arrangements to help clients experience their spaces before construction.",
+        description: "Stunning interior 3D visuals showcasing material selections, lighting design, and spatial arrangements to help clients experience spaces before construction.",
       },
       {
-        icon: TreePine,
+        icon: TreePine, animation: "float" as const,
         title: "Virtual Landscaping",
-        description:
-          "Realistic landscape renderings with vegetation, hardscaping, water features, and outdoor lighting to complete your project's visual presentation.",
+        description: "Realistic landscape renderings with vegetation, hardscaping, water features, and outdoor lighting to complete your project's visual presentation.",
+      },
+      {
+        icon: Eye, animation: "pulse" as const,
+        title: "Virtual Walkthroughs",
+        description: "Interactive 3D walkthroughs that let clients explore every room and angle of their future space with immersive virtual reality experiences.",
+      },
+    ],
+  },
+  {
+    label: "BIM & Technology",
+    description: "Advanced digital modeling for smarter, more efficient construction.",
+    services: [
+      {
+        icon: Cube, animation: "rotate" as const,
+        title: "BIM Modeling",
+        description: "Building Information Modeling services for comprehensive 3D coordination, clash detection, and data-rich project management across disciplines.",
+      },
+      {
+        icon: FileText, animation: "glow" as const,
+        title: "Construction Documents",
+        description: "Complete CD sets with all necessary details, schedules, and specifications for permitting, bidding, and construction phases.",
+      },
+      {
+        icon: Warehouse, animation: "bounce" as const,
+        title: "As-Built Documentation",
+        description: "Accurate as-built drawings documenting existing conditions for renovations, additions, and facility management purposes.",
+      },
+      {
+        icon: Compass, animation: "spin-pulse" as const,
+        title: "Shop Drawings",
+        description: "Detailed fabrication drawings for steel, millwork, curtain walls, and specialty items with precise measurements and specifications.",
       },
     ],
   },
   {
     label: "Estimation & Compliance",
+    description: "Budget control and regulatory compliance from start to finish.",
     services: [
       {
-        icon: Calculator,
+        icon: Calculator, animation: "shake" as const,
         title: "Material Estimation",
-        description:
-          "Accurate quantity takeoffs and material estimates to help you budget effectively and reduce waste during construction.",
+        description: "Accurate quantity takeoffs and material estimates to help you budget effectively, reduce waste, and optimize procurement during construction.",
       },
       {
-        icon: FileCheck,
+        icon: FileCheck, animation: "pulse" as const,
         title: "Plan Stamping",
-        description:
-          "Certified plan stamping by licensed professionals across all US states. Our stamped plans are permit-ready and meet all local and national code requirements.",
+        description: "Certified plan stamping by licensed professionals across all US states. Our stamped plans are permit-ready and meet all code requirements.",
+      },
+      {
+        icon: Zap, animation: "glow" as const,
+        title: "Permit Expediting",
+        description: "Fast-track your building permits with our streamlined compliance-first approach and established relationships with local building departments.",
+      },
+      {
+        icon: HardHat, animation: "bounce" as const,
+        title: "Code Compliance Review",
+        description: "Thorough review of your plans against local building codes, ADA requirements, fire safety regulations, and energy codes before submission.",
       },
     ],
   },
@@ -93,7 +123,7 @@ const Services = () => {
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-xs font-heading uppercase tracking-[0.2em] text-primary mb-4 block"
+            className="text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground mb-4 block"
           >
             Our Services
           </motion.span>
@@ -105,7 +135,7 @@ const Services = () => {
           >
             Comprehensive Drafting
             <br />
-            <span className="text-gradient-gold">& Design Solutions</span>
+            <span className="text-gradient-highlight">& Design Solutions</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -113,9 +143,8 @@ const Services = () => {
             transition={{ delay: 0.2 }}
             className="text-lg text-muted-foreground max-w-2xl leading-relaxed"
           >
-            From initial concepts to permit-ready plans, we deliver the full
-            spectrum of drafting, 3D visualization, and compliance services your
-            project demands.
+            From initial concepts to permit-ready plans, we deliver 16+ specialized
+            services covering every stage of your architectural project.
           </motion.p>
         </div>
       </section>
@@ -127,17 +156,20 @@ const Services = () => {
           className={`py-20 lg:py-28 ${catIdx % 2 === 1 ? "bg-card" : ""}`}
         >
           <div className="container mx-auto px-4 lg:px-8">
-            <motion.h2
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-2xl lg:text-3xl font-heading font-bold mb-4"
+              className="mb-10"
             >
-              {category.label}
-            </motion.h2>
-            <div className="gold-line mb-10 max-w-xs" />
+              <h2 className="text-2xl lg:text-3xl font-heading font-bold mb-2">
+                {category.label}
+              </h2>
+              <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
+              <div className="light-line max-w-xs" />
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {category.services.map((service, i) => (
                 <motion.div
                   key={service.title}
@@ -145,13 +177,15 @@ const Services = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="group bg-secondary/50 border border-border rounded-lg p-8 hover:border-primary/20 transition-all duration-500"
+                  className="group bg-secondary/30 border border-border rounded-lg p-8 card-hover"
                 >
-                  <service.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="mb-4">
+                    <AnimatedIcon icon={service.icon} variant={service.animation} size={32} />
+                  </div>
                   <h3 className="text-xl font-heading font-semibold mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed text-sm">
                     {service.description}
                   </p>
                 </motion.div>
