@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, useAnimationFrame } from "framer-motion";
 import { Star, Quote } from "lucide-react";
+import { useRef, useState } from "react";
 
 const testimonials = [
   {
@@ -17,11 +18,44 @@ const testimonials = [
     name: "James Rodriguez",
     role: "Development Firm Owner, FL",
   },
+  {
+    quote: "Their BIM modeling caught clashes that would have cost us over $200K in change orders. Drafinity is now our go-to for every project.",
+    name: "Robert Martinez",
+    role: "Project Manager, TX",
+  },
+  {
+    quote: "From initial sketches to permit-ready documents in under a week. The speed and quality are unmatched in the industry.",
+    name: "Emily Parker",
+    role: "Architect, Chicago",
+  },
+  {
+    quote: "We needed plans stamped across 15 states for a retail rollout. Drafinity handled it flawlessly — all permits approved first submission.",
+    name: "David Kim",
+    role: "Retail Developer, CA",
+  },
 ];
 
+// Duplicate for seamless loop
+const allCards = [...testimonials, ...testimonials];
+
 const Testimonials = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [offset, setOffset] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useAnimationFrame((_, delta) => {
+    if (isPaused) return;
+    setOffset((prev) => {
+      const speed = 0.03;
+      const next = prev + delta * speed;
+      const cardWidth = 380;
+      const totalWidth = testimonials.length * cardWidth;
+      return next >= totalWidth ? next - totalWidth : next;
+    });
+  });
+
   return (
-    <section className="py-24 lg:py-32 bg-card">
+    <section className="py-24 lg:py-32 bg-card overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
@@ -43,30 +77,35 @@ const Testimonials = () => {
             Trusted by Professionals
           </motion.h2>
         </div>
+      </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonials.map((t, i) => (
-            <motion.div
-              key={t.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15 }}
-              className="bg-background border border-border rounded-lg p-8 flex flex-col card-hover relative"
+      {/* Scrolling container */}
+      <div
+        ref={containerRef}
+        className="relative"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        {/* Edge fades */}
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-card to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-card to-transparent z-10 pointer-events-none" />
+
+        <div
+          className="flex gap-6"
+          style={{
+            transform: `translateX(-${offset}px)`,
+            width: "max-content",
+          }}
+        >
+          {allCards.map((t, i) => (
+            <div
+              key={`${t.name}-${i}`}
+              className="w-[350px] flex-shrink-0 bg-background border border-border rounded-lg p-8 flex flex-col"
             >
               <Quote className="w-8 h-8 text-muted/50 mb-4" />
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: 5 }).map((_, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.15 + idx * 0.1 }}
-                  >
-                    <Star className="w-3.5 h-3.5 fill-foreground text-foreground" />
-                  </motion.div>
+                  <Star key={idx} className="w-3.5 h-3.5 fill-foreground text-foreground" />
                 ))}
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-6">
@@ -76,7 +115,7 @@ const Testimonials = () => {
                 <p className="text-sm font-heading font-semibold">{t.name}</p>
                 <p className="text-xs text-muted-foreground">{t.role}</p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

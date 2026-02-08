@@ -1,8 +1,19 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import CTASection from "@/components/CTASection";
 import portfolio1 from "@/assets/portfolio-1.jpg";
 import portfolio2 from "@/assets/portfolio-2.jpg";
 import portfolio3 from "@/assets/portfolio-3.jpg";
+
+const categories = [
+  "All",
+  "3D Rendering",
+  "Interior Visualization",
+  "Construction Documents",
+  "2D Floor Plans",
+  "BIM Modeling",
+  "Plan Stamping",
+];
 
 const projects = [
   {
@@ -59,9 +70,69 @@ const projects = [
     tools: "AutoCAD, Bluebeam Revu",
     result: "All 15 locations permitted within 60 days.",
   },
+  {
+    image: portfolio1,
+    title: "Waterfront Condo Tower",
+    category: "3D Rendering",
+    problem: "Real estate developer needed marketing visuals for pre-construction sales of a 40-story waterfront tower.",
+    solution: "Full suite of day/night exterior renders, lobby visualization, and bird's-eye perspective.",
+    tools: "3ds Max, V-Ray, Photoshop",
+    result: "Achieved 60% pre-sales before groundbreaking with rendered marketing materials.",
+  },
+  {
+    image: portfolio2,
+    title: "Boutique Hotel Renovation",
+    category: "Interior Visualization",
+    problem: "Hotel group needed interior visuals for a historic building renovation to secure franchise approval.",
+    solution: "Detailed room-by-room interior renderings showing material finishes and FF&E selections.",
+    tools: "SketchUp, V-Ray, Enscape",
+    result: "Franchise approval granted on first submission with visualization package.",
+  },
+  {
+    image: portfolio3,
+    title: "Industrial Warehouse Complex",
+    category: "Construction Documents",
+    problem: "Logistics company needed construction documents for a 200,000 sq ft warehouse with specialized loading.",
+    solution: "Full CD set including structural steel details, MEP coordination, and fire protection plans.",
+    tools: "AutoCAD, Revit, Navisworks",
+    result: "Construction completed 2 weeks ahead of schedule due to accurate documentation.",
+  },
+  {
+    image: portfolio1,
+    title: "Multi-Family Housing Project",
+    category: "2D Floor Plans",
+    problem: "Affordable housing developer needed standardized floor plans for a 120-unit apartment complex.",
+    solution: "Modular floor plan designs optimized for efficient construction and code compliance.",
+    tools: "AutoCAD, Revit",
+    result: "30% reduction in drafting costs through modular design approach.",
+  },
+  {
+    image: portfolio2,
+    title: "University Science Building",
+    category: "BIM Modeling",
+    problem: "University required detailed BIM coordination for a research facility with complex lab requirements.",
+    solution: "LOD 400 BIM model with MEP coordination, equipment clearances, and lab gas routing.",
+    tools: "Revit, Navisworks, Dynamo",
+    result: "Reduced RFIs by 75% during construction phase.",
+  },
+  {
+    image: portfolio3,
+    title: "Restaurant Chain Expansion",
+    category: "Plan Stamping",
+    problem: "Fast-casual restaurant chain needed plans stamped for 25 new locations across 8 states.",
+    solution: "Standardized plan set with state-specific amendments and licensed PE/RA stamps.",
+    tools: "AutoCAD, Bluebeam Revu",
+    result: "Average permit approval time of 12 business days across all locations.",
+  },
 ];
 
 const Portfolio = () => {
+  const [activeFilter, setActiveFilter] = useState("All");
+
+  const filtered = activeFilter === "All"
+    ? projects
+    : projects.filter((p) => p.category === activeFilter);
+
   return (
     <main>
       {/* Hero */}
@@ -96,62 +167,103 @@ const Portfolio = () => {
         </div>
       </section>
 
+      {/* Filters */}
+      <section className="border-y border-border bg-card sticky top-16 lg:top-20 z-30">
+        <div className="container mx-auto px-4 lg:px-8 py-4">
+          <div className="flex flex-wrap gap-2">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className={`text-xs font-heading uppercase tracking-[0.12em] px-4 py-2 rounded-full border transition-all duration-300 ${
+                  activeFilter === cat
+                    ? "bg-foreground text-background border-foreground"
+                    : "bg-transparent text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground"
+                }`}
+              >
+                {cat}
+                {cat !== "All" && (
+                  <span className="ml-1.5 text-[10px] opacity-60">
+                    ({projects.filter((p) => p.category === cat).length})
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Projects Grid */}
       <section className="py-20 lg:py-28">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {projects.map((project, i) => (
-              <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="group bg-card border border-border rounded-lg overflow-hidden card-hover"
-              >
-                {/* Image */}
-                <div className="relative h-56 overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-background/40" />
-                  <span className="absolute top-4 left-4 text-[10px] font-heading uppercase tracking-[0.2em] bg-background/80 backdrop-blur-sm border border-border rounded-full px-3 py-1">
-                    {project.category}
-                  </span>
-                </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeFilter}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+            >
+              {filtered.map((project, i) => (
+                <motion.div
+                  key={project.title}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="group bg-card border border-border rounded-lg overflow-hidden card-hover"
+                >
+                  {/* Image */}
+                  <div className="relative h-56 overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div className="absolute inset-0 bg-background/40" />
+                    <span className="absolute top-4 left-4 text-[10px] font-heading uppercase tracking-[0.2em] bg-background/80 backdrop-blur-sm border border-border rounded-full px-3 py-1">
+                      {project.category}
+                    </span>
+                  </div>
 
-                {/* Content */}
-                <div className="p-6 lg:p-8">
-                  <h3 className="text-xl font-heading font-bold mb-4">
-                    {project.title}
-                  </h3>
-
-                  <div className="space-y-3 text-sm">
-                    <div>
-                      <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Problem</span>
-                      <p className="text-muted-foreground mt-1">{project.problem}</p>
-                    </div>
-                    <div>
-                      <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Solution</span>
-                      <p className="text-muted-foreground mt-1">{project.solution}</p>
-                    </div>
-                    <div className="flex items-center gap-4 pt-2 border-t border-border">
+                  {/* Content */}
+                  <div className="p-6 lg:p-8">
+                    <h3 className="text-xl font-heading font-bold mb-4">
+                      {project.title}
+                    </h3>
+                    <div className="space-y-3 text-sm">
                       <div>
-                        <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Tools</span>
-                        <p className="text-xs text-foreground mt-1">{project.tools}</p>
+                        <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Problem</span>
+                        <p className="text-muted-foreground mt-1">{project.problem}</p>
+                      </div>
+                      <div>
+                        <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Solution</span>
+                        <p className="text-muted-foreground mt-1">{project.solution}</p>
+                      </div>
+                      <div className="flex items-center gap-4 pt-2 border-t border-border">
+                        <div>
+                          <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Tools</span>
+                          <p className="text-xs text-foreground mt-1">{project.tools}</p>
+                        </div>
+                      </div>
+                      <div className="bg-secondary/50 rounded-md p-3">
+                        <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Result</span>
+                        <p className="text-sm text-foreground font-medium mt-1">{project.result}</p>
                       </div>
                     </div>
-                    <div className="bg-secondary/50 rounded-md p-3">
-                      <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Result</span>
-                      <p className="text-sm text-foreground font-medium mt-1">{project.result}</p>
-                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-muted-foreground">No projects found for this category.</p>
+            </div>
+          )}
         </div>
       </section>
 
