@@ -3,13 +3,7 @@ import { Phone, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import heroBg from "@/assets/hero-bg.jpg";
-
-const stats = [
-  { value: "500+", label: "Projects" },
-  { value: "50", label: "States" },
-  { value: "10+", label: "Years" },
-  { value: "100%", label: "Satisfaction" },
-];
+import BlueprintAnimation from "@/components/BlueprintAnimation";
 
 const Hero = () => {
   return (
@@ -46,9 +40,12 @@ const Hero = () => {
         />
       </div>
 
+      {/* Blueprint SVG Animation */}
+      <BlueprintAnimation />
+
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 lg:px-8 py-32">
-        <div className="max-w-5xl">
+        <div className="max-w-4xl">
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -93,7 +90,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="flex flex-col sm:flex-row gap-4 mb-20"
+            className="flex flex-col sm:flex-row gap-4"
           >
             <Link to="/contact">
               <Button variant="hero" size="xl">
@@ -107,31 +104,6 @@ const Hero = () => {
                 Call (917) 540-1563
               </Button>
             </a>
-          </motion.div>
-
-          {/* Stats row */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-8 border-t border-border pt-8"
-          >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 1.2 + i * 0.15 }}
-                className="text-center sm:text-left"
-              >
-                <p className="text-2xl lg:text-3xl font-heading font-bold stat-number">
-                  {stat.value}
-                </p>
-                <p className="text-xs text-muted-foreground uppercase tracking-widest mt-1">
-                  {stat.label}
-                </p>
-              </motion.div>
-            ))}
           </motion.div>
         </div>
       </div>

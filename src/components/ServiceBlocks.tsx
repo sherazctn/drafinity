@@ -1,17 +1,8 @@
 import { motion } from "framer-motion";
 import {
-  PenTool,
-  Box,
-  FileCheck,
-  Building2,
-  Layers,
-  Ruler,
-  TreePine,
-  Palette,
-  Calculator,
-  CuboidIcon as Cube,
-  FileText,
-  Zap,
+  PenTool, Box, FileCheck, Building2, Layers, Ruler,
+  TreePine, Palette, Calculator, CuboidIcon as Cube,
+  FileText, Zap,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import AnimatedIcon from "@/components/AnimatedIcon";
@@ -21,72 +12,84 @@ const services = [
     icon: PenTool,
     animation: "draw" as const,
     title: "2D Floor Plans",
+    slug: "2d-floor-plans",
     description: "Accurate, code-compliant floor plans ready for permits and construction documents.",
   },
   {
     icon: Box,
     animation: "float" as const,
     title: "3D Rendering",
+    slug: "3d-rendering",
     description: "Photorealistic 3D visualizations that bring your designs to life.",
   },
   {
     icon: FileCheck,
     animation: "pulse" as const,
     title: "Plan Stamping",
+    slug: "plan-stamping",
     description: "Certified, permit-ready plan stamping by licensed professionals.",
   },
   {
     icon: Building2,
     animation: "bounce" as const,
     title: "Structural Drafting",
+    slug: "structural-drafting",
     description: "Detailed structural drawings ensuring safety and compliance.",
   },
   {
     icon: Layers,
     animation: "morph" as const,
     title: "MEP Drafting",
+    slug: "mep-drafting",
     description: "Mechanical, electrical, and plumbing plans for seamless construction.",
   },
   {
     icon: Ruler,
     animation: "swing" as const,
     title: "Site Plans",
+    slug: "site-plans",
     description: "Precise site layout drawings for zoning and development approvals.",
   },
   {
     icon: Cube,
     animation: "rotate" as const,
     title: "BIM Modeling",
+    slug: "bim-modeling",
     description: "Building Information Modeling for clash-free design coordination.",
   },
   {
     icon: Palette,
     animation: "wave" as const,
     title: "Interior Design",
+    slug: "interior-visualization",
     description: "Stunning interior visualizations with materials and lighting.",
   },
   {
     icon: FileText,
     animation: "glow" as const,
     title: "Construction Documents",
+    slug: "construction-documents",
     description: "Complete CD sets for permitting, bidding, and construction.",
   },
   {
     icon: TreePine,
     animation: "float" as const,
     title: "Landscape Design",
+    slug: "virtual-landscaping",
     description: "Realistic landscape renderings with vegetation and hardscaping.",
   },
   {
     icon: Calculator,
     animation: "shake" as const,
     title: "Material Estimation",
+    slug: "material-estimation",
     description: "Accurate quantity takeoffs to budget effectively and reduce waste.",
   },
   {
     icon: Zap,
     animation: "spin-pulse" as const,
     title: "Permit Expediting",
+    slug: "permit-expediting",
     description: "Fast-track your permits with our compliance-first approach.",
   },
 ];
@@ -136,7 +139,7 @@ const ServiceBlocks = () => {
               transition={{ delay: i * 0.06 }}
             >
               <Link
-                to="/services"
+                to={`/services/${service.slug}`}
                 className="group block bg-card border border-border rounded-lg p-6 h-full card-hover"
               >
                 <div className="mb-4">

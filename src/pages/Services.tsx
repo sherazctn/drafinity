@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import {
   PenTool, Box, FileCheck, Building2, Layers, Ruler,
   TreePine, Palette, Calculator, CuboidIcon as Cube,
@@ -12,104 +14,40 @@ const serviceCategories = [
     label: "Drafting & Design",
     description: "Comprehensive drafting services from concept to construction-ready documents.",
     services: [
-      {
-        icon: PenTool, animation: "draw" as const,
-        title: "2D Floor Plans",
-        description: "Detailed, dimensioned floor plans for residential and commercial projects. Our plans are accurate, code-compliant, and ready for permit submissions across all 50 states.",
-      },
-      {
-        icon: Building2, animation: "bounce" as const,
-        title: "Structural Drafting",
-        description: "Comprehensive structural drawings including foundations, framing plans, and details. Engineered for safety and compliance with all applicable building codes.",
-      },
-      {
-        icon: Ruler, animation: "swing" as const,
-        title: "Site Plans",
-        description: "Precise site layout drawings showing property boundaries, setbacks, utilities, and grading — essential for zoning and development approvals.",
-      },
-      {
-        icon: Layers, animation: "morph" as const,
-        title: "MEP Drafting",
-        description: "Coordinated mechanical, electrical, and plumbing drawings that integrate seamlessly with architectural and structural plans for clash-free construction.",
-      },
+      { icon: PenTool, animation: "draw" as const, slug: "2d-floor-plans", title: "2D Floor Plans", description: "Detailed, dimensioned floor plans for residential and commercial projects. Our plans are accurate, code-compliant, and ready for permit submissions across all 50 states." },
+      { icon: Building2, animation: "bounce" as const, slug: "structural-drafting", title: "Structural Drafting", description: "Comprehensive structural drawings including foundations, framing plans, and details. Engineered for safety and compliance with all applicable building codes." },
+      { icon: Ruler, animation: "swing" as const, slug: "site-plans", title: "Site Plans", description: "Precise site layout drawings showing property boundaries, setbacks, utilities, and grading — essential for zoning and development approvals." },
+      { icon: Layers, animation: "morph" as const, slug: "mep-drafting", title: "MEP Drafting", description: "Coordinated mechanical, electrical, and plumbing drawings that integrate seamlessly with architectural and structural plans for clash-free construction." },
     ],
   },
   {
     label: "3D & Visualization",
     description: "Photorealistic visuals and immersive experiences that sell your designs.",
     services: [
-      {
-        icon: Box, animation: "float" as const,
-        title: "3D Rendering",
-        description: "Photorealistic exterior and interior renderings that help you present winning designs. Perfect for marketing materials, client approvals, and pre-sales.",
-      },
-      {
-        icon: Palette, animation: "wave" as const,
-        title: "Interior Visualization",
-        description: "Stunning interior 3D visuals showcasing material selections, lighting design, and spatial arrangements to help clients experience spaces before construction.",
-      },
-      {
-        icon: TreePine, animation: "float" as const,
-        title: "Virtual Landscaping",
-        description: "Realistic landscape renderings with vegetation, hardscaping, water features, and outdoor lighting to complete your project's visual presentation.",
-      },
-      {
-        icon: Eye, animation: "pulse" as const,
-        title: "Virtual Walkthroughs",
-        description: "Interactive 3D walkthroughs that let clients explore every room and angle of their future space with immersive virtual reality experiences.",
-      },
+      { icon: Box, animation: "float" as const, slug: "3d-rendering", title: "3D Rendering", description: "Photorealistic exterior and interior renderings that help you present winning designs. Perfect for marketing materials, client approvals, and pre-sales." },
+      { icon: Palette, animation: "wave" as const, slug: "interior-visualization", title: "Interior Visualization", description: "Stunning interior 3D visuals showcasing material selections, lighting design, and spatial arrangements to help clients experience spaces before construction." },
+      { icon: TreePine, animation: "float" as const, slug: "virtual-landscaping", title: "Virtual Landscaping", description: "Realistic landscape renderings with vegetation, hardscaping, water features, and outdoor lighting to complete your project's visual presentation." },
+      { icon: Eye, animation: "pulse" as const, slug: "3d-rendering", title: "Virtual Walkthroughs", description: "Interactive 3D walkthroughs that let clients explore every room and angle of their future space with immersive virtual reality experiences." },
     ],
   },
   {
     label: "BIM & Technology",
     description: "Advanced digital modeling for smarter, more efficient construction.",
     services: [
-      {
-        icon: Cube, animation: "rotate" as const,
-        title: "BIM Modeling",
-        description: "Building Information Modeling services for comprehensive 3D coordination, clash detection, and data-rich project management across disciplines.",
-      },
-      {
-        icon: FileText, animation: "glow" as const,
-        title: "Construction Documents",
-        description: "Complete CD sets with all necessary details, schedules, and specifications for permitting, bidding, and construction phases.",
-      },
-      {
-        icon: Warehouse, animation: "bounce" as const,
-        title: "As-Built Documentation",
-        description: "Accurate as-built drawings documenting existing conditions for renovations, additions, and facility management purposes.",
-      },
-      {
-        icon: Compass, animation: "spin-pulse" as const,
-        title: "Shop Drawings",
-        description: "Detailed fabrication drawings for steel, millwork, curtain walls, and specialty items with precise measurements and specifications.",
-      },
+      { icon: Cube, animation: "rotate" as const, slug: "bim-modeling", title: "BIM Modeling", description: "Building Information Modeling services for comprehensive 3D coordination, clash detection, and data-rich project management across disciplines." },
+      { icon: FileText, animation: "glow" as const, slug: "construction-documents", title: "Construction Documents", description: "Complete CD sets with all necessary details, schedules, and specifications for permitting, bidding, and construction phases." },
+      { icon: Warehouse, animation: "bounce" as const, slug: "construction-documents", title: "As-Built Documentation", description: "Accurate as-built drawings documenting existing conditions for renovations, additions, and facility management purposes." },
+      { icon: Compass, animation: "spin-pulse" as const, slug: "construction-documents", title: "Shop Drawings", description: "Detailed fabrication drawings for steel, millwork, curtain walls, and specialty items with precise measurements and specifications." },
     ],
   },
   {
     label: "Estimation & Compliance",
     description: "Budget control and regulatory compliance from start to finish.",
     services: [
-      {
-        icon: Calculator, animation: "shake" as const,
-        title: "Material Estimation",
-        description: "Accurate quantity takeoffs and material estimates to help you budget effectively, reduce waste, and optimize procurement during construction.",
-      },
-      {
-        icon: FileCheck, animation: "pulse" as const,
-        title: "Plan Stamping",
-        description: "Certified plan stamping by licensed professionals across all US states. Our stamped plans are permit-ready and meet all code requirements.",
-      },
-      {
-        icon: Zap, animation: "glow" as const,
-        title: "Permit Expediting",
-        description: "Fast-track your building permits with our streamlined compliance-first approach and established relationships with local building departments.",
-      },
-      {
-        icon: HardHat, animation: "bounce" as const,
-        title: "Code Compliance Review",
-        description: "Thorough review of your plans against local building codes, ADA requirements, fire safety regulations, and energy codes before submission.",
-      },
+      { icon: Calculator, animation: "shake" as const, slug: "material-estimation", title: "Material Estimation", description: "Accurate quantity takeoffs and material estimates to help you budget effectively, reduce waste, and optimize procurement during construction." },
+      { icon: FileCheck, animation: "pulse" as const, slug: "plan-stamping", title: "Plan Stamping", description: "Certified plan stamping by licensed professionals across all US states. Our stamped plans are permit-ready and meet all code requirements." },
+      { icon: Zap, animation: "glow" as const, slug: "permit-expediting", title: "Permit Expediting", description: "Fast-track your building permits with our streamlined compliance-first approach and established relationships with local building departments." },
+      { icon: HardHat, animation: "bounce" as const, slug: "permit-expediting", title: "Code Compliance Review", description: "Thorough review of your plans against local building codes, ADA requirements, fire safety regulations, and energy codes before submission." },
     ],
   },
 ];
@@ -177,17 +115,22 @@ const Services = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="group bg-secondary/30 border border-border rounded-lg p-8 card-hover"
                 >
-                  <div className="mb-4">
-                    <AnimatedIcon icon={service.icon} variant={service.animation} size={32} />
-                  </div>
-                  <h3 className="text-xl font-heading font-semibold mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">
-                    {service.description}
-                  </p>
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="group block bg-secondary/30 border border-border rounded-lg p-8 card-hover h-full"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <AnimatedIcon icon={service.icon} variant={service.animation} size={32} />
+                      <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    <h3 className="text-xl font-heading font-semibold mb-3">
+                      {service.title}
+                    </h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm">
+                      {service.description}
+                    </p>
+                  </Link>
                 </motion.div>
               ))}
             </div>
