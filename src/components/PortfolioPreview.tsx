@@ -6,31 +6,15 @@ import portfolio2 from "@/assets/portfolio-2.jpg";
 import portfolio3 from "@/assets/portfolio-3.jpg";
 
 const featured = [
-  {
-    image: portfolio1,
-    title: "Modern Residential Complex",
-    category: "3D Rendering",
-    result: "Secured $2.5M in investor funding",
-  },
-  {
-    image: portfolio2,
-    title: "Corporate Office HQ",
-    category: "Interior Visualization",
-    result: "Client approval on first revision",
-  },
-  {
-    image: portfolio3,
-    title: "Mixed-Use Development",
-    category: "Construction Documents",
-    result: "Permits in 3 states, zero revisions",
-  },
+  { image: portfolio1, title: "Modern Residential Complex", category: "3D Rendering", result: "Secured $2.5M in investor funding" },
+  { image: portfolio2, title: "Corporate Office HQ", category: "Interior Visualization", result: "Client approval on first revision" },
+  { image: portfolio3, title: "Mixed-Use Development", category: "Construction Documents", result: "Permits in 3 states, zero revisions" },
 ];
 
 const PortfolioPreview = () => {
   return (
     <section className="py-24 lg:py-32">
       <div className="container mx-auto px-4 lg:px-8">
-        {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-14 gap-4">
           <div>
             <motion.span
@@ -51,11 +35,7 @@ const PortfolioPreview = () => {
               Recent Projects
             </motion.h2>
           </div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
+          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
             <Link
               to="/portfolio"
               className="text-sm font-heading uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors inline-flex items-center gap-2"
@@ -66,7 +46,6 @@ const PortfolioPreview = () => {
           </motion.div>
         </div>
 
-        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {featured.map((project, i) => (
             <motion.div
@@ -78,7 +57,7 @@ const PortfolioPreview = () => {
             >
               <Link
                 to="/portfolio"
-                className="group block bg-card border border-border rounded-lg overflow-hidden card-hover"
+                className="group block bg-card border border-border rounded-lg overflow-hidden card-hover shadow-sm"
               >
                 <div className="relative h-56 overflow-hidden">
                   <img
@@ -87,8 +66,8 @@ const PortfolioPreview = () => {
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-background/30 group-hover:bg-background/10 transition-colors duration-500" />
-                  <span className="absolute top-4 left-4 text-[10px] font-heading uppercase tracking-[0.2em] bg-background/80 backdrop-blur-sm border border-border rounded-full px-3 py-1">
+                  <div className="absolute inset-0 bg-foreground/10 group-hover:bg-foreground/20 transition-colors duration-500" />
+                  <span className="absolute top-4 left-4 text-[10px] font-heading uppercase tracking-[0.2em] bg-card/90 backdrop-blur-sm border border-border rounded-full px-3 py-1">
                     {project.category}
                   </span>
                 </div>

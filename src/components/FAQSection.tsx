@@ -7,38 +7,14 @@ import {
 } from "@/components/ui/accordion";
 
 const faqs = [
-  {
-    q: "What areas do you serve?",
-    a: "We serve all 50 US states. Our licensed professionals are certified to stamp and submit plans in every jurisdiction, ensuring compliance with local building codes no matter where your project is located.",
-  },
-  {
-    q: "How long does a typical drafting project take?",
-    a: "Timelines vary by project complexity. Simple floor plans can be completed in 2–3 business days, while comprehensive construction document sets typically take 1–2 weeks. We also offer expedited services for urgent projects.",
-  },
-  {
-    q: "Do you offer plan stamping services?",
-    a: "Yes, we provide certified plan stamping by licensed architects and engineers across all US states. Our stamped plans are permit-ready and meet all applicable building code requirements.",
-  },
-  {
-    q: "What file formats do you deliver?",
-    a: "We deliver in all standard formats including DWG, DXF, PDF, RVT (Revit), SKP (SketchUp), and high-resolution image files. We can accommodate any specific format requirements your project needs.",
-  },
-  {
-    q: "Can you work with my existing sketches or drawings?",
-    a: "Absolutely. We routinely work from hand sketches, napkin drawings, PDFs, photos, or existing CAD files. Our team will convert your concepts into precise, code-compliant technical drawings.",
-  },
-  {
-    q: "What is your revision policy?",
-    a: "We include revisions in every project. Minor revisions are typically included at no additional cost. For major scope changes, we'll provide a transparent quote before proceeding so there are no surprises.",
-  },
-  {
-    q: "How do you ensure quality and accuracy?",
-    a: "Every project goes through our multi-step QC process: initial review, cross-discipline coordination check, code compliance verification, and final senior review before delivery.",
-  },
-  {
-    q: "Do you sign NDAs or confidentiality agreements?",
-    a: "Yes, we take data security seriously. We're happy to sign NDAs and confidentiality agreements. All project files are stored on encrypted, secure servers with restricted access.",
-  },
+  { q: "What areas do you serve?", a: "We serve all 50 US states. Our licensed professionals are certified to stamp and submit plans in every jurisdiction, ensuring compliance with local building codes no matter where your project is located." },
+  { q: "How long does a typical drafting project take?", a: "Timelines vary by project complexity. Simple floor plans can be completed in 2–3 business days, while comprehensive construction document sets typically take 1–2 weeks. We also offer expedited services for urgent projects." },
+  { q: "Do you offer plan stamping services?", a: "Yes, we provide certified plan stamping by licensed architects and engineers across all US states. Our stamped plans are permit-ready and meet all applicable building code requirements." },
+  { q: "What file formats do you deliver?", a: "We deliver in all standard formats including DWG, DXF, PDF, RVT (Revit), SKP (SketchUp), and high-resolution image files. We can accommodate any specific format requirements your project needs." },
+  { q: "Can you work with my existing sketches or drawings?", a: "Absolutely. We routinely work from hand sketches, napkin drawings, PDFs, photos, or existing CAD files. Our team will convert your concepts into precise, code-compliant technical drawings." },
+  { q: "What is your revision policy?", a: "We include revisions in every project. Minor revisions are typically included at no additional cost. For major scope changes, we'll provide a transparent quote before proceeding so there are no surprises." },
+  { q: "How do you ensure quality and accuracy?", a: "Every project goes through our multi-step QC process: initial review, cross-discipline coordination check, code compliance verification, and final senior review before delivery." },
+  { q: "Do you sign NDAs or confidentiality agreements?", a: "Yes, we take data security seriously. We're happy to sign NDAs and confidentiality agreements. All project files are stored on encrypted, secure servers with restricted access." },
 ];
 
 const FAQSection = () => {
@@ -46,7 +22,6 @@ const FAQSection = () => {
     <section className="py-24 lg:py-32 relative">
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16">
-          {/* Left */}
           <div>
             <motion.span
               initial={{ opacity: 0 }}
@@ -88,7 +63,6 @@ const FAQSection = () => {
             </motion.a>
           </div>
 
-          {/* Right */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -100,7 +74,7 @@ const FAQSection = () => {
                 <AccordionItem
                   key={i}
                   value={`faq-${i}`}
-                  className="border border-border rounded-lg px-6 bg-card"
+                  className="border border-border rounded-lg px-6 bg-card shadow-sm"
                 >
                   <AccordionTrigger className="text-sm font-heading font-medium text-left hover:no-underline py-4">
                     {faq.q}

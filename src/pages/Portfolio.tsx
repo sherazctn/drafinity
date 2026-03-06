@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { ArrowUpRight, Eye } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import portfolio1 from "@/assets/portfolio-1.jpg";
 import portfolio2 from "@/assets/portfolio-2.jpg";
@@ -128,6 +129,7 @@ const projects = [
 
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState("All");
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const filtered = activeFilter === "All"
     ? projects
@@ -136,8 +138,21 @@ const Portfolio = () => {
   return (
     <main>
       {/* Hero */}
-      <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid">
-        <div className="container mx-auto px-4 lg:px-8">
+      <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
+        <div className="absolute inset-0 blueprint-grid" />
+        {/* Floating elements */}
+        <motion.div
+          className="absolute top-32 right-[10%] w-48 h-48 border border-border/30 rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-[5%] w-24 h-24 border border-border/20"
+          animate={{ rotate: [0, 90, 0] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        />
+
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.span
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -168,16 +183,18 @@ const Portfolio = () => {
       </section>
 
       {/* Filters */}
-      <section className="border-y border-border bg-card sticky top-16 lg:top-20 z-30">
+      <section className="border-y border-border bg-card sticky top-16 lg:top-20 z-30 shadow-sm">
         <div className="container mx-auto px-4 lg:px-8 py-4">
           <div className="flex flex-wrap gap-2">
             {categories.map((cat) => (
-              <button
+              <motion.button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
                 className={`text-xs font-heading uppercase tracking-[0.12em] px-4 py-2 rounded-full border transition-all duration-300 ${
                   activeFilter === cat
-                    ? "bg-foreground text-background border-foreground"
+                    ? "bg-foreground text-primary-foreground border-foreground"
                     : "bg-transparent text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground"
                 }`}
               >
@@ -187,7 +204,7 @@ const Portfolio = () => {
                     ({projects.filter((p) => p.category === cat).length})
                   </span>
                 )}
-              </button>
+              </motion.button>
             ))}
           </div>
         </div>
@@ -203,7 +220,7 @@ const Portfolio = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 lg:grid-cols-2 gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
             >
               {filtered.map((project, i) => (
                 <motion.div
@@ -211,46 +228,55 @@ const Portfolio = () => {
                   initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="group bg-card border border-border rounded-lg overflow-hidden card-hover"
+                  transition={{ delay: i * 0.06, duration: 0.5 }}
+                  onMouseEnter={() => setHoveredIndex(i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className="group bg-card border border-border rounded-xl overflow-hidden card-hover"
                 >
                   {/* Image */}
-                  <div className="relative h-56 overflow-hidden">
-                    <img
+                  <div className="relative h-52 overflow-hidden">
+                    <motion.img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      className="w-full h-full object-cover"
+                      animate={{
+                        scale: hoveredIndex === i ? 1.08 : 1,
+                      }}
+                      transition={{ duration: 0.6 }}
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-background/40" />
-                    <span className="absolute top-4 left-4 text-[10px] font-heading uppercase tracking-[0.2em] bg-background/80 backdrop-blur-sm border border-border rounded-full px-3 py-1">
+                    <div className="absolute inset-0 bg-foreground/10 group-hover:bg-foreground/30 transition-colors duration-500" />
+                    <span className="absolute top-4 left-4 text-[10px] font-heading uppercase tracking-[0.2em] bg-card/90 backdrop-blur-sm border border-border rounded-full px-3 py-1">
                       {project.category}
                     </span>
+                    {/* Hover overlay */}
+                    <motion.div
+                      className="absolute inset-0 flex items-center justify-center"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: hoveredIndex === i ? 1 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <div className="w-12 h-12 rounded-full bg-card/90 backdrop-blur-sm flex items-center justify-center">
+                        <Eye className="w-5 h-5 text-foreground" />
+                      </div>
+                    </motion.div>
                   </div>
 
                   {/* Content */}
-                  <div className="p-6 lg:p-8">
-                    <h3 className="text-xl font-heading font-bold mb-4">
+                  <div className="p-6">
+                    <h3 className="text-lg font-heading font-bold mb-3 flex items-center gap-2 group-hover:text-foreground transition-colors">
                       {project.title}
+                      <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </h3>
-                    <div className="space-y-3 text-sm">
-                      <div>
-                        <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Problem</span>
-                        <p className="text-muted-foreground mt-1">{project.problem}</p>
+                    <div className="space-y-2.5 text-sm">
+                      <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2">{project.solution}</p>
+                      <div className="flex items-center gap-2 pt-2 border-t border-border">
+                        <span className="text-[10px] font-heading uppercase tracking-wider text-muted-foreground">Tools:</span>
+                        <span className="text-xs text-foreground">{project.tools}</span>
                       </div>
-                      <div>
-                        <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Solution</span>
-                        <p className="text-muted-foreground mt-1">{project.solution}</p>
-                      </div>
-                      <div className="flex items-center gap-4 pt-2 border-t border-border">
-                        <div>
-                          <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Tools</span>
-                          <p className="text-xs text-foreground mt-1">{project.tools}</p>
-                        </div>
-                      </div>
-                      <div className="bg-secondary/50 rounded-md p-3">
-                        <span className="text-xs font-heading uppercase tracking-wider text-muted-foreground">Result</span>
-                        <p className="text-sm text-foreground font-medium mt-1">{project.result}</p>
+                      <div className="bg-muted/50 rounded-md p-3">
+                        <span className="text-[10px] font-heading uppercase tracking-wider text-muted-foreground">Result</span>
+                        <p className="text-sm text-foreground font-medium mt-0.5">{project.result}</p>
                       </div>
                     </div>
                   </div>
