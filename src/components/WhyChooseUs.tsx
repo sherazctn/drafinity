@@ -3,48 +3,17 @@ import { Shield, Award, Clock, Lock, Users, CheckCircle } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
 
 const pillars = [
-  {
-    icon: Award,
-    animation: "pulse" as const,
-    title: "USA Certified",
-    description: "Licensed professionals delivering code-compliant, permit-ready plans across all 50 states.",
-  },
-  {
-    icon: Clock,
-    animation: "rotate" as const,
-    title: "Since 2015",
-    description: "Nearly a decade of trusted experience in drafting, design, and plan stamping services.",
-  },
-  {
-    icon: Shield,
-    animation: "glow" as const,
-    title: "Quality Assured",
-    description: "Rigorous quality control processes ensure accuracy and compliance in every deliverable.",
-  },
-  {
-    icon: Lock,
-    animation: "bounce" as const,
-    title: "Secure & Confidential",
-    description: "Your project data is protected with enterprise-grade security and strict confidentiality.",
-  },
-  {
-    icon: Users,
-    animation: "wave" as const,
-    title: "Dedicated Team",
-    description: "A specialized team assigned to your project for consistent communication and results.",
-  },
-  {
-    icon: CheckCircle,
-    animation: "float" as const,
-    title: "Zero-Revision Guarantee",
-    description: "Our multi-step QC process ensures plans are right the first time, saving you time and money.",
-  },
+  { icon: Award, animation: "pulse" as const, title: "USA Certified", description: "Licensed professionals delivering code-compliant, permit-ready plans across all 50 states." },
+  { icon: Clock, animation: "rotate" as const, title: "Since 2015", description: "Nearly a decade of trusted experience in drafting, design, and plan stamping services." },
+  { icon: Shield, animation: "glow" as const, title: "Quality Assured", description: "Rigorous quality control processes ensure accuracy and compliance in every deliverable." },
+  { icon: Lock, animation: "bounce" as const, title: "Secure & Confidential", description: "Your project data is protected with enterprise-grade security and strict confidentiality." },
+  { icon: Users, animation: "wave" as const, title: "Dedicated Team", description: "A specialized team assigned to your project for consistent communication and results." },
+  { icon: CheckCircle, animation: "float" as const, title: "Zero-Revision Guarantee", description: "Our multi-step QC process ensures plans are right the first time, saving you time and money." },
 ];
 
 const WhyChooseUs = () => {
   return (
     <section className="py-24 lg:py-32 relative overflow-hidden">
-      {/* Subtle grid background */}
       <div className="absolute inset-0 blueprint-grid opacity-50" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -121,7 +90,6 @@ const WhyChooseUs = () => {
               </motion.p>
             </div>
 
-            {/* Trust indicators */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -149,17 +117,13 @@ const WhyChooseUs = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 + i * 0.1 }}
-                className="bg-card border border-border rounded-lg p-6 card-hover"
+                className="bg-card border border-border rounded-lg p-6 card-hover shadow-sm"
               >
                 <div className="mb-4">
                   <AnimatedIcon icon={pillar.icon} variant={pillar.animation} size={24} />
                 </div>
-                <h3 className="text-sm font-heading font-semibold mb-2">
-                  {pillar.title}
-                </h3>
-                <p className="text-xs text-muted-foreground leading-relaxed">
-                  {pillar.description}
-                </p>
+                <h3 className="text-sm font-heading font-semibold mb-2">{pillar.title}</h3>
+                <p className="text-xs text-muted-foreground leading-relaxed">{pillar.description}</p>
               </motion.div>
             ))}
           </div>

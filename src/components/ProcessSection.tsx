@@ -42,7 +42,7 @@ const steps = [
 
 const ProcessSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-card relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
       <div className="absolute inset-0 blueprint-grid opacity-30" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
@@ -82,7 +82,7 @@ const ProcessSection = () => {
           <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-px bg-border -translate-y-1/2" />
           <motion.div
             className="hidden lg:block absolute top-1/2 left-0 right-0 h-px -translate-y-1/2 origin-left"
-            style={{ background: "linear-gradient(90deg, hsl(0 0% 96% / 0.4), hsl(0 0% 96% / 0.1))" }}
+            style={{ background: "linear-gradient(90deg, hsl(0 0% 8% / 0.3), hsl(0 0% 8% / 0.05))" }}
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
@@ -99,16 +99,15 @@ const ProcessSection = () => {
                 transition={{ delay: i * 0.15, duration: 0.6 }}
                 className="relative text-center group"
               >
-                {/* Step circle */}
                 <div className="relative mx-auto mb-6">
                   <motion.div
-                    className="w-20 h-20 rounded-full border border-border bg-background flex items-center justify-center mx-auto relative z-10"
-                    whileHover={{ scale: 1.1, borderColor: "hsl(0 0% 40%)" }}
+                    className="w-20 h-20 rounded-full border border-border bg-card flex items-center justify-center mx-auto relative z-10 shadow-sm"
+                    whileHover={{ scale: 1.1, borderColor: "hsl(0 0% 60%)" }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <AnimatedIcon icon={step.icon} variant={step.animation} size={24} />
                   </motion.div>
-                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-foreground text-background text-[10px] font-heading font-bold flex items-center justify-center z-20">
+                  <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full bg-foreground text-primary-foreground text-[10px] font-heading font-bold flex items-center justify-center z-20">
                     {step.number}
                   </span>
                 </div>

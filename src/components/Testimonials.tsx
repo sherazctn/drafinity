@@ -35,7 +35,6 @@ const testimonials = [
   },
 ];
 
-// Duplicate for seamless loop
 const allCards = [...testimonials, ...testimonials];
 
 const Testimonials = () => {
@@ -55,9 +54,8 @@ const Testimonials = () => {
   });
 
   return (
-    <section className="py-24 lg:py-32 bg-card overflow-hidden">
+    <section className="py-24 lg:py-32 bg-muted/30 overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-16">
           <motion.span
             initial={{ opacity: 0 }}
@@ -79,16 +77,14 @@ const Testimonials = () => {
         </div>
       </div>
 
-      {/* Scrolling container */}
       <div
         ref={containerRef}
         className="relative"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Edge fades */}
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-card to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-card to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-muted/30 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-muted/30 to-transparent z-10 pointer-events-none" />
 
         <div
           className="flex gap-6"
@@ -100,9 +96,9 @@ const Testimonials = () => {
           {allCards.map((t, i) => (
             <div
               key={`${t.name}-${i}`}
-              className="w-[350px] flex-shrink-0 bg-background border border-border rounded-lg p-8 flex flex-col"
+              className="w-[350px] flex-shrink-0 bg-card border border-border rounded-lg p-8 flex flex-col shadow-sm"
             >
-              <Quote className="w-8 h-8 text-muted/50 mb-4" />
+              <Quote className="w-8 h-8 text-muted-foreground/30 mb-4" />
               <div className="flex gap-1 mb-4">
                 {Array.from({ length: 5 }).map((_, idx) => (
                   <Star key={idx} className="w-3.5 h-3.5 fill-foreground text-foreground" />

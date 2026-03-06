@@ -23,7 +23,7 @@ const CounterNumber = ({ value, suffix }: { value: number; suffix: string }) => 
   }, [isInView, count, value]);
 
   return (
-    <span ref={ref} className="flex items-baseline gap-0.5">
+    <span ref={ref} className="flex items-baseline gap-0.5 justify-center">
       <motion.span>{rounded}</motion.span>
       <span className="text-muted-foreground">{suffix}</span>
     </span>
@@ -32,22 +32,22 @@ const CounterNumber = ({ value, suffix }: { value: number; suffix: string }) => 
 
 const CounterStats = () => {
   return (
-    <section className="relative w-full border-y border-border bg-card">
+    <section className="relative w-full bg-foreground text-primary-foreground">
       {/* Animated line accents */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
           animate={{ x: ["-100%", "200%"] }}
           transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-          className="absolute top-0 h-px w-1/3 bg-gradient-to-r from-transparent via-foreground/20 to-transparent"
+          className="absolute top-0 h-px w-1/3 bg-gradient-to-r from-transparent via-primary-foreground/20 to-transparent"
         />
         <motion.div
           animate={{ x: ["200%", "-100%"] }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-0 h-px w-1/4 bg-gradient-to-r from-transparent via-foreground/15 to-transparent"
+          className="absolute bottom-0 h-px w-1/4 bg-gradient-to-r from-transparent via-primary-foreground/15 to-transparent"
         />
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 py-12 lg:py-16">
+      <div className="container mx-auto px-4 lg:px-8 py-14 lg:py-20">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-4">
           {stats.map((stat, i) => (
             <motion.div
@@ -58,15 +58,14 @@ const CounterStats = () => {
               transition={{ delay: i * 0.1, duration: 0.6 }}
               className="text-center relative"
             >
-              <p className="text-3xl lg:text-4xl font-heading font-bold stat-number mb-1">
+              <p className="text-3xl lg:text-5xl font-heading font-bold stat-number mb-2 text-primary-foreground">
                 <CounterNumber value={stat.value} suffix={stat.suffix} />
               </p>
-              <p className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-[0.15em]">
+              <p className="text-[10px] sm:text-xs text-primary-foreground/50 uppercase tracking-[0.15em]">
                 {stat.label}
               </p>
-              {/* Vertical divider (hidden on last item in each row) */}
               {i < stats.length - 1 && (
-                <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-8 w-px bg-border" />
+                <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 h-10 w-px bg-primary-foreground/10" />
               )}
             </motion.div>
           ))}

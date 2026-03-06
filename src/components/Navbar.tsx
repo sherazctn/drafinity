@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/drafinity-logo.png";
@@ -35,7 +35,7 @@ const Navbar = () => {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border"
+          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm"
           : "bg-transparent"
       }`}
     >
@@ -46,7 +46,7 @@ const Navbar = () => {
             <img
               src={logo}
               alt="Drafinity LLC"
-              className="h-5 lg:h-6 w-auto invert"
+              className="h-5 lg:h-6 w-auto"
             />
           </Link>
 
