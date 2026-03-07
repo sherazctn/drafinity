@@ -1,13 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
-import {
-  PenTool, Box, FileCheck, Building2, Layers, Ruler,
-  TreePine, Palette, Calculator, CuboidIcon as Cube,
-  FileText, Zap, Warehouse, Compass, HardHat, Eye,
-} from "lucide-react";
+import { ArrowRight, PenTool, Box, FileCheck, Building2, Layers, Ruler, TreePine, Palette, Calculator, CuboidIcon as Cube, FileText, Zap, Warehouse, Compass, HardHat, Eye } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
 import CTASection from "@/components/CTASection";
+import PageHeroAnimation from "@/components/PageHeroAnimation";
 
 const serviceCategories = [
   {
@@ -55,81 +51,37 @@ const serviceCategories = [
 const Services = () => {
   return (
     <main>
-      {/* Hero */}
-      <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid">
-        <div className="container mx-auto px-4 lg:px-8">
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground mb-4 block"
-          >
-            Our Services
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl lg:text-6xl font-heading font-bold mb-6 max-w-3xl"
-          >
-            Comprehensive Drafting
-            <br />
-            <span className="text-gradient-highlight">& Design Solutions</span>
+      <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
+        <PageHeroAnimation page="services" />
+        <div className="container mx-auto px-4 lg:px-8 relative z-10">
+          <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground mb-4 block">Our Services</motion.span>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-4xl lg:text-6xl font-heading font-bold mb-6 max-w-3xl">
+            Comprehensive Drafting<br /><span className="text-gradient-highlight">& Design Solutions</span>
           </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg text-muted-foreground max-w-2xl leading-relaxed"
-          >
-            From initial concepts to permit-ready plans, we deliver 16+ specialized
-            services covering every stage of your architectural project.
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            From initial concepts to permit-ready plans, we deliver 16+ specialized services covering every stage of your architectural project.
           </motion.p>
         </div>
       </section>
 
-      {/* Service Categories */}
       {serviceCategories.map((category, catIdx) => (
-        <section
-          key={category.label}
-          className={`py-20 lg:py-28 ${catIdx % 2 === 1 ? "bg-card" : ""}`}
-        >
+        <section key={category.label} className={`py-20 lg:py-28 ${catIdx % 2 === 1 ? "bg-card" : ""}`}>
           <div className="container mx-auto px-4 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mb-10"
-            >
-              <h2 className="text-2xl lg:text-3xl font-heading font-bold mb-2">
-                {category.label}
-              </h2>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="mb-10">
+              <h2 className="text-2xl lg:text-3xl font-heading font-bold mb-2">{category.label}</h2>
               <p className="text-sm text-muted-foreground mb-4">{category.description}</p>
               <div className="light-line max-w-xs" />
             </motion.div>
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {category.services.map((service, i) => (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <Link
-                    to={`/services/${service.slug}`}
-                    className="group block bg-secondary/30 border border-border rounded-lg p-8 card-hover h-full"
-                  >
+                <motion.div key={service.title} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
+                  <Link to={`/services/${service.slug}`} className="group block bg-secondary/30 border border-border rounded-lg p-8 card-hover h-full">
                     <div className="flex items-start justify-between mb-4">
                       <AnimatedIcon icon={service.icon} variant={service.animation} size={32} />
                       <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
-                    <h3 className="text-xl font-heading font-semibold mb-3">
-                      {service.title}
-                    </h3>
-                    <p className="text-muted-foreground leading-relaxed text-sm">
-                      {service.description}
-                    </p>
+                    <h3 className="text-xl font-heading font-semibold mb-3">{service.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm">{service.description}</p>
                   </Link>
                 </motion.div>
               ))}

@@ -8,6 +8,7 @@ import PortfolioPreview from "@/components/PortfolioPreview";
 import Testimonials from "@/components/Testimonials";
 import FAQSection from "@/components/FAQSection";
 import CTASection from "@/components/CTASection";
+import PartnerMap from "@/components/PartnerMap";
 
 const Index = () => {
   return (
@@ -25,6 +26,8 @@ const Index = () => {
       <PortfolioPreview />
       <div className="section-divider" />
       <Testimonials />
+      <div className="section-divider" />
+      <PartnerMap />
       <div className="section-divider" />
       <FAQSection />
       <div className="section-divider" />
