@@ -12,7 +12,7 @@ import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
 import Portfolio from "./pages/Portfolio";
 import SoftwareTools from "./pages/SoftwareTools";
-import Pricing from "./pages/Pricing";
+import Legal from "./pages/Legal";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -34,7 +34,7 @@ const App = () => (
           <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/software" element={<SoftwareTools />} />
-          <Route path="/pricing" element={<Pricing />} />
+          <Route path="/legal" element={<Legal />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />

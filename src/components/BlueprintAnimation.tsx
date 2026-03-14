@@ -54,6 +54,17 @@ const BlueprintAnimation = () => {
             transition={{ duration: 0.8, delay: 2.6 + i * 0.2 }}
           />
         ))}
+        {/* Windows - Row 3 */}
+        {[190, 350].map((x, i) => (
+          <motion.rect
+            key={`w3-${x}`}
+            x={x} y="370" width="40" height="60" rx="2"
+            stroke="hsl(0 0% 8%)" strokeWidth="0.8"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 3.2 + i * 0.2 }}
+          />
+        ))}
         {/* Door */}
         <motion.rect
           x="265" y="410" width="70" height="90" rx="3"
@@ -70,6 +81,24 @@ const BlueprintAnimation = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 4 }}
         />
+        {/* Chimney */}
+        <motion.rect
+          x="380" y="40" width="30" height="60"
+          stroke="hsl(0 0% 8%)" strokeWidth="0.8"
+          initial={{ pathLength: 0 }}
+          animate={{ pathLength: 1 }}
+          transition={{ duration: 1, delay: 2 }}
+        />
+        {/* Chimney smoke */}
+        <motion.path
+          d="M 395 40 C 395 30, 400 25, 395 15 C 390 5, 400 0, 395 -10"
+          stroke="hsl(0 0% 8%)" strokeWidth="0.5"
+          fill="none"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: [0, 0.5, 0] }}
+          transition={{ duration: 3, repeat: Infinity, delay: 4 }}
+        />
+        
         {/* Dimension lines */}
         <motion.g
           initial={{ opacity: 0 }}
@@ -97,6 +126,16 @@ const BlueprintAnimation = () => {
           <circle cx="300" cy="285" r="8" stroke="hsl(0 0% 8%)" strokeWidth="0.5" fill="none" />
         </motion.g>
 
+        {/* Grid overlay that draws itself */}
+        <motion.g initial={{ opacity: 0 }} animate={{ opacity: 0.15 }} transition={{ delay: 4, duration: 1.5 }}>
+          {[180, 220, 260, 300, 340, 380, 420].map((x) => (
+            <motion.line key={`gv-${x}`} x1={x} y1="100" x2={x} y2="500" stroke="hsl(0 0% 8%)" strokeWidth="0.2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1, delay: 4 + (x - 180) * 0.02 }} />
+          ))}
+          {[140, 180, 220, 260, 300, 340, 380, 420, 460].map((y) => (
+            <motion.line key={`gh-${y}`} x1="150" y1={y} x2="450" y2={y} stroke="hsl(0 0% 8%)" strokeWidth="0.2" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1, delay: 4.5 + (y - 140) * 0.02 }} />
+          ))}
+        </motion.g>
+
         {/* Rotating compass */}
         <motion.g
           animate={{ rotate: 360 }}
@@ -104,9 +143,21 @@ const BlueprintAnimation = () => {
           style={{ transformOrigin: "80px 80px" }}
         >
           <circle cx="80" cy="80" r="25" stroke="hsl(0 0% 8%)" strokeWidth="0.5" fill="none" />
+          <circle cx="80" cy="80" r="18" stroke="hsl(0 0% 8%)" strokeWidth="0.3" fill="none" />
           <line x1="80" y1="55" x2="80" y2="65" stroke="hsl(0 0% 8%)" strokeWidth="1" />
           <text x="80" y="52" textAnchor="middle" fill="hsl(0 0% 8%)" fontSize="8" fontFamily="Space Grotesk">N</text>
         </motion.g>
+        
+        {/* Animated laser scanner effect */}
+        <motion.line
+          x1="150" y1="100" x2="450" y2="100"
+          stroke="hsl(0 0% 8%)"
+          strokeWidth="0.3"
+          initial={{ y1: 100, y2: 100 }}
+          animate={{ y1: [100, 500, 100], y2: [100, 500, 100] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", repeatDelay: 3 }}
+          opacity={0.2}
+        />
       </svg>
     </div>
   );

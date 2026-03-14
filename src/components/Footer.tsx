@@ -12,7 +12,7 @@ const quickLinks = [
 
 const resourceLinks = [
   { label: "Software & Tools", href: "/software" },
-  { label: "Pricing", href: "/pricing" },
+  { label: "Legal & Permits", href: "/legal" },
   { label: "Blog & Resources", href: "/blog" },
 ];
 

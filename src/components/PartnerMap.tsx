@@ -4,38 +4,60 @@ import { useState } from "react";
 interface StateInfo {
   name: string;
   abbr: string;
-  cx: number;
-  cy: number;
-  isRegistered: boolean;
-  partner?: string;
-  license?: string;
+  path: string;
+  isHQ: boolean;
+  serviceAvailable: boolean;
 }
 
-const states: StateInfo[] = [
-  { name: "New Mexico", abbr: "NM", cx: 180, cy: 310, isRegistered: true, partner: "Drafinity LLC (HQ Partner)", license: "NM PE License #12345" },
-  { name: "New York", abbr: "NY", cx: 520, cy: 165, isRegistered: false, partner: "Drafinity LLC", license: "NY RA #67890" },
-  { name: "California", abbr: "CA", cx: 82, cy: 260, isRegistered: false, partner: "West Coast Drafting Co.", license: "CA PE #11223" },
-  { name: "Texas", abbr: "TX", cx: 280, cy: 365, isRegistered: false, partner: "Lone Star Engineering", license: "TX PE #33445" },
-  { name: "Florida", abbr: "FL", cx: 500, cy: 390, isRegistered: false, partner: "Sunshine Drafting", license: "FL PE #55667" },
-  { name: "Illinois", abbr: "IL", cx: 400, cy: 200, isRegistered: false, partner: "Midwest Plans LLC", license: "IL PE #77889" },
-  { name: "Washington", abbr: "WA", cx: 100, cy: 95, isRegistered: false, partner: "Pacific NW Design", license: "WA PE #99001" },
-  { name: "Colorado", abbr: "CO", cx: 210, cy: 240, isRegistered: false, partner: "Rocky Mountain Drafting", license: "CO PE #22334" },
-  { name: "Arizona", abbr: "AZ", cx: 145, cy: 320, isRegistered: false, partner: "Desert Design Group", license: "AZ PE #44556" },
-  { name: "Georgia", abbr: "GA", cx: 475, cy: 330, isRegistered: false, partner: "Peach State Engineering", license: "GA PE #66778" },
-  { name: "Ohio", abbr: "OH", cx: 455, cy: 195, isRegistered: false, partner: "Buckeye Plans Inc.", license: "OH PE #88990" },
-  { name: "Pennsylvania", abbr: "PA", cx: 505, cy: 180, isRegistered: false, partner: "Keystone Drafting", license: "PA PE #11234" },
-  { name: "North Carolina", abbr: "NC", cx: 500, cy: 290, isRegistered: false, partner: "Carolina Design Co.", license: "NC PE #22345" },
-  { name: "Michigan", abbr: "MI", cx: 420, cy: 155, isRegistered: false, partner: "Great Lakes Drafting", license: "MI PE #33456" },
-  { name: "Nevada", abbr: "NV", cx: 110, cy: 230, isRegistered: false, partner: "Silver State Plans", license: "NV PE #44567" },
-  { name: "Oregon", abbr: "OR", cx: 85, cy: 135, isRegistered: false, partner: "Pacific Drafting", license: "OR PE #55678" },
-  { name: "Tennessee", abbr: "TN", cx: 440, cy: 285, isRegistered: false, partner: "Volunteer Engineering", license: "TN PE #66789" },
-  { name: "Virginia", abbr: "VA", cx: 510, cy: 255, isRegistered: false, partner: "Old Dominion Drafting", license: "VA PE #77890" },
-  { name: "Massachusetts", abbr: "MA", cx: 545, cy: 155, isRegistered: false, partner: "Bay State Design", license: "MA PE #88901" },
-  { name: "Minnesota", abbr: "MN", cx: 340, cy: 120, isRegistered: false, partner: "North Star Plans", license: "MN PE #99012" },
-  { name: "Missouri", abbr: "MO", cx: 355, cy: 260, isRegistered: false, partner: "Gateway Drafting", license: "MO PE #10123" },
-  { name: "Indiana", abbr: "IN", cx: 420, cy: 215, isRegistered: false, partner: "Hoosier Engineering", license: "IN PE #21234" },
-  { name: "Maryland", abbr: "MD", cx: 520, cy: 235, isRegistered: false, partner: "Chesapeake Design", license: "MD PE #32345" },
-  { name: "Utah", abbr: "UT", cx: 160, cy: 230, isRegistered: false, partner: "Beehive Drafting", license: "UT PE #43456" },
+// Simplified USA state paths (approximate)
+const statesData: StateInfo[] = [
+  { name: "Washington", abbr: "WA", path: "M108,18 L140,15 L145,22 L150,50 L108,53 L100,35 Z", isHQ: false, serviceAvailable: true },
+  { name: "Oregon", abbr: "OR", path: "M100,35 L108,53 L150,50 L148,82 L95,85 L85,60 Z", isHQ: false, serviceAvailable: true },
+  { name: "California", abbr: "CA", path: "M85,60 L95,85 L100,120 L105,160 L95,175 L75,165 L65,130 L70,90 Z", isHQ: false, serviceAvailable: true },
+  { name: "Nevada", abbr: "NV", path: "M95,85 L148,82 L145,95 L138,150 L105,160 L100,120 Z", isHQ: false, serviceAvailable: true },
+  { name: "Idaho", abbr: "ID", path: "M150,50 L168,30 L178,45 L175,90 L148,82 Z", isHQ: false, serviceAvailable: true },
+  { name: "Utah", abbr: "UT", path: "M148,82 L175,90 L172,135 L138,150 L145,95 Z", isHQ: false, serviceAvailable: true },
+  { name: "Arizona", abbr: "AZ", path: "M138,150 L172,135 L168,185 L120,190 L105,160 Z", isHQ: false, serviceAvailable: true },
+  { name: "Montana", abbr: "MT", path: "M168,30 L150,18 L210,12 L240,15 L235,50 L178,45 Z", isHQ: false, serviceAvailable: true },
+  { name: "Wyoming", abbr: "WY", path: "M178,45 L235,50 L232,90 L175,90 Z", isHQ: false, serviceAvailable: true },
+  { name: "Colorado", abbr: "CO", path: "M175,90 L232,90 L228,135 L172,135 Z", isHQ: false, serviceAvailable: true },
+  { name: "New Mexico", abbr: "NM", path: "M172,135 L228,135 L225,190 L168,185 Z", isHQ: true, serviceAvailable: true },
+  { name: "North Dakota", abbr: "ND", path: "M240,15 L290,12 L288,42 L235,45 Z", isHQ: false, serviceAvailable: true },
+  { name: "South Dakota", abbr: "SD", path: "M235,45 L288,42 L286,75 L232,78 Z", isHQ: false, serviceAvailable: true },
+  { name: "Nebraska", abbr: "NE", path: "M232,78 L286,75 L295,80 L290,108 L228,110 Z", isHQ: false, serviceAvailable: true },
+  { name: "Kansas", abbr: "KS", path: "M228,110 L290,108 L288,142 L225,145 Z", isHQ: false, serviceAvailable: true },
+  { name: "Oklahoma", abbr: "OK", path: "M225,145 L288,142 L290,155 L280,172 L225,175 Z", isHQ: false, serviceAvailable: true },
+  { name: "Texas", abbr: "TX", path: "M225,175 L280,172 L290,185 L285,230 L260,255 L230,250 L210,230 L225,190 Z", isHQ: false, serviceAvailable: true },
+  { name: "Minnesota", abbr: "MN", path: "M290,12 L330,10 L335,18 L340,65 L295,68 L288,42 Z", isHQ: false, serviceAvailable: true },
+  { name: "Iowa", abbr: "IA", path: "M295,68 L340,65 L345,100 L295,105 Z", isHQ: false, serviceAvailable: true },
+  { name: "Missouri", abbr: "MO", path: "M295,105 L345,100 L350,110 L348,148 L290,142 Z", isHQ: false, serviceAvailable: true },
+  { name: "Arkansas", abbr: "AR", path: "M290,142 L348,148 L345,178 L290,172 Z", isHQ: false, serviceAvailable: true },
+  { name: "Louisiana", abbr: "LA", path: "M290,172 L345,178 L350,210 L330,218 L295,210 Z", isHQ: false, serviceAvailable: true },
+  { name: "Wisconsin", abbr: "WI", path: "M340,18 L370,15 L375,25 L378,68 L345,72 L340,65 Z", isHQ: false, serviceAvailable: true },
+  { name: "Illinois", abbr: "IL", path: "M345,72 L378,68 L380,78 L375,128 L348,132 L345,100 Z", isHQ: false, serviceAvailable: true },
+  { name: "Mississippi", abbr: "MS", path: "M345,178 L372,175 L375,215 L350,210 Z", isHQ: false, serviceAvailable: true },
+  { name: "Michigan", abbr: "MI", path: "M375,15 L385,12 L400,18 L408,55 L395,65 L378,68 L375,25 Z", isHQ: false, serviceAvailable: true },
+  { name: "Indiana", abbr: "IN", path: "M378,68 L395,65 L398,78 L395,120 L375,128 L380,78 Z", isHQ: false, serviceAvailable: true },
+  { name: "Kentucky", abbr: "KY", path: "M375,128 L395,120 L425,115 L430,135 L370,142 Z", isHQ: false, serviceAvailable: true },
+  { name: "Tennessee", abbr: "TN", path: "M370,142 L430,135 L435,155 L365,162 Z", isHQ: false, serviceAvailable: true },
+  { name: "Alabama", abbr: "AL", path: "M365,162 L395,158 L400,200 L372,205 L372,175 Z", isHQ: false, serviceAvailable: true },
+  { name: "Ohio", abbr: "OH", path: "M395,65 L408,55 L430,52 L435,65 L432,105 L425,115 L395,120 L398,78 Z", isHQ: false, serviceAvailable: true },
+  { name: "West Virginia", abbr: "WV", path: "M425,85 L440,82 L445,105 L435,115 L425,115 L432,105 Z", isHQ: false, serviceAvailable: false },
+  { name: "Virginia", abbr: "VA", path: "M435,115 L445,105 L475,100 L480,118 L440,125 Z", isHQ: false, serviceAvailable: true },
+  { name: "North Carolina", abbr: "NC", path: "M435,125 L480,118 L495,135 L440,145 Z", isHQ: false, serviceAvailable: true },
+  { name: "South Carolina", abbr: "SC", path: "M440,145 L475,140 L480,162 L448,165 Z", isHQ: false, serviceAvailable: true },
+  { name: "Georgia", abbr: "GA", path: "M395,158 L435,155 L448,165 L445,200 L400,200 Z", isHQ: false, serviceAvailable: true },
+  { name: "Florida", abbr: "FL", path: "M400,200 L445,200 L455,215 L450,250 L430,270 L415,255 L400,220 Z", isHQ: false, serviceAvailable: true },
+  { name: "Pennsylvania", abbr: "PA", path: "M430,52 L470,48 L478,58 L475,82 L440,82 L435,65 Z", isHQ: false, serviceAvailable: true },
+  { name: "New York", abbr: "NY", path: "M440,25 L470,20 L490,28 L495,48 L478,58 L470,48 L440,42 Z", isHQ: false, serviceAvailable: true },
+  { name: "New Jersey", abbr: "NJ", path: "M478,58 L488,55 L490,78 L480,82 L475,82 Z", isHQ: false, serviceAvailable: true },
+  { name: "Maryland", abbr: "MD", path: "M475,82 L490,78 L492,95 L480,100 L475,100 L445,105 L440,82 Z", isHQ: false, serviceAvailable: true },
+  { name: "Connecticut", abbr: "CT", path: "M488,40 L498,38 L500,48 L490,50 Z", isHQ: false, serviceAvailable: true },
+  { name: "Massachusetts", abbr: "MA", path: "M490,28 L505,25 L510,35 L498,38 L488,40 L495,32 Z", isHQ: false, serviceAvailable: true },
+  { name: "Vermont", abbr: "VT", path: "M480,15 L490,12 L492,25 L482,28 Z", isHQ: false, serviceAvailable: false },
+  { name: "New Hampshire", abbr: "NH", path: "M490,12 L498,10 L500,25 L492,25 Z", isHQ: false, serviceAvailable: false },
+  { name: "Maine", abbr: "ME", path: "M498,0 L515,2 L510,22 L500,25 L498,10 Z", isHQ: false, serviceAvailable: false },
+  { name: "Delaware", abbr: "DE", path: "M488,72 L495,70 L496,82 L490,82 Z", isHQ: false, serviceAvailable: false },
 ];
 
 const PartnerMap = () => {
@@ -61,7 +83,7 @@ const PartnerMap = () => {
             transition={{ delay: 0.1 }}
             className="text-3xl lg:text-5xl font-heading font-bold mb-4"
           >
-            Our Registered Partners
+            States We Serve
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -70,7 +92,7 @@ const PartnerMap = () => {
             transition={{ delay: 0.2 }}
             className="text-muted-foreground max-w-xl mx-auto"
           >
-            Licensed professionals across the United States ensuring local code compliance and certified plan stamping
+            Professional drafting, design, and plan stamping services available across the United States
           </motion.p>
         </div>
 
@@ -81,104 +103,83 @@ const PartnerMap = () => {
           transition={{ duration: 0.8 }}
           className="relative max-w-4xl mx-auto"
         >
-          <svg viewBox="0 0 620 450" className="w-full h-auto">
-            {/* Simplified US outline */}
-            <motion.path
-              d="M 60 100 C 60 80, 120 60, 200 70 C 280 80, 340 65, 400 70 C 460 75, 520 80, 560 100 C 580 120, 570 150, 560 170 C 555 190, 550 200, 545 220 C 540 245, 540 260, 530 280 C 520 310, 510 330, 520 360 C 525 380, 530 400, 510 410 C 480 425, 440 420, 400 410 C 360 400, 320 395, 280 400 C 240 405, 200 410, 160 390 C 130 375, 100 370, 80 350 C 65 335, 55 300, 60 270 C 65 240, 60 200, 55 170 C 50 140, 55 120, 60 100 Z"
-              stroke="hsl(0 0% 75%)"
-              strokeWidth="1.5"
-              fill="hsl(0 0% 95%)"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 2 }}
-            />
+          <svg viewBox="0 0 530 280" className="w-full h-auto">
+            {/* Background */}
+            <rect x="0" y="0" width="530" height="280" fill="transparent" />
 
-            {/* State divider lines (subtle) */}
-            <motion.g initial={{ opacity: 0 }} whileInView={{ opacity: 0.15 }} viewport={{ once: true }} transition={{ delay: 1.5 }}>
-              <line x1="200" y1="70" x2="200" y2="400" stroke="hsl(0 0% 50%)" strokeWidth="0.3" />
-              <line x1="350" y1="65" x2="350" y2="410" stroke="hsl(0 0% 50%)" strokeWidth="0.3" />
-              <line x1="60" y1="200" x2="560" y2="200" stroke="hsl(0 0% 50%)" strokeWidth="0.3" />
-              <line x1="60" y1="300" x2="530" y2="300" stroke="hsl(0 0% 50%)" strokeWidth="0.3" />
-            </motion.g>
-
-            {/* State dots */}
-            {states.map((state, i) => (
-              <motion.g
+            {/* States */}
+            {statesData.map((state, i) => (
+              <motion.path
                 key={state.abbr}
-                initial={{ scale: 0, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
+                d={state.path}
+                fill={state.isHQ ? "hsl(0 65% 92%)" : state.serviceAvailable ? "hsl(0 0% 93%)" : "hsl(0 0% 96%)"}
+                stroke="hsl(0 0% 75%)"
+                strokeWidth="0.8"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: 1.5 + i * 0.05, type: "spring", stiffness: 300 }}
+                transition={{ delay: 0.5 + i * 0.02 }}
+                className="cursor-pointer transition-colors duration-200"
                 onMouseEnter={(e) => {
                   setHoveredState(state);
                   const svg = e.currentTarget.closest("svg");
                   if (svg) {
                     const rect = svg.getBoundingClientRect();
-                    const scaleX = rect.width / 620;
-                    const scaleY = rect.height / 450;
-                    setTooltipPos({ x: state.cx * scaleX, y: state.cy * scaleY - 20 });
+                    const bbox = e.currentTarget.getBBox();
+                    const scaleX = rect.width / 530;
+                    const scaleY = rect.height / 280;
+                    setTooltipPos({
+                      x: (bbox.x + bbox.width / 2) * scaleX,
+                      y: bbox.y * scaleY - 10,
+                    });
                   }
                 }}
                 onMouseLeave={() => setHoveredState(null)}
-                className="cursor-pointer"
-                style={{ transformOrigin: `${state.cx}px ${state.cy}px` }}
-              >
-                {/* Pulse ring for NM */}
-                {state.isRegistered && (
-                  <motion.circle
-                    cx={state.cx}
-                    cy={state.cy}
-                    r="14"
-                    fill="none"
-                    stroke="hsl(0 70% 50%)"
-                    strokeWidth="0.8"
-                    animate={{ scale: [1, 1.8, 1], opacity: [0.6, 0, 0.6] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                    style={{ transformOrigin: `${state.cx}px ${state.cy}px` }}
-                  />
-                )}
-                <circle
-                  cx={state.cx}
-                  cy={state.cy}
-                  r={state.isRegistered ? 8 : 5}
-                  fill={state.isRegistered ? "hsl(0 70% 50%)" : "hsl(0 0% 15%)"}
-                  stroke={state.isRegistered ? "hsl(0 70% 40%)" : "hsl(0 0% 30%)"}
-                  strokeWidth="1"
-                />
-                <text
-                  x={state.cx}
-                  y={state.cy + (state.isRegistered ? 22 : 18)}
-                  textAnchor="middle"
-                  fill="hsl(0 0% 30%)"
-                  fontSize="8"
-                  fontFamily="Space Grotesk"
-                  fontWeight="500"
-                >
-                  {state.abbr}
-                </text>
-              </motion.g>
+                whileHover={{ fill: state.isHQ ? "hsl(0 65% 85%)" : state.serviceAvailable ? "hsl(0 0% 85%)" : "hsl(0 0% 90%)" }}
+              />
             ))}
+
+            {/* HQ marker for New Mexico */}
+            <motion.circle
+              cx="198" cy="160" r="5"
+              fill="hsl(0 70% 50%)"
+              stroke="hsl(0 0% 100%)"
+              strokeWidth="1.5"
+              initial={{ scale: 0 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 1.5, type: "spring" }}
+            />
+            <motion.circle
+              cx="198" cy="160" r="10"
+              fill="none"
+              stroke="hsl(0 70% 50%)"
+              strokeWidth="0.8"
+              animate={{ scale: [1, 2, 1], opacity: [0.6, 0, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              style={{ transformOrigin: "198px 160px" }}
+            />
           </svg>
 
           {/* Tooltip */}
           {hoveredState && (
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={{ opacity: 0, y: 5 }}
               animate={{ opacity: 1, y: 0 }}
-              className="absolute z-20 bg-foreground text-primary-foreground rounded-lg p-4 shadow-xl pointer-events-none min-w-[220px]"
+              className="absolute z-20 bg-foreground text-primary-foreground rounded-lg p-3 shadow-xl pointer-events-none min-w-[180px]"
               style={{ left: tooltipPos.x, top: tooltipPos.y, transform: "translate(-50%, -100%)" }}
             >
-              <p className="text-sm font-heading font-bold mb-1">{hoveredState.name}</p>
-              {hoveredState.partner && (
-                <p className="text-xs text-primary-foreground/70 mb-0.5">Partner: {hoveredState.partner}</p>
-              )}
-              {hoveredState.license && (
-                <p className="text-xs text-primary-foreground/60">License: {hoveredState.license}</p>
-              )}
-              {hoveredState.isRegistered && (
+              <p className="text-sm font-heading font-bold">{hoveredState.name}</p>
+              <p className="text-xs text-primary-foreground/70 mt-1">
+                {hoveredState.isHQ
+                  ? "Headquarters — Full Service"
+                  : hoveredState.serviceAvailable
+                    ? "Drafting & Stamping Available"
+                    : "Coming Soon"}
+              </p>
+              {hoveredState.isHQ && (
                 <span className="inline-block mt-1.5 text-[10px] uppercase tracking-wider bg-primary-foreground/10 rounded px-2 py-0.5 text-primary-foreground/80">
-                  ★ Registered HQ
+                  ★ HQ
                 </span>
               )}
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-foreground" />
@@ -191,20 +192,24 @@ const PartnerMap = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ delay: 2 }}
-          className="flex items-center justify-center gap-8 mt-8"
+          transition={{ delay: 1 }}
+          className="flex flex-wrap items-center justify-center gap-6 mt-8"
         >
           <div className="flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-[hsl(0_70%_50%)]" />
-            <span className="text-xs text-muted-foreground">Registered HQ (New Mexico)</span>
+            <span className="w-3 h-3 rounded-full" style={{ background: "hsl(0 70% 50%)" }} />
+            <span className="text-xs text-muted-foreground">Headquarters (New Mexico)</span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-foreground" />
-            <span className="text-xs text-muted-foreground">Licensed Partner</span>
+            <span className="w-3 h-3 rounded border" style={{ background: "hsl(0 0% 93%)", borderColor: "hsl(0 0% 75%)" }} />
+            <span className="text-xs text-muted-foreground">Service Available</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="w-3 h-3 rounded border" style={{ background: "hsl(0 0% 96%)", borderColor: "hsl(0 0% 85%)" }} />
+            <span className="text-xs text-muted-foreground">Coming Soon</span>
           </div>
         </motion.div>
 
-        {/* License Details */}
+        {/* Trust cards */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -214,15 +219,15 @@ const PartnerMap = () => {
         >
           <div className="bg-background border border-border rounded-lg p-6">
             <h4 className="text-sm font-heading font-bold mb-2">Professional Engineering</h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">Licensed PE stamps available across all 50 states for structural, mechanical, and civil engineering plans.</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">PE-stamped plans available across all active states for structural, mechanical, and civil engineering.</p>
           </div>
           <div className="bg-background border border-border rounded-lg p-6">
             <h4 className="text-sm font-heading font-bold mb-2">Registered Architect</h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">RA-certified architectural plan review and stamping for residential and commercial projects nationwide.</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">RA-certified architectural plan review and stamping for residential and commercial projects.</p>
           </div>
           <div className="bg-background border border-border rounded-lg p-6">
             <h4 className="text-sm font-heading font-bold mb-2">Code Compliance</h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">IBC, IRC, ADA, OSHA, and local jurisdiction code compliance review included with every stamped plan set.</p>
+            <p className="text-xs text-muted-foreground leading-relaxed">IBC, IRC, ADA, OSHA, and local jurisdiction code compliance review included with every plan set.</p>
           </div>
         </motion.div>
       </div>
