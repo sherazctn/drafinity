@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { ArrowUpRight, Eye, X } from "lucide-react";
+import { ArrowUpRight, Eye, X, ExternalLink } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
 import portfolio1 from "@/assets/portfolio-1.jpg";
