@@ -1,14 +1,22 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import portfolio1 from "@/assets/portfolio-1.jpg";
-import portfolio2 from "@/assets/portfolio-2.jpg";
-import portfolio3 from "@/assets/portfolio-3.jpg";
+import luxury1 from "@/assets/luxury-1.jpg";
+import luxury2 from "@/assets/luxury-2.jpg";
+import luxury3 from "@/assets/luxury-3.jpg";
+import luxury4 from "@/assets/luxury-4.jpg";
+import luxury5 from "@/assets/luxury-5.jpg";
+import luxury6 from "@/assets/luxury-6.jpg";
+import luxury7 from "@/assets/luxury-7.jpg";
 
 const featured = [
-  { image: portfolio1, title: "Modern Residential Complex", category: "3D Rendering", result: "Secured $2.5M in investor funding" },
-  { image: portfolio2, title: "Corporate Office HQ", category: "Interior Visualization", result: "Client approval on first revision" },
-  { image: portfolio3, title: "Mixed-Use Development", category: "Construction Documents", result: "Permits in 3 states, zero revisions" },
+  { image: luxury1, title: "Palm Vista Modern Residence", category: "Luxury Rendering", result: "Pre-sold 8 units before construction" },
+  { image: luxury2, title: "Skyline Mixed-Use Complex", category: "Luxury Rendering", result: "Secured $12M development funding" },
+  { image: luxury3, title: "Greenfield Contemporary Villa", category: "Luxury Rendering", result: "Featured in Architectural Digest" },
+  { image: luxury4, title: "Emerald Terrace Townhouse", category: "Luxury Rendering", result: "Won Best Residential Design 2023" },
+  { image: luxury5, title: "Grand Luxe Shopping Mall", category: "Luxury Rendering", result: "Attracted 3 anchor tenants pre-lease" },
+  { image: luxury6, title: "Marina Bay Waterfront Township", category: "Luxury Rendering", result: "Government approval in 45 days" },
+  { image: luxury7, title: "Oasis Resort & Pool Club", category: "Luxury Rendering", result: "Phase 1 sold out in 3 weeks" },
 ];
 
 const PortfolioPreview = () => {
@@ -46,20 +54,20 @@ const PortfolioPreview = () => {
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {featured.map((project, i) => (
             <motion.div
               key={project.title}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
             >
               <Link
                 to="/portfolio"
                 className="group block bg-card border border-border rounded-lg overflow-hidden card-hover shadow-sm"
               >
-                <div className="relative h-56 overflow-hidden">
+                <div className="relative h-52 overflow-hidden">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -67,12 +75,12 @@ const PortfolioPreview = () => {
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-foreground/10 group-hover:bg-foreground/20 transition-colors duration-500" />
-                  <span className="absolute top-4 left-4 text-[10px] font-heading uppercase tracking-[0.2em] bg-card/90 backdrop-blur-sm border border-border rounded-full px-3 py-1">
+                  <span className="absolute top-3 left-3 text-[10px] font-heading uppercase tracking-[0.2em] bg-card/90 backdrop-blur-sm border border-border rounded-full px-3 py-1">
                     {project.category}
                   </span>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-base font-heading font-semibold mb-2 group-hover:text-foreground transition-colors">
+                <div className="p-5">
+                  <h3 className="text-sm font-heading font-semibold mb-1.5 group-hover:text-foreground transition-colors">
                     {project.title}
                   </h3>
                   <p className="text-xs text-muted-foreground">{project.result}</p>

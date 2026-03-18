@@ -1,15 +1,32 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { ArrowUpRight, Eye } from "lucide-react";
+import { ArrowUpRight, Eye, X } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
 import portfolio1 from "@/assets/portfolio-1.jpg";
 import portfolio2 from "@/assets/portfolio-2.jpg";
 import portfolio3 from "@/assets/portfolio-3.jpg";
+import luxury1 from "@/assets/luxury-1.jpg";
+import luxury2 from "@/assets/luxury-2.jpg";
+import luxury3 from "@/assets/luxury-3.jpg";
+import luxury4 from "@/assets/luxury-4.jpg";
+import luxury5 from "@/assets/luxury-5.jpg";
+import luxury6 from "@/assets/luxury-6.jpg";
+import luxury7 from "@/assets/luxury-7.jpg";
 
-const categories = ["All", "3D Rendering", "Interior Visualization", "Construction Documents", "2D Floor Plans", "BIM Modeling", "Plan Stamping"];
+const categories = ["All", "Luxury Rendering", "3D Rendering", "Interior Visualization", "Construction Documents", "2D Floor Plans", "BIM Modeling", "Plan Stamping"];
 
 const projects = [
+  // Luxury Rendering projects
+  { image: luxury1, title: "Palm Vista Modern Residence", category: "Luxury Rendering", solution: "Photorealistic exterior rendering with tropical landscaping, wet driveway reflections, and luxury vehicle staging for marketing collateral.", tools: "3ds Max, V-Ray, Photoshop, Lumion", result: "Pre-sold 8 units before construction." },
+  { image: luxury2, title: "Skyline Mixed-Use Complex", category: "Luxury Rendering", solution: "Aerial bird's-eye 3D rendering of a multi-building mixed-use development with rooftop gardens and urban context modeling.", tools: "SketchUp Pro, V-Ray, Lumion, AutoCAD", result: "Secured $12M development funding." },
+  { image: luxury3, title: "Greenfield Contemporary Villa", category: "Luxury Rendering", solution: "Full exterior visualization with natural stone finishes, wooden pergola details, and lush front yard landscape design.", tools: "3ds Max, Corona Renderer, Photoshop", result: "Featured in Architectural Digest." },
+  { image: luxury4, title: "Emerald Terrace Townhouse", category: "Luxury Rendering", solution: "Three-story modern facade rendering with vertical garden walls, glass balustrades, and evening ambient lighting.", tools: "Revit, V-Ray, Enscape, Photoshop", result: "Won Best Residential Design 2023." },
+  { image: luxury5, title: "Grand Luxe Shopping Mall", category: "Luxury Rendering", solution: "Large-scale commercial exterior rendering with glass curtain wall systems, digital signage integration, and nighttime atmospheric effects.", tools: "3ds Max, V-Ray, After Effects, Photoshop", result: "Attracted 3 anchor tenants pre-lease." },
+  { image: luxury6, title: "Marina Bay Waterfront Township", category: "Luxury Rendering", solution: "Master plan aerial rendering of a waterfront community with marina, resort amenities, road networks, and green corridors.", tools: "SketchUp, Lumion, AutoCAD, Photoshop", result: "Government approval in 45 days." },
+  { image: luxury7, title: "Oasis Resort & Pool Club", category: "Luxury Rendering", solution: "Resort-style aerial rendering with freeform pools, cabana structures, tropical landscaping, and pedestrian circulation paths.", tools: "3ds Max, V-Ray, Lumion, Photoshop", result: "Phase 1 sold out in 3 weeks." },
+
+  // Existing projects
   { image: portfolio1, title: "Modern Residential Complex", category: "3D Rendering", solution: "Full exterior 3D rendering package with landscaping, lighting studies, and aerial perspectives.", tools: "SketchUp Pro, V-Ray, Lumion", result: "Secured $2.5M in investor funding." },
   { image: portfolio2, title: "Corporate Office Headquarters", category: "Interior Visualization", solution: "Complete interior 3D visualization package with material selections and spatial planning.", tools: "Revit, V-Ray, Adobe Creative Suite", result: "Client approval on first revision." },
   { image: portfolio3, title: "Mixed-Use Development", category: "Construction Documents", solution: "Complete CD set with structural, MEP, and architectural plans stamped for 3 states.", tools: "AutoCAD, Revit, Bluebeam Revu", result: "Permits approved with zero revisions." },
@@ -27,6 +44,7 @@ const projects = [
 const Portfolio = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
   const filtered = activeFilter === "All" ? projects : projects.filter((p) => p.category === activeFilter);
 
   return (
@@ -63,8 +81,8 @@ const Portfolio = () => {
           <AnimatePresence mode="wait">
             <motion.div key={activeFilter} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }} className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {filtered.map((project, i) => (
-                <motion.div key={project.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06, duration: 0.5 }} onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)} className="group bg-card border border-border rounded-xl overflow-hidden card-hover">
-                  <div className="relative h-52 overflow-hidden">
+                <motion.div key={project.title} initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06, duration: 0.5 }} onMouseEnter={() => setHoveredIndex(i)} onMouseLeave={() => setHoveredIndex(null)} className="group bg-card border border-border rounded-xl overflow-hidden card-hover cursor-pointer" onClick={() => setSelectedProject(project)}>
+                  <div className="relative h-56 overflow-hidden">
                     <motion.img src={project.image} alt={project.title} className="w-full h-full object-cover" animate={{ scale: hoveredIndex === i ? 1.08 : 1 }} transition={{ duration: 0.6 }} loading="lazy" />
                     <div className="absolute inset-0 bg-foreground/10 group-hover:bg-foreground/30 transition-colors duration-500" />
                     <span className="absolute top-4 left-4 text-[10px] font-heading uppercase tracking-[0.2em] bg-card/90 backdrop-blur-sm border border-border rounded-full px-3 py-1">{project.category}</span>
@@ -100,6 +118,57 @@ const Portfolio = () => {
           )}
         </div>
       </section>
+
+      {/* Project Detail Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-foreground/60 backdrop-blur-sm p-4"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 30 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 30 }}
+              transition={{ type: "spring", damping: 25 }}
+              className="bg-card border border-border rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative">
+                <img src={selectedProject.image} alt={selectedProject.title} className="w-full h-64 sm:h-80 object-cover rounded-t-2xl" />
+                <button onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 w-10 h-10 rounded-full bg-card/90 backdrop-blur-sm flex items-center justify-center border border-border hover:bg-card transition-colors">
+                  <X className="w-5 h-5 text-foreground" />
+                </button>
+                <span className="absolute bottom-4 left-4 text-[10px] font-heading uppercase tracking-[0.2em] bg-card/90 backdrop-blur-sm border border-border rounded-full px-4 py-1.5">{selectedProject.category}</span>
+              </div>
+              <div className="p-8">
+                <h2 className="text-2xl font-heading font-bold mb-4">{selectedProject.title}</h2>
+                <div className="space-y-5">
+                  <div>
+                    <h4 className="text-xs font-heading uppercase tracking-wider text-muted-foreground mb-1.5">Solution</h4>
+                    <p className="text-sm text-foreground leading-relaxed">{selectedProject.solution}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-heading uppercase tracking-wider text-muted-foreground mb-1.5">Tools Used</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.tools.split(", ").map((tool) => (
+                        <span key={tool} className="text-xs bg-muted rounded-full px-3 py-1 text-foreground">{tool}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="bg-muted/50 rounded-lg p-5 border border-border">
+                    <h4 className="text-xs font-heading uppercase tracking-wider text-muted-foreground mb-1.5">Result</h4>
+                    <p className="text-lg font-heading font-bold text-foreground">{selectedProject.result}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <CTASection />
     </main>
