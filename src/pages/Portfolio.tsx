@@ -171,6 +171,17 @@ const Portfolio = () => {
                     <h4 className="text-xs font-heading uppercase tracking-wider text-muted-foreground mb-1.5">Result</h4>
                     <p className="text-lg font-heading font-bold text-foreground">{selectedProject.result}</p>
                   </div>
+                  {selectedProject.pdfUrl && (
+                    <a
+                      href={selectedProject.pdfUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-foreground text-background font-heading text-sm uppercase tracking-widest px-6 py-3 rounded-lg hover:opacity-90 transition-opacity mt-2"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      View Full Project
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>
