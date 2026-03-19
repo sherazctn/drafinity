@@ -94,35 +94,33 @@ const PartnerMap = () => {
             defaultState={{
               fill: "hsl(0, 0%, 93%)",
               stroke: "hsl(0, 0%, 75%)",
-            }}
-            label={{
-              enabled: true,
-            }}
-            tooltip={{
-              enabled: true,
-              render: (abbr: USAStateAbbreviation) => {
-                const isHQ = abbr === "NM";
-                const isService = serviceStates.includes(abbr);
-                const isComingSoon = comingSoonStates.includes(abbr);
-                return (
-                  <div className="bg-foreground text-primary-foreground rounded-lg p-3 shadow-xl min-w-[180px]">
-                    <p className="text-sm font-heading font-bold">{abbr}</p>
-                    <p className="text-xs text-primary-foreground/70 mt-1">
-                      {isHQ
-                        ? "Headquarters — Full Service"
-                        : isService
-                          ? "Drafting & Stamping Available"
-                          : isComingSoon
-                            ? "Coming Soon"
-                            : "Contact for Availability"}
-                    </p>
-                    {isHQ && (
-                      <span className="inline-block mt-1.5 text-[10px] uppercase tracking-wider bg-primary-foreground/10 rounded px-2 py-0.5 text-primary-foreground/80">
-                        ★ HQ
-                      </span>
-                    )}
-                  </div>
-                );
+              label: { enabled: true },
+              tooltip: {
+                enabled: true,
+                render: (abbr: string) => {
+                  const isHQ = abbr === "NM";
+                  const isService = serviceStates.includes(abbr as USAStateAbbreviation);
+                  const isComingSoon = comingSoonStates.includes(abbr as USAStateAbbreviation);
+                  return (
+                    <div className="bg-foreground text-primary-foreground rounded-lg p-3 shadow-xl min-w-[180px]">
+                      <p className="text-sm font-heading font-bold">{abbr}</p>
+                      <p className="text-xs text-primary-foreground/70 mt-1">
+                        {isHQ
+                          ? "Headquarters — Full Service"
+                          : isService
+                            ? "Drafting & Stamping Available"
+                            : isComingSoon
+                              ? "Coming Soon"
+                              : "Contact for Availability"}
+                      </p>
+                      {isHQ && (
+                        <span className="inline-block mt-1.5 text-[10px] uppercase tracking-wider bg-primary-foreground/10 rounded px-2 py-0.5 text-primary-foreground/80">
+                          ★ HQ
+                        </span>
+                      )}
+                    </div>
+                  );
+                },
               },
             }}
           />
