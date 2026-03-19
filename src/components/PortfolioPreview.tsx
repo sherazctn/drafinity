@@ -11,19 +11,24 @@ import luxury7 from "@/assets/luxury-7.jpg";
 import portfolio1 from "@/assets/portfolio-1.jpg";
 import portfolio2 from "@/assets/portfolio-2.jpg";
 import portfolio3 from "@/assets/portfolio-3.jpg";
+import reno7 from "@/assets/reno-7.jpg";
+import reno8 from "@/assets/reno-8.jpg";
+import reno10 from "@/assets/reno-10.jpg";
 
 const featured = [
   { image: luxury1, title: "Palm Vista Modern Residence", category: "Luxury Rendering", result: "Pre-sold 8 units before construction" },
   { image: luxury2, title: "Skyline Mixed-Use Complex", category: "Luxury Rendering", result: "Secured $12M development funding" },
   { image: luxury3, title: "Greenfield Contemporary Villa", category: "Luxury Rendering", result: "Featured in Architectural Digest" },
+  { image: reno7, title: "Lofts of Delray Mixed-Use", category: "3D Renovation Projects", result: "All 8 units pre-leased before completion" },
   { image: portfolio1, title: "Modern Residential Complex", category: "3D Rendering", result: "Secured $2.5M in investor funding" },
   { image: luxury4, title: "Emerald Terrace Townhouse", category: "Luxury Rendering", result: "Won Best Residential Design 2023" },
+  { image: reno8, title: "Stonegate Manor Estate", category: "3D Renovation Projects", result: "Property value increased by 35%" },
   { image: luxury5, title: "Grand Luxe Shopping Mall", category: "Luxury Rendering", result: "Attracted 3 anchor tenants pre-lease" },
   { image: portfolio2, title: "Corporate Office Headquarters", category: "Interior Visualization", result: "Client approval on first revision" },
+  { image: reno10, title: "Modern Farmhouse Renovation", category: "3D Renovation Projects", result: "Won Regional Design Award 2024" },
   { image: luxury6, title: "Marina Bay Waterfront Township", category: "Luxury Rendering", result: "Government approval in 45 days" },
   { image: luxury7, title: "Oasis Resort & Pool Club", category: "Luxury Rendering", result: "Phase 1 sold out in 3 weeks" },
   { image: portfolio3, title: "Mixed-Use Development", category: "Construction Documents", result: "Permits approved with zero revisions" },
-  { image: portfolio1, title: "Waterfront Condo Tower", category: "3D Rendering", result: "60% pre-sales before groundbreaking" },
 ];
 
 const PortfolioPreview = () => {
