@@ -20,7 +20,6 @@ const PartnerMap = () => {
     customStates[abbr] = {
       fill: abbr === "NM" ? "hsl(0, 65%, 88%)" : "hsl(0, 0%, 90%)",
       stroke: "hsl(0, 0%, 70%)",
-      strokeWidth: 0.6,
       onMouseEnter: () => setHoveredState(abbr),
       onMouseLeave: () => setHoveredState(null),
     };
