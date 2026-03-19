@@ -94,7 +94,6 @@ const PartnerMap = () => {
             defaultState={{
               fill: "hsl(0, 0%, 93%)",
               stroke: "hsl(0, 0%, 75%)",
-              strokeWidth: 0.5,
             }}
             label={{
               enabled: true,
