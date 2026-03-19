@@ -39,7 +39,6 @@ const PartnerMap = () => {
     ...customStates["NM"],
     fill: hoveredState === "NM" ? "hsl(0, 65%, 80%)" : "hsl(0, 65%, 88%)",
     stroke: "hsl(0, 60%, 50%)",
-    strokeWidth: 1.2,
   };
 
   // Hover effect for other states
