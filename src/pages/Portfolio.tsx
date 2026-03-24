@@ -33,6 +33,11 @@ import render3d7 from "@/assets/render-3d-7.jpg";
 import render3d8 from "@/assets/render-3d-8.jpg";
 import render3d9 from "@/assets/render-3d-9.jpg";
 import render3d10 from "@/assets/render-3d-10.jpg";
+import render3d11 from "@/assets/render-3d-11.jpg";
+import render3d12 from "@/assets/render-3d-12.jpg";
+import render3d13 from "@/assets/render-3d-13.jpg";
+import render3d14 from "@/assets/render-3d-14.jpg";
+import render3d15 from "@/assets/render-3d-15.jpg";
 
 const categories = ["All", "Luxury Rendering", "3D Renovation Projects", "3D Rendering", "Interior Visualization", "Construction Documents", "2D Floor Plans", "BIM Modeling", "Plan Stamping"];
 
