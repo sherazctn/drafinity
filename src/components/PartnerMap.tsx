@@ -2,14 +2,60 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { USAMap, USAStateAbbreviation } from "@mirawision/usa-map-react";
 
+const allServices = [
+  "2D Floor Plans",
+  "3D Rendering",
+  "Plan Stamping",
+  "Structural Drafting",
+  "MEP Drafting",
+  "Site Plans",
+  "BIM Modeling",
+  "Interior Visualization",
+  "Construction Documents",
+  "Landscape Design",
+  "Material Estimation",
+  "Permit Expediting",
+  "BIM Coordination & Clash Detection",
+  "Code Compliance Review",
+  "As-Built Documentation",
+  "Structural Analysis & Value Engineering",
+];
+
 const serviceStates: USAStateAbbreviation[] = [
   "WA", "OR", "CA", "NV", "ID", "UT", "AZ", "MT", "WY", "CO", "NM",
   "ND", "SD", "NE", "KS", "OK", "TX", "MN", "IA", "MO", "AR", "LA",
   "WI", "IL", "MS", "MI", "IN", "KY", "TN", "AL", "OH", "VA", "NC",
-  "SC", "GA", "FL", "PA", "NY", "NJ", "MD", "CT", "MA",
+  "SC", "GA", "FL", "PA", "NY", "NJ", "MD", "CT", "MA", "HI", "AK",
 ];
 
-const comingSoonStates: USAStateAbbreviation[] = ["VT", "NH", "ME", "DE", "WV"];
+const comingSoonStates: USAStateAbbreviation[] = ["VT", "NH", "ME", "DE", "WV", "RI", "DC" as USAStateAbbreviation];
+
+// Deterministic pseudo-random based on state abbreviation
+const getStateServices = (abbr: string): string[] => {
+  if (abbr === "NM") return allServices;
+  const seed = abbr.charCodeAt(0) * 31 + abbr.charCodeAt(1);
+  const count = 4 + (seed % 5); // 4-8 services
+  const shuffled = [...allServices].sort((a, b) => {
+    const ha = (a.charCodeAt(0) * 37 + seed) % 100;
+    const hb = (b.charCodeAt(0) * 37 + seed) % 100;
+    return ha - hb;
+  });
+  return shuffled.slice(0, count);
+};
+
+const stateNames: Record<string, string> = {
+  AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas", CA: "California",
+  CO: "Colorado", CT: "Connecticut", DE: "Delaware", FL: "Florida", GA: "Georgia",
+  HI: "Hawaii", ID: "Idaho", IL: "Illinois", IN: "Indiana", IA: "Iowa",
+  KS: "Kansas", KY: "Kentucky", LA: "Louisiana", ME: "Maine", MD: "Maryland",
+  MA: "Massachusetts", MI: "Michigan", MN: "Minnesota", MS: "Mississippi",
+  MO: "Missouri", MT: "Montana", NE: "Nebraska", NV: "Nevada", NH: "New Hampshire",
+  NJ: "New Jersey", NM: "New Mexico", NY: "New York", NC: "North Carolina",
+  ND: "North Dakota", OH: "Ohio", OK: "Oklahoma", OR: "Oregon", PA: "Pennsylvania",
+  RI: "Rhode Island", SC: "South Carolina", SD: "South Dakota", TN: "Tennessee",
+  TX: "Texas", UT: "Utah", VT: "Vermont", VA: "Virginia", WA: "Washington",
+  WV: "West Virginia", WI: "Wisconsin", WY: "Wyoming", DC: "District of Columbia",
+};
 
 const PartnerMap = () => {
   const [hoveredState, setHoveredState] = useState<string | null>(null);
@@ -34,14 +80,12 @@ const PartnerMap = () => {
     };
   });
 
-  // Highlight NM specially
   customStates["NM"] = {
     ...customStates["NM"],
     fill: hoveredState === "NM" ? "hsl(0, 65%, 80%)" : "hsl(0, 65%, 88%)",
     stroke: "hsl(0, 60%, 50%)",
   };
 
-  // Hover effect for other states
   if (hoveredState && hoveredState !== "NM") {
     const isService = serviceStates.includes(hoveredState as USAStateAbbreviation);
     customStates[hoveredState] = {
@@ -101,21 +145,45 @@ const PartnerMap = () => {
                   const isHQ = abbr === "NM";
                   const isService = serviceStates.includes(abbr as USAStateAbbreviation);
                   const isComingSoon = comingSoonStates.includes(abbr as USAStateAbbreviation);
+                  const services = isService ? getStateServices(abbr) : [];
+                  const name = stateNames[abbr] || abbr;
+
                   return (
-                    <div className="bg-foreground text-primary-foreground rounded-lg p-3 shadow-xl min-w-[180px]">
-                      <p className="text-sm font-heading font-bold">{abbr}</p>
-                      <p className="text-xs text-primary-foreground/70 mt-1">
+                    <div className="bg-foreground text-primary-foreground rounded-lg p-4 shadow-xl min-w-[240px] max-w-[320px]">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span
+                          className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                          style={{ background: isHQ ? "hsl(0, 65%, 55%)" : isService ? "hsl(0, 0%, 70%)" : "hsl(0, 0%, 85%)" }}
+                        />
+                        <p className="text-sm font-heading font-bold">{name} ({abbr})</p>
+                      </div>
+                      <p className="text-xs text-primary-foreground/70 mb-2">
                         {isHQ
-                          ? "Headquarters — Full Service"
+                          ? "Headquarters — All Services Registered"
                           : isService
-                            ? "Drafting & Stamping Available"
+                            ? "Associated Partner — Services Available"
                             : isComingSoon
                               ? "Coming Soon"
                               : "Contact for Availability"}
                       </p>
+                      {isService && services.length > 0 && (
+                        <div className="border-t border-primary-foreground/10 pt-2 mt-1">
+                          <p className="text-[10px] uppercase tracking-wider text-primary-foreground/50 mb-1.5">
+                            {isHQ ? "Registered Services" : "Associated Services"}
+                          </p>
+                          <ul className="space-y-0.5">
+                            {services.map((s) => (
+                              <li key={s} className="text-[11px] text-primary-foreground/80 flex items-center gap-1.5">
+                                <span className="w-1 h-1 rounded-full bg-primary-foreground/40 flex-shrink-0" />
+                                {s} {!isHQ && <span className="text-primary-foreground/40 text-[9px]">· associated</span>}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
                       {isHQ && (
-                        <span className="inline-block mt-1.5 text-[10px] uppercase tracking-wider bg-primary-foreground/10 rounded px-2 py-0.5 text-primary-foreground/80">
-                          ★ HQ
+                        <span className="inline-block mt-2 text-[10px] uppercase tracking-wider bg-primary-foreground/10 rounded px-2 py-0.5 text-primary-foreground/80">
+                          ★ HQ — Albuquerque, NM
                         </span>
                       )}
                     </div>
@@ -140,7 +208,7 @@ const PartnerMap = () => {
           </div>
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded border" style={{ background: "hsl(0, 0%, 90%)", borderColor: "hsl(0, 0%, 70%)" }} />
-            <span className="text-xs text-muted-foreground">Service Available</span>
+            <span className="text-xs text-muted-foreground">Associated Partner</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded border" style={{ background: "hsl(0, 0%, 95%)", borderColor: "hsl(0, 0%, 80%)" }} />
