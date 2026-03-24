@@ -32,6 +32,11 @@ import render3d7 from "@/assets/render-3d-7.jpg";
 import render3d8 from "@/assets/render-3d-8.jpg";
 import render3d9 from "@/assets/render-3d-9.jpg";
 import render3d10 from "@/assets/render-3d-10.jpg";
+import render3d11 from "@/assets/render-3d-11.jpg";
+import render3d12 from "@/assets/render-3d-12.jpg";
+import render3d13 from "@/assets/render-3d-13.jpg";
+import render3d14 from "@/assets/render-3d-14.jpg";
+import render3d15 from "@/assets/render-3d-15.jpg";
 
 const allProjects = [
   { image: luxury1, title: "Palm Vista Modern Residence", category: "Luxury Rendering", result: "Pre-sold 8 units before construction" },
@@ -64,6 +69,11 @@ const allProjects = [
   { image: render3d8, title: "Outdoor BBQ Terrace Design", category: "3D Rendering", result: "Built exactly as rendered" },
   { image: render3d9, title: "Luxury Dining Room Visualization", category: "Interior Visualization", result: "Secured high-end furniture contract" },
   { image: render3d10, title: "White Shaker Kitchen Render", category: "Interior Visualization", result: "Contractor used as build reference" },
+  { image: render3d11, title: "Contemporary Luxury Residence", category: "3D Rendering", result: "Investor commitment in 48 hours" },
+  { image: render3d12, title: "Suburban Family Home Design", category: "3D Rendering", result: "Approved on first presentation" },
+  { image: render3d13, title: "Tropical Infinity Pool Villa", category: "3D Rendering", result: "Featured in Luxury Homes International" },
+  { image: render3d14, title: "Avenue Rivi Beach Mixed-Use", category: "3D Rendering", result: "All retail spaces pre-leased" },
+  { image: render3d15, title: "Urban Apartment Complex", category: "3D Rendering", result: "80% units sold in first month" },
 ];
 
 function shuffleAndPick<T>(arr: T[], count: number): T[] {

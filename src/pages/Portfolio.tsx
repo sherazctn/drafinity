@@ -33,6 +33,11 @@ import render3d7 from "@/assets/render-3d-7.jpg";
 import render3d8 from "@/assets/render-3d-8.jpg";
 import render3d9 from "@/assets/render-3d-9.jpg";
 import render3d10 from "@/assets/render-3d-10.jpg";
+import render3d11 from "@/assets/render-3d-11.jpg";
+import render3d12 from "@/assets/render-3d-12.jpg";
+import render3d13 from "@/assets/render-3d-13.jpg";
+import render3d14 from "@/assets/render-3d-14.jpg";
+import render3d15 from "@/assets/render-3d-15.jpg";
 
 const categories = ["All", "Luxury Rendering", "3D Renovation Projects", "3D Rendering", "Interior Visualization", "Construction Documents", "2D Floor Plans", "BIM Modeling", "Plan Stamping"];
 
@@ -64,6 +69,11 @@ const projects = [
   { image: render3d4, title: "Compact Modern Garden Home", category: "3D Rendering", solution: "Exterior rendering of a single-story modern home with angled roofline, dark accent wall, wood soffit, and garden landscaping integration.", tools: "SketchUp, V-Ray, Enscape", result: "Featured in Modern Living magazine.", pdfUrl: "https://drive.google.com/file/d/1GeCx7SWgAGjFd1LCcQ2ciCM83aKsRW9e/view?usp=drive_link" },
   { image: render3d8, title: "Outdoor BBQ Terrace Design", category: "3D Rendering", solution: "Aerial perspective 3D rendering of an outdoor cooking and entertainment terrace with stone wall cladding, built-in grill, and wooden counter seating.", tools: "SketchUp Pro, V-Ray, Photoshop", result: "Built exactly as rendered.", pdfUrl: "https://drive.google.com/file/d/1CtK9mYtbb_sBn-aEAq6PsDv-XmfXu8Kt/view?usp=drive_link" },
   { image: portfolio1, title: "Modern Residential Complex", category: "3D Rendering", solution: "Full exterior 3D rendering package with landscaping, lighting studies, and aerial perspectives.", tools: "SketchUp Pro, V-Ray, Lumion", result: "Secured $2.5M in investor funding.", pdfUrl: "https://drive.google.com/file/d/1derDvg6jZpoCX8a-8nv-tkkQAudReHhX/view?usp=drive_link" },
+  { image: render3d11, title: "Contemporary Luxury Residence", category: "3D Rendering", solution: "Photorealistic exterior rendering of a modern luxury home with stone cladding, glass balustrades, ambient evening lighting, and manicured landscape design.", tools: "3ds Max, V-Ray, Photoshop, Lumion", result: "Investor commitment secured in 48 hours.", pdfUrl: "https://drive.google.com/file/d/1eFA8XQqlBlvmF7k1jPOeAPhPdPIdQCJh/view?usp=drive_link" },
+  { image: render3d12, title: "Suburban Family Home Design", category: "3D Rendering", solution: "Full exterior 3D visualization of a contemporary suburban two-story home with carport, wooden accent cladding, and landscaped front yard.", tools: "SketchUp Pro, V-Ray, Enscape", result: "Client approved design on first presentation.", pdfUrl: "https://drive.google.com/file/d/1tKb_7HtSjSoDmn3s-iBn3rIfjf85HQaZ/view?usp=drive_link" },
+  { image: render3d13, title: "Tropical Infinity Pool Villa", category: "3D Rendering", solution: "Resort-style villa rendering with infinity pool, palm tree landscaping, flat roof architecture, and sunset ambiance for luxury marketing collateral.", tools: "3ds Max, Corona Renderer, Photoshop", result: "Featured in Luxury Homes International.", pdfUrl: "https://drive.google.com/file/d/1yCpXRwPqpqZXz3erxnnR5IdTbSGVZ92n/view?usp=drive_link" },
+  { image: render3d14, title: "Avenue Rivi Beach Mixed-Use", category: "3D Rendering", solution: "3-story mixed-use office building rendering with retail shops, café, and conference center featuring modern glass curtain wall facade and urban street context.", tools: "Revit, V-Ray, AutoCAD, Photoshop", result: "All retail spaces pre-leased before construction.", pdfUrl: "https://drive.google.com/file/d/1Bj2qUjzP4NoxJ2jpE9opwZpDdLjCJ1P5/view?usp=drive_link" },
+  { image: render3d15, title: "Urban Apartment Complex", category: "3D Rendering", solution: "Mid-rise apartment complex visualization with rooftop terrace, wood-accent facade panels, glass balconies, and integrated green elements.", tools: "SketchUp, V-Ray, Lumion, Photoshop", result: "80% units sold within first month.", pdfUrl: "https://drive.google.com/file/d/1tncVCCXfx3YBYnR29h5MbKhIm-by1Jyo/view?usp=drive_link" },
 
   // Interior Visualization with unique images
   { image: render3d2, title: "Contemporary Living Room Design", category: "Interior Visualization", solution: "High-end living room visualization with arched windows, ring pendant lighting, marble flooring, and curated furniture selection.", tools: "3ds Max, V-Ray, Photoshop", result: "Client approved on first draft.", pdfUrl: "https://drive.google.com/file/d/13rvXbZ1XKfDt_EAsNpajXHm5DxBqkeDD/view?usp=drive_link" },
