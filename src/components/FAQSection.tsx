@@ -52,14 +52,14 @@ const FAQSection = () => {
               Everything you need to know about our drafting, design, and plan stamping services. Can't find what you're looking for? Reach out to our team.
             </motion.p>
             <motion.a
-              href="tel:+19175401563"
+              href="tel:+19177281625"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
               className="text-sm font-heading uppercase tracking-[0.15em] text-muted-foreground hover:text-foreground transition-colors"
             >
-              Call us: (917) 540-1563 →
+              Call us: (917) 728-1625 →
             </motion.a>
           </div>
 

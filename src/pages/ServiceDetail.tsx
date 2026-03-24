@@ -495,10 +495,10 @@ const ServiceDetail = () => {
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>
-            <a href="tel:+19175401563">
+            <a href="tel:+19177281625">
               <Button variant="hero-outline" size="xl">
                 <Phone className="w-4 h-4" />
-                Call (917) 540-1563
+                Call (917) 728-1625
               </Button>
             </a>
           </motion.div>
