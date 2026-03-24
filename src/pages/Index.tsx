@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import CounterStats from "@/components/CounterStats";
 import TrustBadges from "@/components/TrustBadges";
 import ServiceBlocks from "@/components/ServiceBlocks";
+import TrendingServices from "@/components/TrendingServices";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import ProcessSection from "@/components/ProcessSection";
 import PortfolioPreview from "@/components/PortfolioPreview";
@@ -18,6 +19,8 @@ const Index = () => {
       <TrustBadges />
       <div className="section-divider" />
       <ServiceBlocks />
+      <div className="section-divider" />
+      <TrendingServices />
       <div className="section-divider" />
       <WhyChooseUs />
       <div className="section-divider" />
