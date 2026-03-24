@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, PenTool, Box, FileCheck, Building2, Layers, Ruler, TreePine, Palette, Calculator, CuboidIcon as Cube, FileText, Zap, Warehouse, Compass, HardHat, Eye } from "lucide-react";
+import { ArrowRight, PenTool, Box, FileCheck, Building2, Layers, Ruler, TreePine, Palette, Calculator, CuboidIcon as Cube, FileText, Zap, Warehouse, Compass, HardHat, Eye, TrendingUp, Flame } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
 import CTASection from "@/components/CTASection";
+import TrendingServices from "@/components/TrendingServices";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
 
 const serviceCategories = [
@@ -89,6 +90,8 @@ const Services = () => {
           </div>
         </section>
       ))}
+
+      <TrendingServices />
 
       <CTASection />
     </main>
