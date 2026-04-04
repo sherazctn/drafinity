@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Calculator, Ruler, Box, Layers, PaintBucket, Stairs, TriangleRight, Weight, Brick, Grid3X3, ArrowRightLeft, FileText } from "lucide-react";
+import { Calculator, Ruler, Box, Layers, PaintBucket, FolderUp, Triangle, Weight, Blocks, Grid3X3, ArrowRightLeft, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
