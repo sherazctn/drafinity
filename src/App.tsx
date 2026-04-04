@@ -12,6 +12,7 @@ import Services from "./pages/Services";
 import ServiceDetail from "./pages/ServiceDetail";
 import Portfolio from "./pages/Portfolio";
 import SoftwareTools from "./pages/SoftwareTools";
+import Tools from "./pages/Tools";
 import Legal from "./pages/Legal";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
