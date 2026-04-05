@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 const CTASection = () => {
   return (
-    <section className="py-24 lg:py-32 relative overflow-hidden bg-foreground text-primary-foreground">
+    <section className="py-24 lg:py-32 relative overflow-hidden bg-foreground text-primary-foreground border-t border-foreground/10">
       <div className="absolute inset-0 pointer-events-none">
         <motion.div animate={{ x: ["-50%", "150%"] }} transition={{ duration: 6, repeat: Infinity, ease: "linear" }} className="absolute top-1/3 h-px w-1/2 bg-gradient-to-r from-transparent via-primary-foreground/10 to-transparent" />
         <motion.div animate={{ x: ["150%", "-50%"] }} transition={{ duration: 8, repeat: Infinity, ease: "linear" }} className="absolute top-2/3 h-px w-1/3 bg-gradient-to-r from-transparent via-primary-foreground/10 to-transparent" />
