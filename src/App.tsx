@@ -1,3 +1,4 @@
+import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,11 +17,16 @@ import Tools from "./pages/Tools";
 import Legal from "./pages/Legal";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
+import Partners from "./pages/Partners";
+import Vision from "./pages/Vision";
+import Mission from "./pages/Mission";
+import TestimonialsPage from "./pages/TestimonialsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
 const App = () => (
+  <HelmetProvider>
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -31,6 +37,10 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<About />} />
+          <Route path="/vision" element={<Vision />} />
+          <Route path="/mission" element={<Mission />} />
+          <Route path="/testimonials" element={<TestimonialsPage />} />
+          <Route path="/partners" element={<Partners />} />
           <Route path="/services" element={<Services />} />
           <Route path="/services/:slug" element={<ServiceDetail />} />
           <Route path="/portfolio" element={<Portfolio />} />
@@ -45,6 +55,7 @@ const App = () => (
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;
