@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/drafinity-logo.png";
@@ -71,6 +71,16 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
   const isActive = (href: string) => {
     if (href === "/") return location.pathname === "/";
     return location.pathname.startsWith(href);
@@ -82,7 +92,7 @@ const Navbar = () => {
   return (
     <>
       <TopBar />
-      <nav className={`sticky top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-background/80 backdrop-blur-sm"} border-b border-border`}>
+      <nav className={`sticky top-0 left-0 right-0 z-[100] transition-all duration-500 ${scrolled ? "bg-background/95 backdrop-blur-md shadow-sm" : "bg-background/80 backdrop-blur-sm"} border-b border-border`}>
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-14 lg:h-16">
             <Link to="/" className="flex items-center">
@@ -129,7 +139,7 @@ const Navbar = () => {
                         transition={{ duration: 0.2 }}
                         onMouseEnter={() => setOpenDropdown("about")}
                         onMouseLeave={() => setOpenDropdown(null)}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-background/98 backdrop-blur-xl border border-border rounded-lg shadow-xl overflow-hidden z-50"
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-52 bg-background backdrop-blur-xl border border-border rounded-lg shadow-xl overflow-hidden z-[200]"
                       >
                         <div className="py-2">
                           {aboutItems.map((item) => (
@@ -152,7 +162,7 @@ const Navbar = () => {
                         transition={{ duration: 0.2 }}
                         onMouseEnter={() => setOpenDropdown("services")}
                         onMouseLeave={() => setOpenDropdown(null)}
-                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-background/98 backdrop-blur-xl border border-border rounded-lg shadow-xl overflow-hidden z-50"
+                        className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-background backdrop-blur-xl border border-border rounded-lg shadow-xl overflow-hidden z-[200]"
                       >
                         <div className="py-2">
                           <Link to="/services" className="block px-4 py-2 text-xs font-heading uppercase tracking-wider text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors border-b border-border mb-1">
@@ -172,10 +182,6 @@ const Navbar = () => {
             </div>
 
             <div className="hidden xl:flex items-center gap-3">
-              <a href="tel:+19177281625" className="flex items-center gap-2 text-xs text-muted-foreground hover:text-foreground transition-colors">
-                <Phone className="w-3.5 h-3.5" />
-                <span className="font-heading tracking-wide">(917) 728-1625</span>
-              </a>
               <Link to="/contact">
                 <Button variant="hero" size="sm">Get a Quote</Button>
               </Link>
@@ -189,15 +195,22 @@ const Navbar = () => {
 
         <AnimatePresence>
           {mobileOpen && (
-            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.3 }} className="xl:hidden bg-background/98 backdrop-blur-xl border-b border-border overflow-hidden">
-              <div className="container mx-auto px-4 py-6 flex flex-col gap-3">
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="xl:hidden bg-background border-b border-border overflow-y-auto"
+              style={{ maxHeight: "calc(100vh - 56px)" }}
+            >
+              <div className="container mx-auto px-4 py-6 flex flex-col gap-2">
                 {navLinks.map((link, i) => (
                   <motion.div key={link.href} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.05 }}>
                     {link.dropdown ? (
                       <div>
                         <button
                           onClick={() => setMobileDropdown(mobileDropdown === link.dropdown ? null : link.dropdown!)}
-                          className={`text-lg font-heading uppercase tracking-[0.15em] py-2 flex items-center gap-2 transition-colors w-full text-left ${isActive(link.href) ? "text-foreground" : "text-muted-foreground"}`}
+                          className={`text-base font-heading uppercase tracking-[0.15em] py-2 flex items-center gap-2 transition-colors w-full text-left ${isActive(link.href) ? "text-foreground" : "text-muted-foreground"}`}
                         >
                           {link.label}
                           <ChevronDown className={`w-4 h-4 transition-transform ${mobileDropdown === link.dropdown ? "rotate-180" : ""}`} />
@@ -221,16 +234,13 @@ const Navbar = () => {
                         </AnimatePresence>
                       </div>
                     ) : (
-                      <Link to={link.href} className={`text-lg font-heading uppercase tracking-[0.15em] py-2 block transition-colors ${isActive(link.href) ? "text-foreground" : "text-muted-foreground"}`}>
+                      <Link to={link.href} className={`text-base font-heading uppercase tracking-[0.15em] py-2 block transition-colors ${isActive(link.href) ? "text-foreground" : "text-muted-foreground"}`}>
                         {link.label}
                       </Link>
                     )}
                   </motion.div>
                 ))}
-                <div className="pt-4 border-t border-border flex flex-col gap-3">
-                  <a href="tel:+19177281625" className="flex items-center gap-2 text-muted-foreground">
-                    <Phone className="w-4 h-4" /><span>(917) 728-1625</span>
-                  </a>
+                <div className="pt-4 border-t border-border">
                   <Link to="/contact">
                     <Button variant="hero" className="w-full">Get a Free Quote</Button>
                   </Link>
