@@ -528,9 +528,26 @@ const Tools = () => {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative aspect-square max-w-md mx-auto lg:mx-0"
+                className="relative aspect-square max-w-md mx-auto lg:mx-0 bg-muted/30 rounded-2xl border border-border overflow-hidden flex items-center justify-center"
               >
-                <BlueprintAnimation />
+                {/* Animated blueprint grid */}
+                <svg viewBox="0 0 400 400" className="w-full h-full opacity-20">
+                  {Array.from({ length: 20 }).map((_, i) => (
+                    <motion.line key={`h${i}`} x1="0" y1={i * 20} x2="400" y2={i * 20} stroke="currentColor" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.5 }} />
+                  ))}
+                  {Array.from({ length: 20 }).map((_, i) => (
+                    <motion.line key={`v${i}`} x1={i * 20} y1="0" x2={i * 20} y2="400" stroke="currentColor" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.5 }} />
+                  ))}
+                  <motion.rect x="60" y="60" width="120" height="100" fill="none" stroke="currentColor" strokeWidth="1.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 1 }} />
+                  <motion.rect x="220" y="80" width="100" height="80" fill="none" stroke="currentColor" strokeWidth="1.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.7, duration: 1 }} />
+                  <motion.rect x="100" y="220" width="200" height="120" fill="none" stroke="currentColor" strokeWidth="1.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.9, duration: 1 }} />
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-center">
+                    <Calculator className="w-16 h-16 text-foreground/20 mx-auto mb-3" />
+                    <p className="text-xs font-heading uppercase tracking-widest text-muted-foreground">{tools.length}+ Free Tools</p>
+                  </div>
+                </div>
               </motion.div>
 
               <motion.div
