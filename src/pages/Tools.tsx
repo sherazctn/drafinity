@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
-import BlueprintAnimation from "@/components/BlueprintAnimation";
+
 
 // ─── Calculator Components (unchanged logic) ─────────────────
 
