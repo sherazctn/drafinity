@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Calculator, Ruler, Box, Layers, PaintBucket, FolderUp, Triangle, Weight, Blocks, Grid3X3, ArrowRightLeft, FileText, Zap, Droplets, Thermometer, Scale, Wrench, Home, BarChart3, Maximize, Percent } from "lucide-react";
+import { Calculator, Ruler, Box, Layers, PaintBucket, FolderUp, Triangle, Weight, Blocks, Grid3X3, ArrowRightLeft, FileText, Zap, Droplets, Thermometer, Scale, Wrench, Home, BarChart3, Maximize, TrendingUp, Star, Sparkles, Percent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import BlueprintAnimation from "@/components/BlueprintAnimation";
 
-// ─── Existing Tools ─────────────────────────────────────────
+// ─── Calculator Components (unchanged logic) ─────────────────
 
 const SquareFootageCalc = () => {
   const [length, setLength] = useState(""); const [width, setWidth] = useState("");
@@ -202,8 +204,6 @@ const InsulationCalc = () => {
   );
 };
 
-// ─── NEW Tools ─────────────────────────────────────────
-
 const FlooringCalc = () => {
   const [l, setL] = useState(""); const [w, setW] = useState(""); const [waste, setWaste] = useState("10");
   const area = l && w ? parseFloat(l) * parseFloat(w) : 0;
@@ -331,27 +331,97 @@ const WindowAreaCalc = () => {
   );
 };
 
-// ─── Tool definitions ───────────────────────────────────────
+// New additional calculators
+const MortgageCalc = () => {
+  const [price, setPrice] = useState(""); const [down, setDown] = useState("20"); const [rate, setRate] = useState("6.5"); const [years, setYears] = useState("30");
+  const loanAmt = price ? parseFloat(price) * (1 - parseFloat(down) / 100) : 0;
+  const monthlyRate = rate ? parseFloat(rate) / 100 / 12 : 0;
+  const n = years ? parseInt(years) * 12 : 0;
+  const payment = loanAmt && monthlyRate && n ? (loanAmt * monthlyRate * Math.pow(1 + monthlyRate, n)) / (Math.pow(1 + monthlyRate, n) - 1) : 0;
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <div><Label className="text-xs">Home Price ($)</Label><Input type="number" value={price} onChange={e => setPrice(e.target.value)} placeholder="350000" /></div>
+        <div><Label className="text-xs">Down Payment %</Label><Input type="number" value={down} onChange={e => setDown(e.target.value)} placeholder="20" /></div>
+        <div><Label className="text-xs">Interest Rate %</Label><Input type="number" value={rate} onChange={e => setRate(e.target.value)} placeholder="6.5" /></div>
+        <div><Label className="text-xs">Term (years)</Label><Input type="number" value={years} onChange={e => setYears(e.target.value)} placeholder="30" /></div>
+      </div>
+      {payment > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Monthly Payment</p><p className="text-2xl font-heading font-bold">${payment.toFixed(2)}</p><p className="text-xs text-muted-foreground mt-1">Loan: ${loanAmt.toLocaleString()} · Total: ${(payment * n).toLocaleString(undefined, { maximumFractionDigits: 0 })}</p></div>}
+    </div>
+  );
+};
+
+const FenceCalc = () => {
+  const [perimeter, setPerimeter] = useState(""); const [postSpacing, setPostSpacing] = useState("8"); const [gates, setGates] = useState("1");
+  const fenceLen = perimeter ? parseFloat(perimeter) - (gates ? parseInt(gates) * 4 : 0) : 0;
+  const posts = fenceLen > 0 && postSpacing ? Math.ceil(fenceLen / parseFloat(postSpacing)) + 1 : 0;
+  const panels = posts > 1 ? posts - 1 : 0;
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-3">
+        <div><Label className="text-xs">Perimeter (ft)</Label><Input type="number" value={perimeter} onChange={e => setPerimeter(e.target.value)} placeholder="200" /></div>
+        <div><Label className="text-xs">Post Spacing (ft)</Label><Input type="number" value={postSpacing} onChange={e => setPostSpacing(e.target.value)} placeholder="8" /></div>
+        <div><Label className="text-xs">Gates</Label><Input type="number" value={gates} onChange={e => setGates(e.target.value)} placeholder="1" /></div>
+      </div>
+      {posts > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Fence Materials</p><p className="text-2xl font-heading font-bold">{posts} posts · {panels} panels</p><p className="text-xs text-muted-foreground mt-1">Fence length: {fenceLen.toFixed(0)} ft + {gates} gate(s)</p></div>}
+    </div>
+  );
+};
+
+const LandscapeMulchCalc = () => {
+  const [l, setL] = useState(""); const [w, setW] = useState(""); const [depth, setDepth] = useState("3");
+  const cubicYd = l && w && depth ? (parseFloat(l) * parseFloat(w) * (parseFloat(depth) / 12)) / 27 : 0;
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-3 gap-3">
+        <div><Label className="text-xs">Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="30" /></div>
+        <div><Label className="text-xs">Width (ft)</Label><Input type="number" value={w} onChange={e => setW(e.target.value)} placeholder="10" /></div>
+        <div><Label className="text-xs">Depth (in)</Label><Input type="number" value={depth} onChange={e => setDepth(e.target.value)} placeholder="3" /></div>
+      </div>
+      {cubicYd > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Mulch / Soil Needed</p><p className="text-2xl font-heading font-bold">{cubicYd.toFixed(2)} cubic yards</p><p className="text-xs text-muted-foreground mt-1">~{Math.ceil(cubicYd * 13.5)} bags (2 cu ft each)</p></div>}
+    </div>
+  );
+};
+
+const CostPerSqftCalc = () => {
+  const [totalCost, setTotalCost] = useState(""); const [sqft, setSqft] = useState("");
+  const costPerSqft = totalCost && sqft ? parseFloat(totalCost) / parseFloat(sqft) : 0;
+  return (
+    <div className="space-y-4">
+      <div className="grid grid-cols-2 gap-3">
+        <div><Label className="text-xs">Total Cost ($)</Label><Input type="number" value={totalCost} onChange={e => setTotalCost(e.target.value)} placeholder="250000" /></div>
+        <div><Label className="text-xs">Area (sq ft)</Label><Input type="number" value={sqft} onChange={e => setSqft(e.target.value)} placeholder="2000" /></div>
+      </div>
+      {costPerSqft > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Cost Per Square Foot</p><p className="text-2xl font-heading font-bold">${costPerSqft.toFixed(2)}/sq ft</p></div>}
+    </div>
+  );
+};
+
+// ─── Sorted by US usage (most popular first), with badges ───
 
 const tools = [
-  { id: "sqft", icon: Grid3X3, title: "Square Footage Calculator", desc: "Calculate area in sq ft and sq meters from length × width.", component: SquareFootageCalc, category: "General", keywords: "area calculator, square footage, room size" },
-  { id: "concrete", icon: Box, title: "Concrete Calculator", desc: "Estimate cubic yards of concrete for slabs, footings, and walls.", component: ConcreteCalc, category: "Materials", keywords: "concrete volume, slab calculator, cubic yards" },
-  { id: "stair", icon: FolderUp, title: "Stair Calculator", desc: "Calculate riser count, tread depth, and total run per IRC code.", component: StairCalc, category: "Design", keywords: "stair design, riser calculator, tread depth, IRC code" },
-  { id: "roof", icon: Triangle, title: "Roof Pitch Calculator", desc: "Find pitch ratio, angle, and slope multiplier for roofing.", component: RoofPitchCalc, category: "Design", keywords: "roof pitch, slope angle, roofing calculator" },
-  { id: "paint", icon: PaintBucket, title: "Paint Calculator", desc: "Estimate gallons of paint needed for rooms and walls.", component: PaintCalc, category: "Materials", keywords: "paint estimator, wall coverage, gallons needed" },
-  { id: "unit", icon: ArrowRightLeft, title: "Unit Converter", desc: "Convert between feet, meters, inches, centimeters, and more.", component: UnitConverter, category: "General", keywords: "unit conversion, feet to meters, construction converter" },
-  { id: "brick", icon: Blocks, title: "Brick Calculator", desc: "Calculate number of bricks and mortar for wall construction.", component: BrickCalc, category: "Materials", keywords: "brick estimator, masonry calculator, mortar" },
-  { id: "rebar", icon: Layers, title: "Rebar Calculator", desc: "Estimate linear feet and number of rebar bars for slabs.", component: RebarCalc, category: "Structural", keywords: "rebar estimator, reinforcement, steel bars" },
-  { id: "gravel", icon: Weight, title: "Gravel & Fill Calculator", desc: "Calculate cubic yards and tons of gravel, sand, or fill dirt.", component: GravelCalc, category: "Materials", keywords: "gravel calculator, fill dirt, landscaping materials" },
-  { id: "deck", icon: Ruler, title: "Deck Board Calculator", desc: "Estimate number of deck boards needed by dimensions.", component: DeckBoardCalc, category: "Design", keywords: "deck builder, board calculator, outdoor decking" },
-  { id: "drywall", icon: FileText, title: "Drywall Calculator", desc: "Calculate 4×8 drywall sheets for walls and ceilings.", component: DryWallCalc, category: "Materials", keywords: "drywall sheets, sheetrock, gypsum board" },
-  { id: "insulation", icon: Calculator, title: "Insulation Calculator", desc: "Estimate insulation bags/rolls by area and R-value.", component: InsulationCalc, category: "Materials", keywords: "insulation R-value, fiberglass, energy efficiency" },
-  { id: "flooring", icon: Home, title: "Flooring Calculator", desc: "Calculate flooring material with waste allowance for any room.", component: FlooringCalc, category: "Materials", keywords: "flooring estimate, hardwood, laminate, vinyl plank" },
+  { id: "sqft", icon: Grid3X3, title: "Square Footage Calculator", desc: "Calculate area in sq ft and sq meters from length × width.", component: SquareFootageCalc, category: "General", keywords: "area calculator, square footage, room size", badge: "Most Popular" },
+  { id: "concrete", icon: Box, title: "Concrete Calculator", desc: "Estimate cubic yards of concrete for slabs, footings, and walls.", component: ConcreteCalc, category: "Materials", keywords: "concrete volume, slab calculator, cubic yards", badge: "Most Popular" },
+  { id: "mortgage", icon: TrendingUp, title: "Mortgage Calculator", desc: "Calculate monthly mortgage payments, total cost, and loan amounts.", component: MortgageCalc, category: "General", keywords: "mortgage calculator, home loan, monthly payment", badge: "Most Popular" },
+  { id: "paint", icon: PaintBucket, title: "Paint Calculator", desc: "Estimate gallons of paint needed for rooms and walls.", component: PaintCalc, category: "Materials", keywords: "paint estimator, wall coverage, gallons needed", badge: "Popular" },
+  { id: "unit", icon: ArrowRightLeft, title: "Unit Converter", desc: "Convert between feet, meters, inches, centimeters, and more.", component: UnitConverter, category: "General", keywords: "unit conversion, feet to meters, construction converter", badge: "Popular" },
+  { id: "flooring", icon: Home, title: "Flooring Calculator", desc: "Calculate flooring material with waste allowance for any room.", component: FlooringCalc, category: "Materials", keywords: "flooring estimate, hardwood, laminate, vinyl plank", badge: "Popular" },
   { id: "tile", icon: Grid3X3, title: "Tile Calculator", desc: "Estimate number of tiles needed for floors or walls.", component: TileCalc, category: "Materials", keywords: "tile calculator, ceramic, porcelain, backsplash" },
-  { id: "ceiling", icon: BarChart3, title: "Building Height Calculator", desc: "Calculate total building height from floors and slab thickness.", component: CeilingHeightCalc, category: "Structural", keywords: "building height, floor to floor, multi-story" },
-  { id: "electrical", icon: Zap, title: "Electrical Load Calculator", desc: "Estimate electrical service panel size for residential projects.", component: ElectricalLoadCalc, category: "MEP", keywords: "electrical load, panel size, amps, service entrance" },
-  { id: "plumbing", icon: Droplets, title: "Plumbing Fixture Calculator", desc: "Calculate drainage fixture units and minimum pipe sizes.", component: PlumbingFixtureCalc, category: "MEP", keywords: "plumbing DFU, drainage, pipe sizing, fixtures" },
+  { id: "drywall", icon: FileText, title: "Drywall Calculator", desc: "Calculate 4×8 drywall sheets for walls and ceilings.", component: DryWallCalc, category: "Materials", keywords: "drywall sheets, sheetrock, gypsum board" },
+  { id: "roof", icon: Triangle, title: "Roof Pitch Calculator", desc: "Find pitch ratio, angle, and slope multiplier for roofing.", component: RoofPitchCalc, category: "Design", keywords: "roof pitch, slope angle, roofing calculator" },
+  { id: "stair", icon: FolderUp, title: "Stair Calculator", desc: "Calculate riser count, tread depth, and total run per IRC code.", component: StairCalc, category: "Design", keywords: "stair design, riser calculator, tread depth, IRC code" },
   { id: "hvac", icon: Thermometer, title: "HVAC Tonnage Calculator", desc: "Estimate AC/heating tonnage by floor area and climate zone.", component: HVACTonnageCalc, category: "MEP", keywords: "HVAC sizing, BTU calculator, air conditioning, tonnage" },
+  { id: "electrical", icon: Zap, title: "Electrical Load Calculator", desc: "Estimate electrical service panel size for residential projects.", component: ElectricalLoadCalc, category: "MEP", keywords: "electrical load, panel size, amps, service entrance" },
+  { id: "brick", icon: Blocks, title: "Brick Calculator", desc: "Calculate number of bricks and mortar for wall construction.", component: BrickCalc, category: "Materials", keywords: "brick estimator, masonry calculator, mortar" },
+  { id: "fence", icon: Ruler, title: "Fence Calculator", desc: "Estimate posts, panels, and gates for fence projects.", component: FenceCalc, category: "Design", keywords: "fence calculator, posts, panels, yard fencing" },
+  { id: "gravel", icon: Weight, title: "Gravel & Fill Calculator", desc: "Calculate cubic yards and tons of gravel, sand, or fill dirt.", component: GravelCalc, category: "Materials", keywords: "gravel calculator, fill dirt, landscaping materials" },
+  { id: "mulch", icon: PaintBucket, title: "Mulch & Soil Calculator", desc: "Estimate cubic yards and bags for landscaping beds.", component: LandscapeMulchCalc, category: "Materials", keywords: "mulch calculator, soil, landscaping, garden bed" },
+  { id: "costpersqft", icon: Percent, title: "Cost Per Sq Ft Calculator", desc: "Calculate construction or property cost per square foot.", component: CostPerSqftCalc, category: "General", keywords: "cost per square foot, construction cost, property value" },
+  { id: "rebar", icon: Layers, title: "Rebar Calculator", desc: "Estimate linear feet and number of rebar bars for slabs.", component: RebarCalc, category: "Structural", keywords: "rebar estimator, reinforcement, steel bars" },
+  { id: "deck", icon: Ruler, title: "Deck Board Calculator", desc: "Estimate number of deck boards needed by dimensions.", component: DeckBoardCalc, category: "Design", keywords: "deck builder, board calculator, outdoor decking" },
+  { id: "insulation", icon: Calculator, title: "Insulation Calculator", desc: "Estimate insulation bags/rolls by area and R-value.", component: InsulationCalc, category: "Materials", keywords: "insulation R-value, fiberglass, energy efficiency" },
+  { id: "ceiling", icon: BarChart3, title: "Building Height Calculator", desc: "Calculate total building height from floors and slab thickness.", component: CeilingHeightCalc, category: "Structural", keywords: "building height, floor to floor, multi-story" },
+  { id: "plumbing", icon: Droplets, title: "Plumbing Fixture Calculator", desc: "Calculate drainage fixture units and minimum pipe sizes.", component: PlumbingFixtureCalc, category: "MEP", keywords: "plumbing DFU, drainage, pipe sizing, fixtures" },
   { id: "slope", icon: Scale, title: "Slope & Grade Calculator", desc: "Calculate site slope percentage, ratio, and angle for grading.", component: SlopeGradeCalc, category: "Design", keywords: "slope grade, site grading, drainage slope, ADA ramp" },
   { id: "window", icon: Maximize, title: "Window Area Calculator", desc: "Determine required window area for natural light per IRC code.", component: WindowAreaCalc, category: "Design", keywords: "window area, natural light, IRC code, daylighting" },
 ];
@@ -372,12 +442,12 @@ const Tools = () => {
   return (
     <main>
       <Helmet>
-        <title>Free Construction Calculators & Tools | Drafinity LLC</title>
-        <meta name="description" content="Free online construction calculators: concrete, stair, roof pitch, HVAC tonnage, electrical load, plumbing fixtures, flooring, tile, rebar, paint, drywall, insulation and more. Professional-grade AEC tools." />
-        <meta name="keywords" content="construction calculator, concrete calculator, stair calculator, roof pitch calculator, HVAC calculator, electrical load calculator, plumbing calculator, flooring calculator, tile calculator, rebar calculator, paint calculator, drywall calculator, building tools, AEC tools, architecture tools" />
+        <title>Free Construction Calculators & AEC Tools | Drafinity LLC</title>
+        <meta name="description" content="All free tools for basic use for industry ease. 24+ free construction calculators: concrete, mortgage, stair, roof pitch, HVAC, electrical load, plumbing, flooring, tile, rebar, paint, drywall, insulation, fence, mulch, cost per sq ft and more." />
+        <meta name="keywords" content="free construction calculator, concrete calculator, mortgage calculator, stair calculator, roof pitch calculator, HVAC calculator, electrical load calculator, plumbing calculator, flooring calculator, tile calculator, rebar calculator, paint calculator, drywall calculator, building tools, AEC tools, architecture tools, fence calculator, mulch calculator, cost per square foot" />
         <link rel="canonical" href="https://drafinity.lovable.app/tools" />
-        <meta property="og:title" content="Free Construction Calculators & Tools | Drafinity" />
-        <meta property="og:description" content="20+ free professional-grade calculators for architects, engineers, contractors, and homeowners." />
+        <meta property="og:title" content="Free Construction Calculators & AEC Tools | Drafinity" />
+        <meta property="og:description" content="All free tools for basic use for industry ease. 24+ professional-grade calculators for architects, engineers, contractors, and homeowners." />
         <meta property="og:type" content="website" />
       </Helmet>
 
@@ -385,16 +455,16 @@ const Tools = () => {
         <PageHeroAnimation page="software" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground mb-4 block">Free Online Tools</motion.span>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-4xl lg:text-6xl font-heading font-bold mb-6 max-w-3xl">
-            Construction &<br /><span className="text-gradient-highlight">Design Calculators</span>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-3xl lg:text-6xl font-heading font-bold mb-6 max-w-3xl">
+            All Free Tools for<br /><span className="text-gradient-highlight">Basic Use for Industry Ease</span>
           </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            {tools.length} free professional-grade calculators and tools for architects, engineers, contractors, and homeowners. No signup required.
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-base lg:text-lg text-muted-foreground max-w-2xl leading-relaxed">
+            {tools.length} free professional-grade calculators and tools for architects, engineers, contractors, and homeowners. No signup required — instantly calculate materials, costs, and design parameters for your next project.
           </motion.p>
         </div>
       </section>
 
-      <section className="py-16 lg:py-24">
+      <section className="py-12 lg:py-24">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex flex-col sm:flex-row gap-3 mb-10">
             <Input placeholder="Search tools..." value={search} onChange={(e) => setSearch(e.target.value)} className="max-w-xs text-sm" />
@@ -418,11 +488,11 @@ const Tools = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.03 }}
-                  className={`bg-card border rounded-lg p-6 transition-all ${isActive ? "border-foreground shadow-lg" : "border-border card-hover"}`}
+                  className={`bg-card border rounded-lg p-5 lg:p-6 transition-all ${isActive ? "border-foreground shadow-lg" : "border-border card-hover"}`}
                 >
-                  <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-start justify-between mb-4 gap-2">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center">
+                      <div className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center shrink-0">
                         <Icon className="w-5 h-5 text-foreground" />
                       </div>
                       <div>
@@ -430,6 +500,12 @@ const Tools = () => {
                         <span className="text-[10px] uppercase tracking-wider text-muted-foreground">{tool.category}</span>
                       </div>
                     </div>
+                    {(tool as any).badge && (
+                      <Badge variant={(tool as any).badge === "Most Popular" ? "default" : "secondary"} className="text-[9px] shrink-0">
+                        {(tool as any).badge === "Most Popular" ? <Star className="w-2.5 h-2.5 mr-0.5" /> : <TrendingUp className="w-2.5 h-2.5 mr-0.5" />}
+                        {(tool as any).badge}
+                      </Badge>
+                    )}
                   </div>
                   <p className="text-xs text-muted-foreground mb-4">{tool.desc}</p>
                   {isActive ? (
@@ -445,20 +521,48 @@ const Tools = () => {
             })}
           </div>
 
-          {/* SEO Content */}
-          <div className="mt-20 max-w-3xl mx-auto">
-            <h2 className="text-2xl font-heading font-bold mb-4">Professional Construction Calculators</h2>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              Drafinity's free construction calculators help architects, engineers, contractors, and homeowners estimate materials, plan designs, and ensure code compliance. From concrete volume and stair dimensions to HVAC tonnage and electrical load sizing — all calculations follow industry standards including IRC, IECC, and NEC codes.
-            </p>
-            <h3 className="text-lg font-heading font-semibold mb-2">Why Use Our Tools?</h3>
-            <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside mb-4">
-              <li>Instant results — no signup or download required</li>
-              <li>Based on industry-standard formulas and building codes</li>
-              <li>Covers structural, MEP, materials, and design calculations</li>
-              <li>Mobile-friendly for use on job sites</li>
-              <li>Regularly updated for accuracy</li>
-            </ul>
+          {/* Improved Last Section with animation on left, text on right */}
+          <div className="mt-20 lg:mt-28">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="relative aspect-square max-w-md mx-auto lg:mx-0"
+              >
+                <BlueprintAnimation />
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-2xl lg:text-3xl font-heading font-bold mb-6">Professional Construction Calculators — Built for the Industry</h2>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                  Drafinity's free construction calculators help architects, engineers, contractors, and homeowners estimate materials, plan designs, and ensure code compliance. From concrete volume and stair dimensions to HVAC tonnage and electrical load sizing — all calculations follow industry standards including IRC, IECC, and NEC codes.
+                </p>
+                <h3 className="text-lg font-heading font-semibold mb-3">Why Use Our Free Tools?</h3>
+                <ul className="text-sm text-muted-foreground space-y-2 mb-6">
+                  {[
+                    "Instant results — no signup or download required",
+                    "Based on industry-standard formulas and building codes",
+                    "Covers structural, MEP, materials, and design calculations",
+                    "Mobile-friendly for use on job sites",
+                    "Sorted by popularity in the US construction industry",
+                    "Regularly updated for accuracy and compliance",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <Sparkles className="w-4 h-4 text-foreground shrink-0 mt-0.5" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  Whether you're estimating concrete for a foundation, calculating HVAC tonnage for a commercial building, or figuring out mortgage payments — our tools give you instant, accurate answers based on US building codes and industry best practices.
+                </p>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
