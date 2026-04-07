@@ -1,32 +1,9 @@
 import { motion } from "framer-motion";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
-
-const softwareLogos: Record<string, string> = {
-  "AutoCAD": "https://img.icons8.com/color/96/autocad.png",
-  "ArchiCAD": "https://img.icons8.com/color/96/archicad.png",
-  "DraftSight": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/DraftSight_Logo.svg/200px-DraftSight_Logo.svg.png",
-  "MicroStation": "https://img.icons8.com/color/96/bentley-systems.png",
-  "Revit": "https://img.icons8.com/color/96/autodesk-revit.png",
-  "Navisworks": "https://img.icons8.com/color/96/navisworks.png",
-  "Tekla Structures": "https://img.icons8.com/color/96/tekla-structures.png",
-  "Dynamo": "https://img.icons8.com/color/96/autodesk.png",
-  "SketchUp Pro": "https://img.icons8.com/color/96/sketchup.png",
-  "V-Ray": "https://img.icons8.com/color/96/v-ray.png",
-  "Lumion": "https://img.icons8.com/color/96/rendering.png",
-  "Enscape": "https://img.icons8.com/color/96/virtual-reality.png",
-  "3ds Max": "https://img.icons8.com/color/96/3ds-max.png",
-  "Twinmotion": "https://img.icons8.com/color/96/unreal-engine.png",
-  "Bluebeam Revu": "https://img.icons8.com/color/96/pdf.png",
-  "Adobe Creative Suite": "https://img.icons8.com/color/96/adobe-creative-cloud.png",
-  "PlanGrid": "https://img.icons8.com/color/96/autodesk.png",
-  "BIM 360": "https://img.icons8.com/color/96/autodesk.png",
-  "Procore": "https://img.icons8.com/color/96/construction.png",
-  "Microsoft Project": "https://img.icons8.com/color/96/microsoft-project.png",
-  "ETABS": "https://img.icons8.com/color/96/structural.png",
-  "RISA-3D": "https://img.icons8.com/color/96/structural.png",
-  "SAP2000": "https://img.icons8.com/color/96/structural.png",
-};
+import { getSoftwareLogo } from "@/lib/softwareLogos";
+import { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const softwareCategories = [
   { label: "CAD & Drafting", tools: [
@@ -66,7 +43,38 @@ const softwareCategories = [
   ]},
 ];
 
+const allSoftwareNames = softwareCategories.flatMap(c => c.tools.map(t => t.name));
+
 const SoftwareTools = () => {
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const itemsPerView = 8;
+  const totalItems = allSoftwareNames.length;
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setCarouselIndex(prev => (prev + 1) % totalItems);
+    }, 2500);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, [totalItems]);
+
+  const getVisibleItems = () => {
+    const items = [];
+    for (let i = 0; i < itemsPerView; i++) {
+      items.push(allSoftwareNames[(carouselIndex + i) % totalItems]);
+    }
+    return items;
+  };
+
+  const handlePrev = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    setCarouselIndex(prev => (prev - 1 + totalItems) % totalItems);
+  };
+  const handleNext = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    setCarouselIndex(prev => (prev + 1) % totalItems);
+  };
+
   return (
     <main>
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
@@ -82,29 +90,38 @@ const SoftwareTools = () => {
         </div>
       </section>
 
-      {/* Trusted Software Logos Bar */}
+      {/* Trusted Software Logos Carousel */}
       <section className="py-12 border-b border-border bg-muted/30">
         <div className="container mx-auto px-4 lg:px-8">
           <p className="text-center text-[10px] font-heading uppercase tracking-[0.2em] text-muted-foreground mb-8">Trusted Industry Software</p>
-          <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-10">
-            {["AutoCAD", "Revit", "SketchUp Pro", "V-Ray", "Lumion", "Navisworks", "Bluebeam Revu", "ArchiCAD", "3ds Max", "Enscape"].map((name, i) => (
-              <motion.div
-                key={name}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05 }}
-                className="flex flex-col items-center gap-1"
-              >
-                <img
-                  src={softwareLogos[name] || ""}
-                  alt={name}
-                  className="w-8 h-8 object-contain grayscale opacity-50"
-                  loading="lazy"
-                />
-                <span className="text-[10px] font-heading text-muted-foreground/40 select-none tracking-wide">{name.replace(" Pro", "").replace(" Revu", "")}</span>
-              </motion.div>
-            ))}
+          <div className="flex items-center gap-4">
+            <button onClick={handlePrev} className="shrink-0 w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors">
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <div className="flex-1 overflow-hidden">
+              <div className="flex items-center justify-center gap-6 lg:gap-10">
+                {getVisibleItems().map((name, i) => (
+                  <motion.div
+                    key={`${carouselIndex}-${i}`}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.04 }}
+                    className="flex flex-col items-center gap-1.5 min-w-[60px]"
+                  >
+                    <img
+                      src={getSoftwareLogo(name)}
+                      alt={name}
+                      className="w-10 h-10 object-contain"
+                      loading="lazy"
+                    />
+                    <span className="text-[10px] font-heading text-muted-foreground/60 select-none tracking-wide whitespace-nowrap">{name.replace(" Pro", "").replace(" Revu", "")}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+            <button onClick={handleNext} className="shrink-0 w-8 h-8 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground transition-colors">
+              <ChevronRight className="w-4 h-4" />
+            </button>
           </div>
         </div>
       </section>
@@ -121,7 +138,7 @@ const SoftwareTools = () => {
                 <motion.div key={tool.name} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="bg-secondary/30 border border-border rounded-lg p-6 card-hover group">
                   <div className="flex items-start gap-4 mb-3">
                     <img
-                      src={softwareLogos[tool.name] || "https://img.icons8.com/color/96/software.png"}
+                      src={getSoftwareLogo(tool.name)}
                       alt={`${tool.name} logo`}
                       className="w-10 h-10 object-contain shrink-0"
                       loading="lazy"

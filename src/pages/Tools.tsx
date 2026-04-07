@@ -1,17 +1,78 @@
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Calculator, Ruler, Box, Layers, PaintBucket, FolderUp, Triangle, Weight, Blocks, Grid3X3, ArrowRightLeft, FileText, Zap, Droplets, Thermometer, Scale, Wrench, Home, BarChart3, Maximize, TrendingUp, Star, Sparkles, Percent } from "lucide-react";
+import { Calculator, Ruler, Box, Layers, PaintBucket, FolderUp, Triangle, Weight, Blocks, Grid3X3, ArrowRightLeft, FileText, Zap, Droplets, Thermometer, Scale, Wrench, Home, BarChart3, Maximize, TrendingUp, Star, Sparkles, Percent, Send, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import { toast } from "sonner";
+
+// ─── Helper hint component ─────────────────
+const Hint = ({ text }: { text: string }) => (
+  <p className="text-[10px] text-muted-foreground/70 italic mt-1">{text}</p>
+);
+
+// ─── Email Results Dialog ─────────────────
+const EmailResultsDialog = ({ open, onClose, resultText }: { open: boolean; onClose: () => void; resultText: string }) => {
+  const [email, setEmail] = useState("");
+  const [sending, setSending] = useState(false);
+
+  const handleSend = async () => {
+    if (!email) { toast.error("Please enter your email"); return; }
+    setSending(true);
+    const subject = encodeURIComponent("Drafinity Calculator Results");
+    const body = encodeURIComponent(resultText + "\n\n—\nCalculated with Drafinity Free Tools\nhttps://drafinity.lovable.app/tools");
+    window.open(`mailto:${email}?subject=${subject}&body=${body}`, "_self");
+    setSending(false);
+    toast.success("Opening your email client with results");
+    onClose();
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-md">
+        <DialogHeader>
+          <DialogTitle className="font-heading">Email Your Results</DialogTitle>
+          <DialogDescription>Enter your email to receive the calculation results.</DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4 pt-2">
+          <div>
+            <Label className="text-xs">Email Address</Label>
+            <Input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="your@email.com" />
+          </div>
+          <div className="bg-muted rounded-lg p-3 text-xs text-muted-foreground whitespace-pre-wrap max-h-32 overflow-y-auto">{resultText}</div>
+          <Button onClick={handleSend} disabled={sending} className="w-full">
+            <Mail className="w-4 h-4 mr-2" /> Send Results
+          </Button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+// ─── Result wrapper with email button ─────────────────
+const ResultBox = ({ children, resultText }: { children: React.ReactNode; resultText: string }) => {
+  const [showEmail, setShowEmail] = useState(false);
+  return (
+    <>
+      <div className="bg-muted rounded-lg p-4 text-center">
+        {children}
+        <button onClick={() => setShowEmail(true)} className="mt-2 inline-flex items-center gap-1 text-[10px] text-muted-foreground hover:text-foreground transition-colors">
+          <Send className="w-3 h-3" /> Email Results
+        </button>
+      </div>
+      <EmailResultsDialog open={showEmail} onClose={() => setShowEmail(false)} resultText={resultText} />
+    </>
+  );
+};
 
 
-// ─── Calculator Components (unchanged logic) ─────────────────
+// ─── Calculator Components with helper hints ─────────────────
 
 const SquareFootageCalc = () => {
   const [length, setLength] = useState(""); const [width, setWidth] = useState("");
@@ -19,10 +80,10 @@ const SquareFootageCalc = () => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
-        <div><Label className="text-xs">Length (ft)</Label><Input type="number" value={length} onChange={e => setLength(e.target.value)} placeholder="0" /></div>
+        <div><Label className="text-xs">Length (ft)</Label><Input type="number" value={length} onChange={e => setLength(e.target.value)} placeholder="0" /><Hint text="Measure wall-to-wall inside" /></div>
         <div><Label className="text-xs">Width (ft)</Label><Input type="number" value={width} onChange={e => setWidth(e.target.value)} placeholder="0" /></div>
       </div>
-      {area > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Total Area</p><p className="text-2xl font-heading font-bold">{area.toLocaleString()} sq ft</p><p className="text-xs text-muted-foreground mt-1">{(area * 0.0929).toFixed(2)} m²</p></div>}
+      {area > 0 && <ResultBox resultText={`Area: ${area.toLocaleString()} sq ft (${(area * 0.0929).toFixed(2)} m²)`}><p className="text-xs text-muted-foreground mb-1">Total Area</p><p className="text-2xl font-heading font-bold">{area.toLocaleString()} sq ft</p><p className="text-xs text-muted-foreground mt-1">{(area * 0.0929).toFixed(2)} m²</p></ResultBox>}
     </div>
   );
 };
@@ -35,9 +96,9 @@ const ConcreteCalc = () => {
       <div className="grid grid-cols-3 gap-3">
         <div><Label className="text-xs">Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="0" /></div>
         <div><Label className="text-xs">Width (ft)</Label><Input type="number" value={w} onChange={e => setW(e.target.value)} placeholder="0" /></div>
-        <div><Label className="text-xs">Depth (in)</Label><Input type="number" value={d} onChange={e => setD(e.target.value)} placeholder="4" /></div>
+        <div><Label className="text-xs">Depth (in)</Label><Input type="number" value={d} onChange={e => setD(e.target.value)} placeholder="4" /><Hint text="Standard slab: 4in, Footing: 8-12in" /></div>
       </div>
-      {vol > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Concrete Needed</p><p className="text-2xl font-heading font-bold">{vol.toFixed(2)} cubic yards</p><p className="text-xs text-muted-foreground mt-1">{(vol * 0.7646).toFixed(2)} m³ · ~{Math.ceil(vol * 2)} bags (80lb)</p></div>}
+      {vol > 0 && <ResultBox resultText={`Concrete: ${vol.toFixed(2)} cu yd · ${Math.ceil(vol * 2)} bags (80lb)`}><p className="text-xs text-muted-foreground mb-1">Concrete Needed</p><p className="text-2xl font-heading font-bold">{vol.toFixed(2)} cubic yards</p><p className="text-xs text-muted-foreground mt-1">{(vol * 0.7646).toFixed(2)} m³ · ~{Math.ceil(vol * 2)} bags (80lb)</p></ResultBox>}
     </div>
   );
 };
@@ -50,10 +111,10 @@ const StairCalc = () => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
-        <div><Label className="text-xs">Total Rise (in)</Label><Input type="number" value={totalRise} onChange={e => setTotalRise(e.target.value)} placeholder="108" /></div>
-        <div><Label className="text-xs">Riser Height (in)</Label><Input type="number" value={riserH} onChange={e => setRiserH(e.target.value)} placeholder="7.5" /></div>
+        <div><Label className="text-xs">Total Rise (in)</Label><Input type="number" value={totalRise} onChange={e => setTotalRise(e.target.value)} placeholder="108" /><Hint text="Floor-to-floor height in inches" /></div>
+        <div><Label className="text-xs">Riser Height (in)</Label><Input type="number" value={riserH} onChange={e => setRiserH(e.target.value)} placeholder="7.5" /><Hint text="IRC max: 7.75in, Ideal: 7-7.5in" /></div>
       </div>
-      {risers > 0 && <div className="bg-muted rounded-lg p-4 space-y-2"><div className="grid grid-cols-2 gap-4 text-center"><div><p className="text-xs text-muted-foreground">Risers</p><p className="text-xl font-heading font-bold">{risers}</p></div><div><p className="text-xs text-muted-foreground">Treads</p><p className="text-xl font-heading font-bold">{risers - 1}</p></div><div><p className="text-xs text-muted-foreground">Actual Riser</p><p className="text-xl font-heading font-bold">{actualRiser.toFixed(2)}"</p></div><div><p className="text-xs text-muted-foreground">Total Run</p><p className="text-xl font-heading font-bold">{totalRun}"</p></div></div></div>}
+      {risers > 0 && <ResultBox resultText={`Risers: ${risers}, Treads: ${risers-1}, Actual Riser: ${actualRiser.toFixed(2)}in, Total Run: ${totalRun}in`}><div className="grid grid-cols-2 gap-4 text-center"><div><p className="text-xs text-muted-foreground">Risers</p><p className="text-xl font-heading font-bold">{risers}</p></div><div><p className="text-xs text-muted-foreground">Treads</p><p className="text-xl font-heading font-bold">{risers - 1}</p></div><div><p className="text-xs text-muted-foreground">Actual Riser</p><p className="text-xl font-heading font-bold">{actualRiser.toFixed(2)}"</p></div><div><p className="text-xs text-muted-foreground">Total Run</p><p className="text-xl font-heading font-bold">{totalRun}"</p></div></div></ResultBox>}
     </div>
   );
 };
@@ -66,10 +127,10 @@ const RoofPitchCalc = () => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
-        <div><Label className="text-xs">Rise (in)</Label><Input type="number" value={rise} onChange={e => setRise(e.target.value)} placeholder="6" /></div>
-        <div><Label className="text-xs">Run (in)</Label><Input type="number" value={run} onChange={e => setRun(e.target.value)} placeholder="12" /></div>
+        <div><Label className="text-xs">Rise (in)</Label><Input type="number" value={rise} onChange={e => setRise(e.target.value)} placeholder="6" /><Hint text="Low: 2-4, Medium: 5-8, Steep: 9-12" /></div>
+        <div><Label className="text-xs">Run (in)</Label><Input type="number" value={run} onChange={e => setRun(e.target.value)} placeholder="12" /><Hint text="Standard run is always 12in" /></div>
       </div>
-      {pitch > 0 && <div className="bg-muted rounded-lg p-4 text-center space-y-2"><p className="text-2xl font-heading font-bold">{parseFloat(rise)}/12 Pitch</p><p className="text-sm text-muted-foreground">Angle: {angle.toFixed(1)}° · Multiplier: {factor.toFixed(4)}</p></div>}
+      {pitch > 0 && <ResultBox resultText={`Pitch: ${parseFloat(rise)}/12, Angle: ${angle.toFixed(1)}°, Multiplier: ${factor.toFixed(4)}`}><p className="text-2xl font-heading font-bold">{parseFloat(rise)}/12 Pitch</p><p className="text-sm text-muted-foreground">Angle: {angle.toFixed(1)}° · Multiplier: {factor.toFixed(4)}</p></ResultBox>}
     </div>
   );
 };
@@ -83,10 +144,10 @@ const PaintCalc = () => {
       <div className="grid grid-cols-2 gap-3">
         <div><Label className="text-xs">Room Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="12" /></div>
         <div><Label className="text-xs">Room Width (ft)</Label><Input type="number" value={w} onChange={e => setW(e.target.value)} placeholder="10" /></div>
-        <div><Label className="text-xs">Wall Height (ft)</Label><Input type="number" value={h} onChange={e => setH(e.target.value)} placeholder="8" /></div>
-        <div><Label className="text-xs">Coats</Label><Input type="number" value={coats} onChange={e => setCoats(e.target.value)} placeholder="2" /></div>
+        <div><Label className="text-xs">Wall Height (ft)</Label><Input type="number" value={h} onChange={e => setH(e.target.value)} placeholder="8" /><Hint text="Standard: 8ft, Modern: 9-10ft" /></div>
+        <div><Label className="text-xs">Coats</Label><Input type="number" value={coats} onChange={e => setCoats(e.target.value)} placeholder="2" /><Hint text="1 coat for touch-up, 2 for new color" /></div>
       </div>
-      {gallons > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Paint Needed</p><p className="text-2xl font-heading font-bold">{Math.ceil(gallons)} gallons</p><p className="text-xs text-muted-foreground mt-1">Wall area: {wallArea.toFixed(0)} sq ft</p></div>}
+      {gallons > 0 && <ResultBox resultText={`Paint: ${Math.ceil(gallons)} gallons, Wall area: ${wallArea.toFixed(0)} sq ft`}><p className="text-xs text-muted-foreground mb-1">Paint Needed</p><p className="text-2xl font-heading font-bold">{Math.ceil(gallons)} gallons</p><p className="text-xs text-muted-foreground mt-1">Wall area: {wallArea.toFixed(0)} sq ft</p></ResultBox>}
     </div>
   );
 };
@@ -103,7 +164,7 @@ const UnitConverter = () => {
         <div><Label className="text-xs">From</Label><Select value={from} onValueChange={setFrom}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{units.map(u => <SelectItem key={u.v} value={u.v}>{u.l}</SelectItem>)}</SelectContent></Select></div>
         <div><Label className="text-xs">To</Label><Select value={to} onValueChange={setTo}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{units.map(u => <SelectItem key={u.v} value={u.v}>{u.l}</SelectItem>)}</SelectContent></Select></div>
       </div>
-      {result > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-2xl font-heading font-bold">{result.toFixed(4)} {to}</p></div>}
+      {result > 0 && <ResultBox resultText={`${val} ${from} = ${result.toFixed(4)} ${to}`}><p className="text-2xl font-heading font-bold">{result.toFixed(4)} {to}</p></ResultBox>}
     </div>
   );
 };
@@ -116,9 +177,9 @@ const BrickCalc = () => {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         <div><Label className="text-xs">Wall Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="20" /></div>
-        <div><Label className="text-xs">Wall Height (ft)</Label><Input type="number" value={h} onChange={e => setH(e.target.value)} placeholder="8" /></div>
+        <div><Label className="text-xs">Wall Height (ft)</Label><Input type="number" value={h} onChange={e => setH(e.target.value)} placeholder="8" /><Hint text="~7 bricks per sq ft (standard size)" /></div>
       </div>
-      {bricks > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Bricks Needed</p><p className="text-2xl font-heading font-bold">{bricks.toLocaleString()}</p><p className="text-xs text-muted-foreground mt-1">Wall area: {area.toFixed(0)} sq ft</p></div>}
+      {bricks > 0 && <ResultBox resultText={`Bricks: ${bricks.toLocaleString()}, Wall area: ${area.toFixed(0)} sq ft`}><p className="text-xs text-muted-foreground mb-1">Bricks Needed</p><p className="text-2xl font-heading font-bold">{bricks.toLocaleString()}</p><p className="text-xs text-muted-foreground mt-1">Wall area: {area.toFixed(0)} sq ft</p></ResultBox>}
     </div>
   );
 };
@@ -133,9 +194,9 @@ const RebarCalc = () => {
       <div className="grid grid-cols-3 gap-3">
         <div><Label className="text-xs">Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="20" /></div>
         <div><Label className="text-xs">Width (ft)</Label><Input type="number" value={w} onChange={e => setW(e.target.value)} placeholder="20" /></div>
-        <div><Label className="text-xs">Spacing (in)</Label><Input type="number" value={sp} onChange={e => setSp(e.target.value)} placeholder="12" /></div>
+        <div><Label className="text-xs">Spacing (in)</Label><Input type="number" value={sp} onChange={e => setSp(e.target.value)} placeholder="12" /><Hint text="Common: 12in, Heavy: 6in" /></div>
       </div>
-      {totalFt > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground">Rebar Needed</p><p className="text-2xl font-heading font-bold">{totalFt.toFixed(0)} linear ft</p><p className="text-xs text-muted-foreground">{barsL + barsW} bars · ~{Math.ceil(totalFt / 20)} pcs (20ft)</p></div>}
+      {totalFt > 0 && <ResultBox resultText={`Rebar: ${totalFt.toFixed(0)} linear ft, ${barsL + barsW} bars, ~${Math.ceil(totalFt / 20)} pcs (20ft)`}><p className="text-xs text-muted-foreground">Rebar Needed</p><p className="text-2xl font-heading font-bold">{totalFt.toFixed(0)} linear ft</p><p className="text-xs text-muted-foreground">{barsL + barsW} bars · ~{Math.ceil(totalFt / 20)} pcs (20ft)</p></ResultBox>}
     </div>
   );
 };
@@ -148,9 +209,9 @@ const GravelCalc = () => {
       <div className="grid grid-cols-3 gap-3">
         <div><Label className="text-xs">Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="20" /></div>
         <div><Label className="text-xs">Width (ft)</Label><Input type="number" value={w} onChange={e => setW(e.target.value)} placeholder="10" /></div>
-        <div><Label className="text-xs">Depth (in)</Label><Input type="number" value={d} onChange={e => setD(e.target.value)} placeholder="4" /></div>
+        <div><Label className="text-xs">Depth (in)</Label><Input type="number" value={d} onChange={e => setD(e.target.value)} placeholder="4" /><Hint text="Driveway: 4-6in, Walkway: 2-3in" /></div>
       </div>
-      {cubicYd > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Material Needed</p><p className="text-2xl font-heading font-bold">{cubicYd.toFixed(2)} cubic yards</p><p className="text-xs text-muted-foreground mt-1">~{(cubicYd * 1.4).toFixed(2)} tons</p></div>}
+      {cubicYd > 0 && <ResultBox resultText={`Gravel: ${cubicYd.toFixed(2)} cu yd, ~${(cubicYd * 1.4).toFixed(2)} tons`}><p className="text-xs text-muted-foreground mb-1">Material Needed</p><p className="text-2xl font-heading font-bold">{cubicYd.toFixed(2)} cubic yards</p><p className="text-xs text-muted-foreground mt-1">~{(cubicYd * 1.4).toFixed(2)} tons</p></ResultBox>}
     </div>
   );
 };
@@ -163,9 +224,9 @@ const DeckBoardCalc = () => {
       <div className="grid grid-cols-3 gap-3">
         <div><Label className="text-xs">Deck Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="16" /></div>
         <div><Label className="text-xs">Deck Width (ft)</Label><Input type="number" value={w} onChange={e => setW(e.target.value)} placeholder="12" /></div>
-        <div><Label className="text-xs">Board Width (in)</Label><Input type="number" value={bw} onChange={e => setBw(e.target.value)} placeholder="5.5" /></div>
+        <div><Label className="text-xs">Board Width (in)</Label><Input type="number" value={bw} onChange={e => setBw(e.target.value)} placeholder="5.5" /><Hint text="Standard 2×6: 5.5in actual" /></div>
       </div>
-      {boards > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground">Boards Needed</p><p className="text-2xl font-heading font-bold">{boards} boards</p><p className="text-xs text-muted-foreground">Each {w || 0}ft long</p></div>}
+      {boards > 0 && <ResultBox resultText={`Boards: ${boards}, each ${w || 0}ft long`}><p className="text-xs text-muted-foreground">Boards Needed</p><p className="text-2xl font-heading font-bold">{boards} boards</p><p className="text-xs text-muted-foreground">Each {w || 0}ft long</p></ResultBox>}
     </div>
   );
 };
@@ -180,16 +241,22 @@ const DryWallCalc = () => {
       <div className="grid grid-cols-3 gap-3">
         <div><Label className="text-xs">Room Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="12" /></div>
         <div><Label className="text-xs">Room Width (ft)</Label><Input type="number" value={w} onChange={e => setW(e.target.value)} placeholder="10" /></div>
-        <div><Label className="text-xs">Height (ft)</Label><Input type="number" value={h} onChange={e => setH(e.target.value)} placeholder="8" /></div>
+        <div><Label className="text-xs">Height (ft)</Label><Input type="number" value={h} onChange={e => setH(e.target.value)} placeholder="8" /><Hint text="1/2in thick for walls, 5/8in for ceilings" /></div>
       </div>
-      {sheets > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground">Drywall Sheets (4×8)</p><p className="text-2xl font-heading font-bold">{sheets} sheets</p><p className="text-xs text-muted-foreground">Walls: {wallArea.toFixed(0)} + Ceiling: {ceilingArea.toFixed(0)} sq ft</p></div>}
+      {sheets > 0 && <ResultBox resultText={`Drywall: ${sheets} sheets (4×8), Walls: ${wallArea.toFixed(0)} + Ceiling: ${ceilingArea.toFixed(0)} sq ft`}><p className="text-xs text-muted-foreground">Drywall Sheets (4×8)</p><p className="text-2xl font-heading font-bold">{sheets} sheets</p><p className="text-xs text-muted-foreground">Walls: {wallArea.toFixed(0)} + Ceiling: {ceilingArea.toFixed(0)} sq ft</p></ResultBox>}
     </div>
   );
 };
 
 const InsulationCalc = () => {
   const [area, setArea] = useState(""); const [rVal, setRVal] = useState("R-19");
-  const rValues: Record<string, { thickness: string; bags: number }> = { "R-13": { thickness: '3.5"', bags: 26 }, "R-19": { thickness: '6.25"', bags: 18 }, "R-30": { thickness: '9.5"', bags: 12 }, "R-38": { thickness: '12"', bags: 9 }, "R-49": { thickness: '15.5"', bags: 7 } };
+  const rValues: Record<string, { thickness: string; bags: number; use: string }> = {
+    "R-13": { thickness: '3.5"', bags: 26, use: "Interior walls" },
+    "R-19": { thickness: '6.25"', bags: 18, use: "Exterior walls (2×6)" },
+    "R-30": { thickness: '9.5"', bags: 12, use: "Floors, ceilings" },
+    "R-38": { thickness: '12"', bags: 9, use: "Attics (mild climate)" },
+    "R-49": { thickness: '15.5"', bags: 7, use: "Attics (cold climate)" },
+  };
   const sqft = area ? parseFloat(area) : 0;
   const info = rValues[rVal];
   const batts = sqft ? Math.ceil(sqft / (info?.bags || 18)) : 0;
@@ -197,9 +264,9 @@ const InsulationCalc = () => {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         <div><Label className="text-xs">Area (sq ft)</Label><Input type="number" value={area} onChange={e => setArea(e.target.value)} placeholder="500" /></div>
-        <div><Label className="text-xs">R-Value</Label><Select value={rVal} onValueChange={setRVal}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{Object.keys(rValues).map(r => <SelectItem key={r} value={r}>{r}</SelectItem>)}</SelectContent></Select></div>
+        <div><Label className="text-xs">R-Value</Label><Select value={rVal} onValueChange={setRVal}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent>{Object.keys(rValues).map(r => <SelectItem key={r} value={r}>{r} — {rValues[r].use}</SelectItem>)}</SelectContent></Select><Hint text={info ? `${rVal}: ${info.use}, ${info.thickness} thick` : ""} /></div>
       </div>
-      {sqft > 0 && info && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground">Insulation Needed</p><p className="text-2xl font-heading font-bold">{batts} bags/rolls</p><p className="text-xs text-muted-foreground">{rVal} · Thickness: {info.thickness}</p></div>}
+      {sqft > 0 && info && <ResultBox resultText={`Insulation: ${batts} bags/rolls, ${rVal}, Thickness: ${info.thickness}`}><p className="text-xs text-muted-foreground">Insulation Needed</p><p className="text-2xl font-heading font-bold">{batts} bags/rolls</p><p className="text-xs text-muted-foreground">{rVal} · Thickness: {info.thickness} · {info.use}</p></ResultBox>}
     </div>
   );
 };
@@ -214,9 +281,9 @@ const FlooringCalc = () => {
       <div className="grid grid-cols-3 gap-3">
         <div><Label className="text-xs">Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="15" /></div>
         <div><Label className="text-xs">Width (ft)</Label><Input type="number" value={w} onChange={e => setW(e.target.value)} placeholder="12" /></div>
-        <div><Label className="text-xs">Waste %</Label><Input type="number" value={waste} onChange={e => setWaste(e.target.value)} placeholder="10" /></div>
+        <div><Label className="text-xs">Waste %</Label><Input type="number" value={waste} onChange={e => setWaste(e.target.value)} placeholder="10" /><Hint text="Simple layout: 5-7%, Complex/diagonal: 10-15%" /></div>
       </div>
-      {withWaste > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Flooring Needed</p><p className="text-2xl font-heading font-bold">{withWaste.toFixed(0)} sq ft</p><p className="text-xs text-muted-foreground mt-1">~{boxes} boxes (20 sq ft/box) incl. {waste}% waste</p></div>}
+      {withWaste > 0 && <ResultBox resultText={`Flooring: ${withWaste.toFixed(0)} sq ft, ~${boxes} boxes (20 sq ft/box) incl. ${waste}% waste`}><p className="text-xs text-muted-foreground mb-1">Flooring Needed</p><p className="text-2xl font-heading font-bold">{withWaste.toFixed(0)} sq ft</p><p className="text-xs text-muted-foreground mt-1">~{boxes} boxes (20 sq ft/box) incl. {waste}% waste</p></ResultBox>}
     </div>
   );
 };
@@ -230,10 +297,10 @@ const TileCalc = () => {
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-3">
         <div><Label className="text-xs">Area (sq ft)</Label><Input type="number" value={area} onChange={e => setArea(e.target.value)} placeholder="100" /></div>
-        <div><Label className="text-xs">Tile Width (in)</Label><Input type="number" value={tileW} onChange={e => setTileW(e.target.value)} placeholder="12" /></div>
+        <div><Label className="text-xs">Tile Width (in)</Label><Input type="number" value={tileW} onChange={e => setTileW(e.target.value)} placeholder="12" /><Hint text="Common: 12×12, 12×24, 6×6" /></div>
         <div><Label className="text-xs">Tile Height (in)</Label><Input type="number" value={tileH} onChange={e => setTileH(e.target.value)} placeholder="12" /></div>
       </div>
-      {tiles > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Tiles Needed</p><p className="text-2xl font-heading font-bold">{tiles} tiles</p><p className="text-xs text-muted-foreground mt-1">Includes 10% waste allowance</p></div>}
+      {tiles > 0 && <ResultBox resultText={`Tiles: ${tiles} (includes 10% waste)`}><p className="text-xs text-muted-foreground mb-1">Tiles Needed</p><p className="text-2xl font-heading font-bold">{tiles} tiles</p><p className="text-xs text-muted-foreground mt-1">Includes 10% waste allowance</p></ResultBox>}
     </div>
   );
 };
@@ -244,11 +311,11 @@ const CeilingHeightCalc = () => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-3">
-        <div><Label className="text-xs">Floors</Label><Input type="number" value={floors} onChange={e => setFloors(e.target.value)} placeholder="3" /></div>
-        <div><Label className="text-xs">Floor-to-Floor (ft)</Label><Input type="number" value={floorH} onChange={e => setFloorH(e.target.value)} placeholder="9" /></div>
+        <div><Label className="text-xs">Floors</Label><Input type="number" value={floors} onChange={e => setFloors(e.target.value)} placeholder="3" /><Hint text="Residential: 1-3, Commercial: 3-10+" /></div>
+        <div><Label className="text-xs">Floor-to-Floor (ft)</Label><Input type="number" value={floorH} onChange={e => setFloorH(e.target.value)} placeholder="9" /><Hint text="Residential: 9ft, Commercial: 12-14ft" /></div>
         <div><Label className="text-xs">Slab Thickness (in)</Label><Input type="number" value={slabT} onChange={e => setSlabT(e.target.value)} placeholder="8" /></div>
       </div>
-      {totalH > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Total Building Height</p><p className="text-2xl font-heading font-bold">{totalH.toFixed(1)} ft</p><p className="text-xs text-muted-foreground mt-1">{(totalH * 0.3048).toFixed(2)} m</p></div>}
+      {totalH > 0 && <ResultBox resultText={`Building Height: ${totalH.toFixed(1)} ft (${(totalH * 0.3048).toFixed(2)} m)`}><p className="text-xs text-muted-foreground mb-1">Total Building Height</p><p className="text-2xl font-heading font-bold">{totalH.toFixed(1)} ft</p><p className="text-xs text-muted-foreground mt-1">{(totalH * 0.3048).toFixed(2)} m</p></ResultBox>}
     </div>
   );
 };
@@ -261,10 +328,10 @@ const ElectricalLoadCalc = () => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
-        <div><Label className="text-xs">Floor Area (sq ft)</Label><Input type="number" value={sqft} onChange={e => setSqft(e.target.value)} placeholder="2000" /></div>
-        <div><Label className="text-xs">Appliance Load (W)</Label><Input type="number" value={appliances} onChange={e => setAppliances(e.target.value)} placeholder="5000" /></div>
+        <div><Label className="text-xs">Floor Area (sq ft)</Label><Input type="number" value={sqft} onChange={e => setSqft(e.target.value)} placeholder="2000" /><Hint text="3 watts per sq ft general lighting load" /></div>
+        <div><Label className="text-xs">Appliance Load (W)</Label><Input type="number" value={appliances} onChange={e => setAppliances(e.target.value)} placeholder="5000" /><Hint text="Kitchen: ~3000W, Dryer: ~5000W, AC: ~3500W" /></div>
       </div>
-      {amps > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Service Size Needed</p><p className="text-2xl font-heading font-bold">{Math.ceil(amps / 25) * 25}A Panel</p><p className="text-xs text-muted-foreground mt-1">Calculated: {amps.toFixed(0)}A · {(totalWatts / 1000).toFixed(1)} kW total</p></div>}
+      {amps > 0 && <ResultBox resultText={`Panel: ${Math.ceil(amps / 25) * 25}A, ${amps.toFixed(0)}A calculated, ${(totalWatts / 1000).toFixed(1)} kW total`}><p className="text-xs text-muted-foreground mb-1">Service Size Needed</p><p className="text-2xl font-heading font-bold">{Math.ceil(amps / 25) * 25}A Panel</p><p className="text-xs text-muted-foreground mt-1">Calculated: {amps.toFixed(0)}A · {(totalWatts / 1000).toFixed(1)} kW total</p></ResultBox>}
     </div>
   );
 };
@@ -276,12 +343,12 @@ const PlumbingFixtureCalc = () => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
-        <div><Label className="text-xs">Toilets</Label><Input type="number" value={toilets} onChange={e => setToilets(e.target.value)} placeholder="3" /></div>
-        <div><Label className="text-xs">Sinks</Label><Input type="number" value={sinks} onChange={e => setSinks(e.target.value)} placeholder="4" /></div>
-        <div><Label className="text-xs">Showers/Tubs</Label><Input type="number" value={showers} onChange={e => setShowers(e.target.value)} placeholder="2" /></div>
-        <div><Label className="text-xs">Dishwashers</Label><Input type="number" value={dishwashers} onChange={e => setDishwashers(e.target.value)} placeholder="1" /></div>
+        <div><Label className="text-xs">Toilets</Label><Input type="number" value={toilets} onChange={e => setToilets(e.target.value)} placeholder="3" /><Hint text="4 DFU each" /></div>
+        <div><Label className="text-xs">Sinks</Label><Input type="number" value={sinks} onChange={e => setSinks(e.target.value)} placeholder="4" /><Hint text="2 DFU each" /></div>
+        <div><Label className="text-xs">Showers/Tubs</Label><Input type="number" value={showers} onChange={e => setShowers(e.target.value)} placeholder="2" /><Hint text="3 DFU each" /></div>
+        <div><Label className="text-xs">Dishwashers</Label><Input type="number" value={dishwashers} onChange={e => setDishwashers(e.target.value)} placeholder="1" /><Hint text="2 DFU each" /></div>
       </div>
-      {units > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Drainage Fixture Units</p><p className="text-2xl font-heading font-bold">{units} DFU</p><p className="text-xs text-muted-foreground mt-1">Min. drain pipe: {pipeSize}</p></div>}
+      {units > 0 && <ResultBox resultText={`Drainage: ${units} DFU, Min drain pipe: ${pipeSize}`}><p className="text-xs text-muted-foreground mb-1">Drainage Fixture Units</p><p className="text-2xl font-heading font-bold">{units} DFU</p><p className="text-xs text-muted-foreground mt-1">Min. drain pipe: {pipeSize}</p></ResultBox>}
     </div>
   );
 };
@@ -289,15 +356,31 @@ const PlumbingFixtureCalc = () => {
 const HVACTonnageCalc = () => {
   const [sqft, setSqft] = useState(""); const [climate, setClimate] = useState("moderate");
   const factors: Record<string, number> = { cold: 450, moderate: 500, hot: 400 };
+  const climateInfo: Record<string, string> = {
+    cold: "Cold (Below 40°F avg winter) — Northern US, MN, WI, ND, ME",
+    moderate: "Moderate (40-65°F avg) — Mid-Atlantic, OH, PA, NC, CO",
+    hot: "Hot/Humid (Above 75°F avg summer) — FL, TX, AZ, LA, NM",
+  };
   const tons = sqft ? parseFloat(sqft) / factors[climate] : 0;
   const btu = tons * 12000;
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
-        <div><Label className="text-xs">Floor Area (sq ft)</Label><Input type="number" value={sqft} onChange={e => setSqft(e.target.value)} placeholder="2000" /></div>
-        <div><Label className="text-xs">Climate Zone</Label><Select value={climate} onValueChange={setClimate}><SelectTrigger><SelectValue /></SelectTrigger><SelectContent><SelectItem value="cold">Cold</SelectItem><SelectItem value="moderate">Moderate</SelectItem><SelectItem value="hot">Hot/Humid</SelectItem></SelectContent></Select></div>
+        <div><Label className="text-xs">Floor Area (sq ft)</Label><Input type="number" value={sqft} onChange={e => setSqft(e.target.value)} placeholder="2000" /><Hint text="~400-500 sq ft per ton rule of thumb" /></div>
+        <div>
+          <Label className="text-xs">Climate Zone</Label>
+          <Select value={climate} onValueChange={setClimate}>
+            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectContent>
+              <SelectItem value="cold">Cold</SelectItem>
+              <SelectItem value="moderate">Moderate</SelectItem>
+              <SelectItem value="hot">Hot/Humid</SelectItem>
+            </SelectContent>
+          </Select>
+          <Hint text={climateInfo[climate]} />
+        </div>
       </div>
-      {tons > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">HVAC Size Needed</p><p className="text-2xl font-heading font-bold">{tons.toFixed(1)} Tons</p><p className="text-xs text-muted-foreground mt-1">{btu.toLocaleString()} BTU/hr</p></div>}
+      {tons > 0 && <ResultBox resultText={`HVAC: ${tons.toFixed(1)} Tons, ${btu.toLocaleString()} BTU/hr`}><p className="text-xs text-muted-foreground mb-1">HVAC Size Needed</p><p className="text-2xl font-heading font-bold">{tons.toFixed(1)} Tons</p><p className="text-xs text-muted-foreground mt-1">{btu.toLocaleString()} BTU/hr</p></ResultBox>}
     </div>
   );
 };
@@ -309,10 +392,10 @@ const SlopeGradeCalc = () => {
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
-        <div><Label className="text-xs">Rise (ft)</Label><Input type="number" value={rise} onChange={e => setRise(e.target.value)} placeholder="1" /></div>
-        <div><Label className="text-xs">Run (ft)</Label><Input type="number" value={run} onChange={e => setRun(e.target.value)} placeholder="50" /></div>
+        <div><Label className="text-xs">Rise (ft)</Label><Input type="number" value={rise} onChange={e => setRise(e.target.value)} placeholder="1" /><Hint text="ADA ramp max: 1:12 (8.3%)" /></div>
+        <div><Label className="text-xs">Run (ft)</Label><Input type="number" value={run} onChange={e => setRun(e.target.value)} placeholder="50" /><Hint text="Drainage min: 1-2% grade" /></div>
       </div>
-      {grade > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Slope Grade</p><p className="text-2xl font-heading font-bold">{grade.toFixed(2)}%</p><p className="text-xs text-muted-foreground mt-1">Ratio: {ratio} · Angle: {(Math.atan(grade / 100) * 180 / Math.PI).toFixed(2)}°</p></div>}
+      {grade > 0 && <ResultBox resultText={`Slope: ${grade.toFixed(2)}%, Ratio: ${ratio}, Angle: ${(Math.atan(grade / 100) * 180 / Math.PI).toFixed(2)}°`}><p className="text-xs text-muted-foreground mb-1">Slope Grade</p><p className="text-2xl font-heading font-bold">{grade.toFixed(2)}%</p><p className="text-xs text-muted-foreground mt-1">Ratio: {ratio} · Angle: {(Math.atan(grade / 100) * 180 / Math.PI).toFixed(2)}°</p></ResultBox>}
     </div>
   );
 };
@@ -324,14 +407,13 @@ const WindowAreaCalc = () => {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         <div><Label className="text-xs">Floor Area (sq ft)</Label><Input type="number" value={floorArea} onChange={e => setFloorArea(e.target.value)} placeholder="2000" /></div>
-        <div><Label className="text-xs">Window-to-Floor %</Label><Input type="number" value={ratio} onChange={e => setRatio(e.target.value)} placeholder="15" /></div>
+        <div><Label className="text-xs">Window-to-Floor %</Label><Input type="number" value={ratio} onChange={e => setRatio(e.target.value)} placeholder="15" /><Hint text="IRC min: 8%, Typical: 15-20%, Luxury: 25%+" /></div>
       </div>
-      {windowArea > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Required Window Area</p><p className="text-2xl font-heading font-bold">{windowArea.toFixed(0)} sq ft</p><p className="text-xs text-muted-foreground mt-1">IRC requires min 8% for natural light</p></div>}
+      {windowArea > 0 && <ResultBox resultText={`Window Area: ${windowArea.toFixed(0)} sq ft, IRC requires min 8%`}><p className="text-xs text-muted-foreground mb-1">Required Window Area</p><p className="text-2xl font-heading font-bold">{windowArea.toFixed(0)} sq ft</p><p className="text-xs text-muted-foreground mt-1">IRC requires min 8% for natural light</p></ResultBox>}
     </div>
   );
 };
 
-// New additional calculators
 const MortgageCalc = () => {
   const [price, setPrice] = useState(""); const [down, setDown] = useState("20"); const [rate, setRate] = useState("6.5"); const [years, setYears] = useState("30");
   const loanAmt = price ? parseFloat(price) * (1 - parseFloat(down) / 100) : 0;
@@ -342,11 +424,11 @@ const MortgageCalc = () => {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         <div><Label className="text-xs">Home Price ($)</Label><Input type="number" value={price} onChange={e => setPrice(e.target.value)} placeholder="350000" /></div>
-        <div><Label className="text-xs">Down Payment %</Label><Input type="number" value={down} onChange={e => setDown(e.target.value)} placeholder="20" /></div>
-        <div><Label className="text-xs">Interest Rate %</Label><Input type="number" value={rate} onChange={e => setRate(e.target.value)} placeholder="6.5" /></div>
-        <div><Label className="text-xs">Term (years)</Label><Input type="number" value={years} onChange={e => setYears(e.target.value)} placeholder="30" /></div>
+        <div><Label className="text-xs">Down Payment %</Label><Input type="number" value={down} onChange={e => setDown(e.target.value)} placeholder="20" /><Hint text="Min 3.5% (FHA), 20% avoids PMI" /></div>
+        <div><Label className="text-xs">Interest Rate %</Label><Input type="number" value={rate} onChange={e => setRate(e.target.value)} placeholder="6.5" /><Hint text="2024 US avg: 6.5-7.5%" /></div>
+        <div><Label className="text-xs">Term (years)</Label><Input type="number" value={years} onChange={e => setYears(e.target.value)} placeholder="30" /><Hint text="15yr saves interest, 30yr lower payment" /></div>
       </div>
-      {payment > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Monthly Payment</p><p className="text-2xl font-heading font-bold">${payment.toFixed(2)}</p><p className="text-xs text-muted-foreground mt-1">Loan: ${loanAmt.toLocaleString()} · Total: ${(payment * n).toLocaleString(undefined, { maximumFractionDigits: 0 })}</p></div>}
+      {payment > 0 && <ResultBox resultText={`Monthly: $${payment.toFixed(2)}, Loan: $${loanAmt.toLocaleString()}, Total: $${(payment * n).toLocaleString(undefined, { maximumFractionDigits: 0 })}`}><p className="text-xs text-muted-foreground mb-1">Monthly Payment</p><p className="text-2xl font-heading font-bold">${payment.toFixed(2)}</p><p className="text-xs text-muted-foreground mt-1">Loan: ${loanAmt.toLocaleString()} · Total: ${(payment * n).toLocaleString(undefined, { maximumFractionDigits: 0 })}</p></ResultBox>}
     </div>
   );
 };
@@ -360,10 +442,10 @@ const FenceCalc = () => {
     <div className="space-y-4">
       <div className="grid grid-cols-3 gap-3">
         <div><Label className="text-xs">Perimeter (ft)</Label><Input type="number" value={perimeter} onChange={e => setPerimeter(e.target.value)} placeholder="200" /></div>
-        <div><Label className="text-xs">Post Spacing (ft)</Label><Input type="number" value={postSpacing} onChange={e => setPostSpacing(e.target.value)} placeholder="8" /></div>
+        <div><Label className="text-xs">Post Spacing (ft)</Label><Input type="number" value={postSpacing} onChange={e => setPostSpacing(e.target.value)} placeholder="8" /><Hint text="Wood: 6-8ft, Vinyl: 6ft, Chain: 10ft" /></div>
         <div><Label className="text-xs">Gates</Label><Input type="number" value={gates} onChange={e => setGates(e.target.value)} placeholder="1" /></div>
       </div>
-      {posts > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Fence Materials</p><p className="text-2xl font-heading font-bold">{posts} posts · {panels} panels</p><p className="text-xs text-muted-foreground mt-1">Fence length: {fenceLen.toFixed(0)} ft + {gates} gate(s)</p></div>}
+      {posts > 0 && <ResultBox resultText={`Fence: ${posts} posts, ${panels} panels, ${fenceLen.toFixed(0)} ft + ${gates} gate(s)`}><p className="text-xs text-muted-foreground mb-1">Fence Materials</p><p className="text-2xl font-heading font-bold">{posts} posts · {panels} panels</p><p className="text-xs text-muted-foreground mt-1">Fence length: {fenceLen.toFixed(0)} ft + {gates} gate(s)</p></ResultBox>}
     </div>
   );
 };
@@ -376,9 +458,9 @@ const LandscapeMulchCalc = () => {
       <div className="grid grid-cols-3 gap-3">
         <div><Label className="text-xs">Length (ft)</Label><Input type="number" value={l} onChange={e => setL(e.target.value)} placeholder="30" /></div>
         <div><Label className="text-xs">Width (ft)</Label><Input type="number" value={w} onChange={e => setW(e.target.value)} placeholder="10" /></div>
-        <div><Label className="text-xs">Depth (in)</Label><Input type="number" value={depth} onChange={e => setDepth(e.target.value)} placeholder="3" /></div>
+        <div><Label className="text-xs">Depth (in)</Label><Input type="number" value={depth} onChange={e => setDepth(e.target.value)} placeholder="3" /><Hint text="Mulch: 2-3in, Topsoil: 4-6in" /></div>
       </div>
-      {cubicYd > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Mulch / Soil Needed</p><p className="text-2xl font-heading font-bold">{cubicYd.toFixed(2)} cubic yards</p><p className="text-xs text-muted-foreground mt-1">~{Math.ceil(cubicYd * 13.5)} bags (2 cu ft each)</p></div>}
+      {cubicYd > 0 && <ResultBox resultText={`Mulch/Soil: ${cubicYd.toFixed(2)} cu yd, ~${Math.ceil(cubicYd * 13.5)} bags (2 cu ft each)`}><p className="text-xs text-muted-foreground mb-1">Mulch / Soil Needed</p><p className="text-2xl font-heading font-bold">{cubicYd.toFixed(2)} cubic yards</p><p className="text-xs text-muted-foreground mt-1">~{Math.ceil(cubicYd * 13.5)} bags (2 cu ft each)</p></ResultBox>}
     </div>
   );
 };
@@ -390,9 +472,9 @@ const CostPerSqftCalc = () => {
     <div className="space-y-4">
       <div className="grid grid-cols-2 gap-3">
         <div><Label className="text-xs">Total Cost ($)</Label><Input type="number" value={totalCost} onChange={e => setTotalCost(e.target.value)} placeholder="250000" /></div>
-        <div><Label className="text-xs">Area (sq ft)</Label><Input type="number" value={sqft} onChange={e => setSqft(e.target.value)} placeholder="2000" /></div>
+        <div><Label className="text-xs">Area (sq ft)</Label><Input type="number" value={sqft} onChange={e => setSqft(e.target.value)} placeholder="2000" /><Hint text="US avg new construction: $150-$250/sq ft" /></div>
       </div>
-      {costPerSqft > 0 && <div className="bg-muted rounded-lg p-4 text-center"><p className="text-xs text-muted-foreground mb-1">Cost Per Square Foot</p><p className="text-2xl font-heading font-bold">${costPerSqft.toFixed(2)}/sq ft</p></div>}
+      {costPerSqft > 0 && <ResultBox resultText={`Cost: $${costPerSqft.toFixed(2)}/sq ft`}><p className="text-xs text-muted-foreground mb-1">Cost Per Square Foot</p><p className="text-2xl font-heading font-bold">${costPerSqft.toFixed(2)}/sq ft</p></ResultBox>}
     </div>
   );
 };
@@ -521,31 +603,49 @@ const Tools = () => {
             })}
           </div>
 
-          {/* Improved Last Section with animation on left, text on right */}
+          {/* Improved bottom section with interactive animation */}
           <div className="mt-20 lg:mt-28">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative aspect-square max-w-md mx-auto lg:mx-0 bg-muted/30 rounded-2xl border border-border overflow-hidden flex items-center justify-center"
+                className="relative aspect-square max-w-md mx-auto lg:mx-0 rounded-2xl border border-border overflow-hidden"
               >
-                {/* Animated blueprint grid */}
-                <svg viewBox="0 0 400 400" className="w-full h-full opacity-20">
-                  {Array.from({ length: 20 }).map((_, i) => (
-                    <motion.line key={`h${i}`} x1="0" y1={i * 20} x2="400" y2={i * 20} stroke="currentColor" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.5 }} />
+                {/* Animated isometric building illustration */}
+                <div className="absolute inset-0 bg-gradient-to-br from-muted/40 via-background to-muted/20" />
+                <svg viewBox="0 0 400 400" className="w-full h-full relative z-10">
+                  {/* Grid */}
+                  {Array.from({ length: 21 }).map((_, i) => (
+                    <motion.line key={`g${i}`} x1={i * 20} y1="0" x2={i * 20} y2="400" stroke="currentColor" strokeWidth="0.3" opacity="0.1" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.02, duration: 0.4 }} />
                   ))}
-                  {Array.from({ length: 20 }).map((_, i) => (
-                    <motion.line key={`v${i}`} x1={i * 20} y1="0" x2={i * 20} y2="400" stroke="currentColor" strokeWidth="0.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.05, duration: 0.5 }} />
+                  {Array.from({ length: 21 }).map((_, i) => (
+                    <motion.line key={`gh${i}`} x1="0" y1={i * 20} x2="400" y2={i * 20} stroke="currentColor" strokeWidth="0.3" opacity="0.1" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.02, duration: 0.4 }} />
                   ))}
-                  <motion.rect x="60" y="60" width="120" height="100" fill="none" stroke="currentColor" strokeWidth="1.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 1 }} />
-                  <motion.rect x="220" y="80" width="100" height="80" fill="none" stroke="currentColor" strokeWidth="1.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.7, duration: 1 }} />
-                  <motion.rect x="100" y="220" width="200" height="120" fill="none" stroke="currentColor" strokeWidth="1.5" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.9, duration: 1 }} />
+                  {/* Building 1 */}
+                  <motion.rect x="40" y="120" width="80" height="200" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.3" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.3 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 1.2 }} />
+                  <motion.line x1="40" y1="180" x2="120" y2="180" stroke="currentColor" strokeWidth="0.5" opacity="0.2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.8 }} />
+                  <motion.line x1="40" y1="240" x2="120" y2="240" stroke="currentColor" strokeWidth="0.5" opacity="0.2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.9 }} />
+                  {/* Building 2 (tall) */}
+                  <motion.rect x="160" y="60" width="100" height="260" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.4" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.4 }} viewport={{ once: true }} transition={{ delay: 0.7, duration: 1.5 }} />
+                  {[100, 140, 180, 220, 260].map((y, i) => (
+                    <motion.line key={`f${i}`} x1="160" y1={y} x2="260" y2={y} stroke="currentColor" strokeWidth="0.5" opacity="0.15" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1 + i * 0.1 }} />
+                  ))}
+                  {/* Building 3 */}
+                  <motion.rect x="300" y="160" width="60" height="160" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.25" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.25 }} viewport={{ once: true }} transition={{ delay: 0.9, duration: 1 }} />
+                  {/* Ground line */}
+                  <motion.line x1="20" y1="320" x2="380" y2="320" stroke="currentColor" strokeWidth="1" opacity="0.3" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 1 }} />
+                  {/* Dimension lines */}
+                  <motion.line x1="40" y1="340" x2="120" y2="340" stroke="currentColor" strokeWidth="0.5" opacity="0.2" strokeDasharray="4 2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.5 }} />
+                  <motion.line x1="160" y1="340" x2="260" y2="340" stroke="currentColor" strokeWidth="0.5" opacity="0.2" strokeDasharray="4 2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.7 }} />
+                  {/* Measurement arrows */}
+                  <motion.text x="70" y="355" textAnchor="middle" fill="currentColor" fontSize="10" opacity="0.3" initial={{ opacity: 0 }} whileInView={{ opacity: 0.3 }} viewport={{ once: true }} transition={{ delay: 2 }}>80'</motion.text>
+                  <motion.text x="210" y="355" textAnchor="middle" fill="currentColor" fontSize="10" opacity="0.3" initial={{ opacity: 0 }} whileInView={{ opacity: 0.3 }} viewport={{ once: true }} transition={{ delay: 2.2 }}>100'</motion.text>
                 </svg>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <Calculator className="w-16 h-16 text-foreground/20 mx-auto mb-3" />
-                    <p className="text-xs font-heading uppercase tracking-widest text-muted-foreground">{tools.length}+ Free Tools</p>
+                <div className="absolute bottom-6 left-6 right-6">
+                  <div className="bg-background/80 backdrop-blur-sm border border-border rounded-lg p-4 text-center">
+                    <Calculator className="w-8 h-8 text-foreground/40 mx-auto mb-2" />
+                    <p className="text-xs font-heading uppercase tracking-widest text-muted-foreground">{tools.length}+ Free Industry Tools</p>
                   </div>
                 </div>
               </motion.div>
