@@ -34,7 +34,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           {/* Brand */}
           <div className="lg:col-span-4">
-            <img src={logo} alt="Drafinity LLC" className="h-5 w-auto invert mb-4" />
+            <img src={logo} alt="Drafinity LLC" className="h-7 w-auto invert mb-4" />
             <p className="text-sm text-primary-foreground/60 leading-relaxed max-w-xs mb-6">
               USA Certified Drafting, 3D Design & Plan Stamping Experts. Delivering
               permit-ready, precision-driven plans since 2015.
