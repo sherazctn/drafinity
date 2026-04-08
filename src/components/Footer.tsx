@@ -11,9 +11,12 @@ const quickLinks = [
 ];
 
 const resourceLinks = [
-  { label: "Software & Tools", href: "/software" },
-  { label: "Legal & Permits", href: "/legal" },
-  { label: "Blog & Resources", href: "/blog" },
+  { label: "Software", href: "/software" },
+  { label: "Tools", href: "/tools" },
+  { label: "Legal", href: "/legal" },
+  { label: "Permits", href: "/legal" },
+  { label: "Blog", href: "/blog" },
+  { label: "Resources", href: "/blog" },
 ];
 
 const serviceLinks = [
@@ -116,7 +119,7 @@ const Footer = () => {
       <div className="border-t border-primary-foreground/10">
         <div className="container mx-auto px-4 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-primary-foreground/50">© {new Date().getFullYear()} Drafinity LLC. All rights reserved.</p>
+            <p className="text-xs text-primary-foreground/50">© 2015 – 2026 Drafinity LLC. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <span className="text-xs text-primary-foreground/50">USA Certified · Precision-Driven · Since 2015</span>
             </div>

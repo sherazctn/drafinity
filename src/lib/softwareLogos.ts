@@ -1,42 +1,54 @@
-// Centralized software logo URLs - using CDN sources with transparent backgrounds
-// All logos are sourced from reliable CDNs
+// Centralized software logo URLs - using reliable CDN sources with transparent backgrounds
 
 export const softwareLogos: Record<string, string> = {
-  "AutoCAD": "https://cdn.worldvectorlogo.com/logos/autocad-2021.svg",
-  "ArchiCAD": "https://cdn.worldvectorlogo.com/logos/archicad.svg",
-  "DraftSight": "https://cdn.worldvectorlogo.com/logos/draftsight.svg",
-  "MicroStation": "https://cdn.worldvectorlogo.com/logos/bentley-2.svg",
-  "Revit": "https://cdn.worldvectorlogo.com/logos/autodesk-revit.svg",
-  "Navisworks": "https://cdn.worldvectorlogo.com/logos/navisworks.svg",
-  "Tekla Structures": "https://cdn.worldvectorlogo.com/logos/tekla-1.svg",
-  "Dynamo": "https://cdn.worldvectorlogo.com/logos/autodesk-1.svg",
-  "SketchUp Pro": "https://cdn.worldvectorlogo.com/logos/sketchup-2.svg",
-  "SketchUp": "https://cdn.worldvectorlogo.com/logos/sketchup-2.svg",
-  "V-Ray": "https://cdn.worldvectorlogo.com/logos/v-ray-5.svg",
-  "Lumion": "https://cdn.worldvectorlogo.com/logos/lumion-1.svg",
-  "Enscape": "https://cdn.worldvectorlogo.com/logos/enscape-1.svg",
-  "3ds Max": "https://cdn.worldvectorlogo.com/logos/autodesk-3ds-max-1.svg",
-  "Twinmotion": "https://cdn.worldvectorlogo.com/logos/twinmotion-1.svg",
-  "Bluebeam Revu": "https://cdn.worldvectorlogo.com/logos/bluebeam-1.svg",
-  "Bluebeam": "https://cdn.worldvectorlogo.com/logos/bluebeam-1.svg",
-  "Adobe Creative Suite": "https://cdn.worldvectorlogo.com/logos/adobe-creative-cloud-cc.svg",
-  "PlanGrid": "https://cdn.worldvectorlogo.com/logos/autodesk-1.svg",
-  "BIM 360": "https://cdn.worldvectorlogo.com/logos/autodesk-1.svg",
-  "Procore": "https://cdn.worldvectorlogo.com/logos/procore-1.svg",
-  "Microsoft Project": "https://cdn.worldvectorlogo.com/logos/microsoft-project-2019.svg",
-  "ETABS": "https://cdn.worldvectorlogo.com/logos/csi-1.svg",
-  "RISA-3D": "https://cdn.worldvectorlogo.com/logos/risa-1.svg",
-  "SAP2000": "https://cdn.worldvectorlogo.com/logos/csi-1.svg",
-  "Rhino": "https://cdn.worldvectorlogo.com/logos/rhinoceros-1.svg",
-  "Grasshopper": "https://cdn.worldvectorlogo.com/logos/rhinoceros-1.svg",
-  "Civil 3D": "https://cdn.worldvectorlogo.com/logos/autodesk-1.svg",
-  "InfraWorks": "https://cdn.worldvectorlogo.com/logos/autodesk-1.svg",
-  "Solidworks": "https://cdn.worldvectorlogo.com/logos/solidworks-2.svg",
-  "Inventor": "https://cdn.worldvectorlogo.com/logos/autodesk-1.svg",
+  // CAD & Drafting
+  "AutoCAD": "https://img.icons8.com/color/96/autocad.png",
+  "ArchiCAD": "https://img.icons8.com/color/96/archicad.png",
+  "DraftSight": "https://companieslogo.com/img/orig/dasault-systemes_BIG.D-0a4e3e36.png",
+  "MicroStation": "https://img.icons8.com/color/96/bentley-systems.png",
+
+  // BIM & Modeling
+  "Revit": "https://img.icons8.com/color/96/autodesk-revit.png",
+  "Navisworks": "https://damassets.autodesk.net/content/dam/autodesk/www/product-imagery/badge-75x75/navisworks-manage-badge-75x75.png",
+  "Tekla Structures": "https://img.icons8.com/color/96/trimble.png",
+  "Dynamo": "https://img.icons8.com/color/96/autodesk.png",
+
+  // 3D Visualization
+  "SketchUp Pro": "https://img.icons8.com/color/96/sketchup.png",
+  "SketchUp": "https://img.icons8.com/color/96/sketchup.png",
+  "V-Ray": "https://img.icons8.com/color/96/chaos-group.png",
+  "Lumion": "https://upload.wikimedia.org/wikipedia/en/thumb/7/76/Lumion_logo.png/150px-Lumion_logo.png",
+  "Enscape": "https://img.icons8.com/color/96/chaos-group.png",
+  "3ds Max": "https://img.icons8.com/color/96/3ds-max.png",
+  "Twinmotion": "https://img.icons8.com/color/96/unreal-engine.png",
+
+  // Documentation & Review
+  "Bluebeam Revu": "https://img.icons8.com/color/96/pdf-2.png",
+  "Bluebeam": "https://img.icons8.com/color/96/pdf-2.png",
+  "Adobe Creative Suite": "https://img.icons8.com/color/96/adobe-creative-cloud.png",
+  "PlanGrid": "https://img.icons8.com/color/96/autodesk.png",
+
+  // Project Management
+  "BIM 360": "https://img.icons8.com/color/96/autodesk.png",
+  "Procore": "https://img.icons8.com/color/96/project.png",
+  "Microsoft Project": "https://img.icons8.com/color/96/microsoft-project-2019.png",
+
+  // Structural
+  "ETABS": "https://img.icons8.com/color/96/structural.png",
+  "RISA-3D": "https://img.icons8.com/color/96/structural.png",
+  "SAP2000": "https://img.icons8.com/color/96/structural.png",
+
+  // Advanced
+  "Rhino": "https://img.icons8.com/color/96/rhinoceros.png",
+  "Grasshopper": "https://img.icons8.com/color/96/rhinoceros.png",
+  "Civil 3D": "https://img.icons8.com/color/96/autodesk.png",
+  "InfraWorks": "https://img.icons8.com/color/96/autodesk.png",
+  "Solidworks": "https://img.icons8.com/color/96/solidworks.png",
+  "Inventor": "https://img.icons8.com/color/96/autodesk.png",
 };
 
-// Fallback icon for unknown software
-export const fallbackLogo = "https://cdn.worldvectorlogo.com/logos/autodesk-1.svg";
+// Fallback icon
+export const fallbackLogo = "https://img.icons8.com/color/96/autodesk.png";
 
 export function getSoftwareLogo(name: string): string {
   return softwareLogos[name] || fallbackLogo;
