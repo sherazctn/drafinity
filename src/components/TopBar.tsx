@@ -1,4 +1,4 @@
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 
 const TopBar = () => {
   return (
@@ -14,6 +14,11 @@ const TopBar = () => {
             <Phone className="w-3 h-3" />
             +1 (917) 728-1625
           </a>
+          <span className="text-border">|</span>
+          <span className="flex items-center gap-1.5 text-muted-foreground">
+            <MapPin className="w-3 h-3" />
+            1209 Mountain Road Pl NE, Albuquerque, NM 87110
+          </span>
         </div>
         <div className="flex items-center gap-3">
           <a href="https://www.facebook.com/drafinity" target="_blank" rel="noopener noreferrer" className="text-muted-foreground/50 hover:text-foreground transition-colors">
