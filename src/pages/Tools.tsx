@@ -603,49 +603,62 @@ const Tools = () => {
             })}
           </div>
 
-          {/* Improved bottom section with interactive animation */}
+          {/* Improved bottom section with interactive construction animation */}
           <div className="mt-20 lg:mt-28">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="relative aspect-square max-w-md mx-auto lg:mx-0 rounded-2xl border border-border overflow-hidden"
+                className="relative aspect-square max-w-md mx-auto lg:mx-0 rounded-2xl border border-border overflow-hidden bg-gradient-to-br from-muted/30 via-background to-muted/10"
               >
-                {/* Animated isometric building illustration */}
-                <div className="absolute inset-0 bg-gradient-to-br from-muted/40 via-background to-muted/20" />
                 <svg viewBox="0 0 400 400" className="w-full h-full relative z-10">
-                  {/* Grid */}
+                  {/* Blueprint grid */}
                   {Array.from({ length: 21 }).map((_, i) => (
-                    <motion.line key={`g${i}`} x1={i * 20} y1="0" x2={i * 20} y2="400" stroke="currentColor" strokeWidth="0.3" opacity="0.1" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.02, duration: 0.4 }} />
+                    <line key={`g${i}`} x1={i * 20} y1="0" x2={i * 20} y2="400" stroke="currentColor" strokeWidth="0.2" opacity="0.06" />
                   ))}
                   {Array.from({ length: 21 }).map((_, i) => (
-                    <motion.line key={`gh${i}`} x1="0" y1={i * 20} x2="400" y2={i * 20} stroke="currentColor" strokeWidth="0.3" opacity="0.1" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.02, duration: 0.4 }} />
+                    <line key={`gh${i}`} x1="0" y1={i * 20} x2="400" y2={i * 20} stroke="currentColor" strokeWidth="0.2" opacity="0.06" />
                   ))}
-                  {/* Building 1 */}
-                  <motion.rect x="40" y="120" width="80" height="200" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.3" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.3 }} viewport={{ once: true }} transition={{ delay: 0.5, duration: 1.2 }} />
-                  <motion.line x1="40" y1="180" x2="120" y2="180" stroke="currentColor" strokeWidth="0.5" opacity="0.2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.8 }} />
-                  <motion.line x1="40" y1="240" x2="120" y2="240" stroke="currentColor" strokeWidth="0.5" opacity="0.2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.9 }} />
-                  {/* Building 2 (tall) */}
-                  <motion.rect x="160" y="60" width="100" height="260" fill="none" stroke="currentColor" strokeWidth="2" opacity="0.4" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.4 }} viewport={{ once: true }} transition={{ delay: 0.7, duration: 1.5 }} />
-                  {[100, 140, 180, 220, 260].map((y, i) => (
-                    <motion.line key={`f${i}`} x1="160" y1={y} x2="260" y2={y} stroke="currentColor" strokeWidth="0.5" opacity="0.15" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1 + i * 0.1 }} />
-                  ))}
-                  {/* Building 3 */}
-                  <motion.rect x="300" y="160" width="60" height="160" fill="none" stroke="currentColor" strokeWidth="1" opacity="0.25" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 0.25 }} viewport={{ once: true }} transition={{ delay: 0.9, duration: 1 }} />
-                  {/* Ground line */}
-                  <motion.line x1="20" y1="320" x2="380" y2="320" stroke="currentColor" strokeWidth="1" opacity="0.3" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.3, duration: 1 }} />
+
+                  {/* Floor plan - main structure */}
+                  <motion.rect x="60" y="80" width="280" height="220" fill="none" stroke="currentColor" strokeWidth="1.5" opacity="0.35" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ duration: 2, ease: "easeInOut" }} />
+                  
+                  {/* Interior walls */}
+                  <motion.line x1="200" y1="80" x2="200" y2="220" stroke="currentColor" strokeWidth="1" opacity="0.25" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 0.8, duration: 1 }} />
+                  <motion.line x1="60" y1="220" x2="340" y2="220" stroke="currentColor" strokeWidth="1" opacity="0.25" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1, duration: 1 }} />
+                  <motion.line x1="260" y1="220" x2="260" y2="300" stroke="currentColor" strokeWidth="1" opacity="0.25" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.2, duration: 0.8 }} />
+                  
+                  {/* Door arcs */}
+                  <motion.path d="M 200 220 A 20 20 0 0 0 180 200" fill="none" stroke="currentColor" strokeWidth="0.8" opacity="0.2" strokeDasharray="2 2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.5, duration: 0.6 }} />
+                  <motion.path d="M 260 300 A 20 20 0 0 1 280 280" fill="none" stroke="currentColor" strokeWidth="0.8" opacity="0.2" strokeDasharray="2 2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.7, duration: 0.6 }} />
+
+                  {/* Room labels */}
+                  <motion.text x="130" y="155" textAnchor="middle" fill="currentColor" fontSize="8" opacity="0" fontFamily="monospace" initial={{ opacity: 0 }} whileInView={{ opacity: 0.2 }} viewport={{ once: true }} transition={{ delay: 2 }}>LIVING</motion.text>
+                  <motion.text x="270" y="155" textAnchor="middle" fill="currentColor" fontSize="8" opacity="0" fontFamily="monospace" initial={{ opacity: 0 }} whileInView={{ opacity: 0.2 }} viewport={{ once: true }} transition={{ delay: 2.1 }}>KITCHEN</motion.text>
+                  <motion.text x="150" y="265" textAnchor="middle" fill="currentColor" fontSize="8" opacity="0" fontFamily="monospace" initial={{ opacity: 0 }} whileInView={{ opacity: 0.2 }} viewport={{ once: true }} transition={{ delay: 2.2 }}>BEDROOM</motion.text>
+                  <motion.text x="300" y="265" textAnchor="middle" fill="currentColor" fontSize="8" opacity="0" fontFamily="monospace" initial={{ opacity: 0 }} whileInView={{ opacity: 0.2 }} viewport={{ once: true }} transition={{ delay: 2.3 }}>BATH</motion.text>
+
                   {/* Dimension lines */}
-                  <motion.line x1="40" y1="340" x2="120" y2="340" stroke="currentColor" strokeWidth="0.5" opacity="0.2" strokeDasharray="4 2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.5 }} />
-                  <motion.line x1="160" y1="340" x2="260" y2="340" stroke="currentColor" strokeWidth="0.5" opacity="0.2" strokeDasharray="4 2" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.7 }} />
-                  {/* Measurement arrows */}
-                  <motion.text x="70" y="355" textAnchor="middle" fill="currentColor" fontSize="10" opacity="0.3" initial={{ opacity: 0 }} whileInView={{ opacity: 0.3 }} viewport={{ once: true }} transition={{ delay: 2 }}>80'</motion.text>
-                  <motion.text x="210" y="355" textAnchor="middle" fill="currentColor" fontSize="10" opacity="0.3" initial={{ opacity: 0 }} whileInView={{ opacity: 0.3 }} viewport={{ once: true }} transition={{ delay: 2.2 }}>100'</motion.text>
+                  <motion.line x1="60" y1="325" x2="340" y2="325" stroke="currentColor" strokeWidth="0.6" opacity="0.25" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 1.8, duration: 0.8 }} />
+                  <motion.line x1="60" y1="320" x2="60" y2="330" stroke="currentColor" strokeWidth="0.6" opacity="0.25" initial={{ opacity: 0 }} whileInView={{ opacity: 0.25 }} viewport={{ once: true }} transition={{ delay: 2.2 }} />
+                  <motion.line x1="340" y1="320" x2="340" y2="330" stroke="currentColor" strokeWidth="0.6" opacity="0.25" initial={{ opacity: 0 }} whileInView={{ opacity: 0.25 }} viewport={{ once: true }} transition={{ delay: 2.2 }} />
+                  <motion.text x="200" y="340" textAnchor="middle" fill="currentColor" fontSize="9" opacity="0" fontFamily="monospace" initial={{ opacity: 0 }} whileInView={{ opacity: 0.3 }} viewport={{ once: true }} transition={{ delay: 2.5 }}>28'-0"</motion.text>
+
+                  {/* Side dimension */}
+                  <motion.line x1="375" y1="80" x2="375" y2="300" stroke="currentColor" strokeWidth="0.6" opacity="0.25" initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: true }} transition={{ delay: 2, duration: 0.8 }} />
+                  <motion.line x1="370" y1="80" x2="380" y2="80" stroke="currentColor" strokeWidth="0.6" opacity="0.25" initial={{ opacity: 0 }} whileInView={{ opacity: 0.25 }} viewport={{ once: true }} transition={{ delay: 2.4 }} />
+                  <motion.line x1="370" y1="300" x2="380" y2="300" stroke="currentColor" strokeWidth="0.6" opacity="0.25" initial={{ opacity: 0 }} whileInView={{ opacity: 0.25 }} viewport={{ once: true }} transition={{ delay: 2.4 }} />
+                  <motion.text x="385" y="195" textAnchor="start" fill="currentColor" fontSize="9" opacity="0" fontFamily="monospace" transform="rotate(90, 385, 195)" initial={{ opacity: 0 }} whileInView={{ opacity: 0.3 }} viewport={{ once: true }} transition={{ delay: 2.6 }}>22'-0"</motion.text>
+
+                  {/* Animated measurement cursor */}
+                  <motion.circle cx="60" cy="325" r="3" fill="currentColor" opacity="0.4" initial={{ cx: 60 }} animate={{ cx: [60, 340, 60] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }} />
                 </svg>
-                <div className="absolute bottom-6 left-6 right-6">
-                  <div className="bg-background/80 backdrop-blur-sm border border-border rounded-lg p-4 text-center">
-                    <Calculator className="w-8 h-8 text-foreground/40 mx-auto mb-2" />
-                    <p className="text-xs font-heading uppercase tracking-widest text-muted-foreground">{tools.length}+ Free Industry Tools</p>
+
+                <div className="absolute bottom-5 left-5 right-5">
+                  <div className="bg-background/80 backdrop-blur-sm border border-border rounded-lg p-3 text-center">
+                    <Ruler className="w-6 h-6 text-foreground/40 mx-auto mb-1" />
+                    <p className="text-[10px] font-heading uppercase tracking-widest text-muted-foreground">{tools.length}+ Free Industry Calculators</p>
                   </div>
                 </div>
               </motion.div>
@@ -664,10 +677,11 @@ const Tools = () => {
                   {[
                     "Instant results — no signup or download required",
                     "Based on industry-standard formulas and building codes",
+                    "Contextual hints with recommended ranges and code references",
                     "Covers structural, MEP, materials, and design calculations",
                     "Mobile-friendly for use on job sites",
+                    "Email results directly from any calculator",
                     "Sorted by popularity in the US construction industry",
-                    "Regularly updated for accuracy and compliance",
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-2">
                       <Sparkles className="w-4 h-4 text-foreground shrink-0 mt-0.5" />
