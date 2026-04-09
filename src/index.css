@@ -122,6 +122,13 @@
   background-clip: text;
 }
 
+.dark .text-gradient-highlight {
+  background: linear-gradient(135deg, hsl(0 0% 85%), hsl(0 0% 55%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Light line separator */
 .light-line {
   height: 1px;
