@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import { Phone, ArrowRight } from "lucide-react";
+import { Phone, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import BlueprintAnimation from "@/components/BlueprintAnimation";
 
 const headingLines = [
-  ["Precision Drafting", "& 3D Design"],
-  ["Permit-Ready Plans", "You Can Trust"],
-  ["Architectural Plans", "Built to Code"],
-  ["From Concept", "To Construction"],
+  { line1: "Precision Drafting", line2: "& 3D Design", icon: "✏️" },
+  { line1: "Permit-Ready Plans", line2: "You Can Trust", icon: "📋" },
+  { line1: "AI-Enhanced", line2: "Architecture", icon: "🤖" },
+  { line1: "From Concept", line2: "To Construction", icon: "🏗️" },
 ];
 
 const Hero = () => {
@@ -73,12 +73,12 @@ const Hero = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-flex items-center gap-2 text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-8">
               <motion.span animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-1.5 h-1.5 rounded-full bg-foreground" />
-              USA Certified Since 2015
+              USA Certified Since 2015 • AI-Enhanced
             </span>
           </motion.div>
 
           <div className="h-[180px] sm:h-[200px] lg:h-[280px] mb-8 overflow-hidden relative">
-            {headingLines.map((lines, idx) => (
+            {headingLines.map((heading, idx) => (
               <motion.h1
                 key={idx}
                 className="text-5xl sm:text-6xl lg:text-8xl font-heading font-bold leading-[0.95] tracking-tight absolute inset-0"
@@ -86,8 +86,8 @@ const Hero = () => {
                 animate={lineIndex === idx ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: -60, filter: "blur(8px)" }}
                 transition={{ duration: 0.8, ease: [0.33, 1, 0.68, 1] }}
               >
-                <span className="block">{lines[0]}</span>
-                <span className="block text-gradient-highlight">{lines[1]}</span>
+                <span className="block">{heading.line1}</span>
+                <span className="block text-gradient-highlight">{heading.line2}</span>
               </motion.h1>
             ))}
           </div>
@@ -117,7 +117,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-lg lg:text-xl text-muted-foreground max-w-2xl mb-12 leading-relaxed"
           >
-            Delivering permit-ready, precision-driven plans with secure quality.
+            Delivering permit-ready, AI-enhanced precision plans with secure quality.
             Certified drafting, 3D rendering & plan stamping you can trust.
           </motion.p>
 
@@ -129,6 +129,7 @@ const Hero = () => {
           >
             <Link to="/contact">
               <Button variant="hero" size="xl">
+                <Sparkles className="w-4 h-4" />
                 Get a Free Quote
                 <motion.span animate={{ x: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity }}>
                   <ArrowRight className="w-4 h-4" />

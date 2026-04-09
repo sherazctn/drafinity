@@ -32,12 +32,12 @@ const serviceLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-primary-foreground border-t border-border">
+    <footer className="bg-foreground text-primary-foreground border-t border-border dark:bg-card dark:text-foreground">
       <div className="container mx-auto px-4 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           {/* Brand */}
           <div className="lg:col-span-4">
-            <img src={logo} alt="Drafinity LLC" className="h-7 w-auto invert mb-4" />
+            <img src={logo} alt="Drafinity LLC" className="h-7 w-auto invert dark:invert-0 mb-4" />
             <p className="text-sm text-primary-foreground/60 leading-relaxed max-w-xs mb-6">
               USA Certified Drafting, 3D Design & Plan Stamping Experts. Delivering
               permit-ready, precision-driven plans since 2015.

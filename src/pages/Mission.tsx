@@ -31,7 +31,7 @@ const Mission = () => {
             Empowering Builders With<br /><span className="text-gradient-highlight">Precision & Trust</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Our mission is to empower architects, contractors, and developers with the most precise, compliant, and beautifully crafted architectural documentation available — delivered on time, every time.
+            Our mission is to empower architects, contractors, and developers with AI-enhanced, precision-driven architectural documentation — blending cutting-edge technology with expert craftsmanship to deliver permit-ready plans on time, every time.
           </motion.p>
         </div>
       </section>
