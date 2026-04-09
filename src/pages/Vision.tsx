@@ -7,10 +7,10 @@ import PageHeroAnimation from "@/components/PageHeroAnimation";
 const visionPoints = [
   { icon: Eye, animation: "pulse" as const, title: "Industry Leadership", description: "To be the most trusted name in architectural drafting and design services across the United States, setting new standards for quality, speed, and innovation." },
   { icon: Globe, animation: "float" as const, title: "Nationwide Accessibility", description: "Making world-class drafting and design services accessible to every architect, contractor, and developer in all 50 states through our expanding partner network." },
-  { icon: Rocket, animation: "bounce" as const, title: "Technology-Forward", description: "Pioneering the integration of AI, BIM, and advanced visualization technologies to transform how buildings are designed, documented, and constructed." },
-  { icon: TrendingUp, animation: "wave" as const, title: "Sustainable Growth", description: "Building a company that grows sustainably by investing in our people, technology, and processes while maintaining the highest standards of quality." },
+  { icon: Rocket, animation: "bounce" as const, title: "AI-Powered Future", description: "Leading the integration of Artificial Intelligence, machine learning, and generative design into every phase of architectural documentation — from automated code checking to intelligent clash detection." },
+  { icon: TrendingUp, animation: "wave" as const, title: "Sustainable Growth", description: "Building a company that grows sustainably by investing in our people, AI infrastructure, and processes while maintaining the highest standards of quality." },
   { icon: Users, animation: "glow" as const, title: "Community Impact", description: "Contributing to safer, more beautiful built environments by ensuring every project we touch meets the highest standards of code compliance and design excellence." },
-  { icon: Lightbulb, animation: "rotate" as const, title: "Innovation Culture", description: "Fostering a culture of continuous innovation where every team member is empowered to find better, faster, and more accurate ways to serve our clients." },
+  { icon: Lightbulb, animation: "rotate" as const, title: "Innovation Culture", description: "Fostering a culture where AI, automation, and human expertise work together — empowering every team member to deliver faster, smarter, and more accurate results than ever before." },
 ];
 
 const Vision = () => {
@@ -24,7 +24,7 @@ const Vision = () => {
             Building the Future of<br /><span className="text-gradient-highlight">Architectural Services</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            We envision a world where every construction project begins with precise, code-compliant, and beautifully crafted documentation — delivered faster and more affordably than ever before.
+            We envision a world where AI and human expertise converge to create precise, code-compliant, and beautifully crafted architectural documentation — delivered faster and more affordably than ever before.
           </motion.p>
         </div>
       </section>
@@ -35,7 +35,7 @@ const Vision = () => {
           <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
             <Eye className="w-12 h-12 mx-auto mb-6 text-muted-foreground/40" />
             <blockquote className="text-2xl lg:text-3xl font-heading font-bold leading-relaxed mb-6">
-              "To revolutionize the AEC industry by delivering unmatched precision, speed, and innovation in every drafting and design project — making world-class architectural services accessible to all."
+              "To revolutionize the AEC industry by harnessing the power of AI, automation, and human craftsmanship to deliver unmatched precision, speed, and innovation — making world-class architectural services accessible to all."
             </blockquote>
             <p className="text-sm text-muted-foreground">— Drafinity LLC Leadership Team</p>
           </motion.div>
