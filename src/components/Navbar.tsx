@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/drafinity-logo.png";
 import TopBar from "@/components/TopBar";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const serviceItems = [
   { label: "2D Floor Plans", slug: "2d-floor-plans" },
@@ -182,6 +183,7 @@ const Navbar = () => {
             </div>
 
             <div className="hidden xl:flex items-center gap-3">
+              <ThemeToggle />
               <Link to="/contact">
                 <Button variant="hero" size="sm">Get a Quote</Button>
               </Link>
