@@ -47,9 +47,9 @@ const WhyChooseUs = () => {
                 transition={{ delay: 0.2 }}
                 className="text-muted-foreground leading-relaxed mb-6"
               >
-                We combine industry expertise with cutting-edge technology to
+                We combine industry expertise with cutting-edge AI technology to
                 deliver plans that exceed expectations. Every project is handled with
-                the precision and care it deserves.
+                the precision, intelligence, and care it deserves.
               </motion.p>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -73,7 +73,7 @@ const WhyChooseUs = () => {
               >
                 Our team of certified drafters, designers, and engineers brings together decades
                 of combined experience across residential, commercial, industrial, and institutional
-                projects. We stay ahead of industry standards by investing in the latest CAD and
+                projects. We stay ahead by investing in AI-enhanced workflows, the latest CAD and
                 BIM technology, continuous professional development, and rigorous quality management systems.
               </motion.p>
               <motion.p
