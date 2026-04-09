@@ -242,8 +242,9 @@ const Navbar = () => {
                     )}
                   </motion.div>
                 ))}
-                <div className="pt-4 border-t border-border">
-                  <Link to="/contact">
+                <div className="pt-4 border-t border-border flex items-center gap-3">
+                  <ThemeToggle />
+                  <Link to="/contact" className="flex-1">
                     <Button variant="hero" className="w-full">Get a Free Quote</Button>
                   </Link>
                 </div>

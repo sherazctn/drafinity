@@ -82,7 +82,7 @@ const AIChatbot = () => {
         whileHover={{ scale: 1.1 }}
       >
         <MessageCircle className="w-6 h-6" />
-        <span className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background animate-pulse" />
+        <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full border-2 border-background animate-pulse" style={{ backgroundColor: "hsl(142, 71%, 45%)" }} />
       </motion.button>
 
       {/* Chat window */}
