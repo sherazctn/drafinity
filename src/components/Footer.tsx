@@ -11,9 +11,12 @@ const quickLinks = [
 ];
 
 const resourceLinks = [
-  { label: "Software & Tools", href: "/software" },
-  { label: "Legal & Permits", href: "/legal" },
-  { label: "Blog & Resources", href: "/blog" },
+  { label: "Software", href: "/software" },
+  { label: "Tools", href: "/tools" },
+  { label: "Legal", href: "/legal" },
+  { label: "Permits", href: "/legal" },
+  { label: "Blog", href: "/blog" },
+  { label: "Resources", href: "/blog" },
 ];
 
 const serviceLinks = [
@@ -29,12 +32,12 @@ const serviceLinks = [
 
 const Footer = () => {
   return (
-    <footer className="bg-foreground text-primary-foreground border-t border-border">
+    <footer className="bg-foreground text-primary-foreground border-t border-border dark:bg-card dark:text-foreground">
       <div className="container mx-auto px-4 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
           {/* Brand */}
           <div className="lg:col-span-4">
-            <img src={logo} alt="Drafinity LLC" className="h-5 w-auto invert mb-4" />
+            <img src={logo} alt="Drafinity LLC" className="h-7 w-auto invert dark:invert-0 mb-4" />
             <p className="text-sm text-primary-foreground/60 leading-relaxed max-w-xs mb-6">
               USA Certified Drafting, 3D Design & Plan Stamping Experts. Delivering
               permit-ready, precision-driven plans since 2015.
@@ -116,7 +119,7 @@ const Footer = () => {
       <div className="border-t border-primary-foreground/10">
         <div className="container mx-auto px-4 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-primary-foreground/50">© {new Date().getFullYear()} Drafinity LLC. All rights reserved.</p>
+            <p className="text-xs text-primary-foreground/50">© 2015 – 2026 Drafinity LLC. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <span className="text-xs text-primary-foreground/50">USA Certified · Precision-Driven · Since 2015</span>
             </div>

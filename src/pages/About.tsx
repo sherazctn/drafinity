@@ -15,7 +15,7 @@ const values = [
   { icon: Award, animation: "pulse" as const, title: "Certified Excellence", description: "Every deliverable is certified by licensed professionals, ensuring compliance with local and national building codes." },
   { icon: Users, animation: "wave" as const, title: "Client-Centric Approach", description: "We tailor our services to your unique project needs, providing dedicated support from start to finish." },
   { icon: Shield, animation: "glow" as const, title: "Uncompromising Quality", description: "Multi-stage quality assurance checks guarantee accuracy, consistency, and compliance in every drawing." },
-  { icon: Cpu, animation: "rotate" as const, title: "Cutting-Edge Technology", description: "We leverage the latest CAD, BIM, and 3D visualization tools to deliver state-of-the-art results." },
+  { icon: Cpu, animation: "rotate" as const, title: "AI-Enhanced Technology", description: "We leverage AI-powered drafting tools, automated code checking, and intelligent BIM workflows to deliver faster, more accurate results." },
   { icon: Target, animation: "bounce" as const, title: "Precision-Driven", description: "Every measurement, every line, every detail is verified for absolute precision in all deliverables." },
   { icon: Globe, animation: "float" as const, title: "Nationwide Coverage", description: "We serve clients across all 50 states with consistent quality and rapid turnaround times." },
 ];
@@ -28,7 +28,7 @@ const timelineEvents = [
   { year: "2019", event: "Achieved 200+ project milestone" },
   { year: "2021", event: "Launched BIM modeling services" },
   { year: "2023", event: "Nationwide plan stamping coverage" },
-  { year: "2025", event: "500+ projects delivered across 50 states" },
+  { year: "2025", event: "AI-enhanced workflows & 500+ projects across 50 states" },
 ];
 
 const About = () => {
@@ -42,7 +42,7 @@ const About = () => {
             We Turn Concepts Into<br /><span className="text-gradient-highlight">Permit-Ready Plans</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Drafinity LLC is a USA-based drafting and design firm specializing in precision-driven architectural plans, 3D visualization, and certified plan stamping. Since 2015, we've partnered with architects, contractors, and developers to deliver exceptional quality.
+            Drafinity LLC is a USA-based drafting and design firm specializing in AI-enhanced, precision-driven architectural plans, 3D visualization, and certified plan stamping. Since 2015, we've partnered with architects, contractors, and developers to deliver exceptional quality powered by cutting-edge technology.
           </motion.p>
         </div>
       </section>
