@@ -3,6 +3,8 @@ import { Award, Users, Shield, Cpu, Target, Globe } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import SEO from "@/components/SEO";
+import { organizationSchema, breadcrumbSchema } from "@/lib/seoSchemas";
 
 const stats = [
   { value: "2015", label: "Founded" },
@@ -34,6 +36,13 @@ const timelineEvents = [
 const About = () => {
   return (
     <main>
+      <SEO
+        title="About Drafinity LLC — USA Certified Drafting Firm Since 2015"
+        description="Learn about Drafinity LLC, a USA-certified drafting and plan stamping firm based in Albuquerque, NM. 500+ projects, 100% client satisfaction, AI-enhanced workflows since 2015."
+        path="/about"
+        keywords="about Drafinity, drafting company, architectural firm USA, certified drafting service"
+        schema={[organizationSchema, breadcrumbSchema([{name:'Home',path:'/'},{name:'About',path:'/about'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="about" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">

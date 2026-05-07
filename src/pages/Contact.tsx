@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import SEO from "@/components/SEO";
+import { localBusinessSchema, breadcrumbSchema } from "@/lib/seoSchemas";
 
 const promptSuggestions = [
   "I need floor plans for a 2-story residential home, approximately 2,500 sq ft...",
@@ -115,6 +117,13 @@ Looking forward to a detailed quote and project timeline. Thank you!`;
 
   return (
     <main>
+      <SEO
+        title="Contact Drafinity LLC — Free Quote in 24 Hours"
+        description="Contact Drafinity LLC for a free architectural drafting quote within 24 hours. Email info@drafinity.us or call (917) 728-1625. Serving all 50 US states from Albuquerque, NM."
+        path="/contact"
+        keywords="contact Drafinity, drafting quote, architectural drafting contact, plan stamping inquiry"
+        schema={[localBusinessSchema, breadcrumbSchema([{name:'Home',path:'/'},{name:'Contact',path:'/contact'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="contact" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">

@@ -5,6 +5,8 @@ import AnimatedIcon from "@/components/AnimatedIcon";
 import CTASection from "@/components/CTASection";
 import TrendingServices from "@/components/TrendingServices";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import SEO from "@/components/SEO";
+import { localBusinessSchema, breadcrumbSchema } from "@/lib/seoSchemas";
 
 const serviceCategories = [
   {
@@ -52,6 +54,13 @@ const serviceCategories = [
 const Services = () => {
   return (
     <main>
+      <SEO
+        title="Drafting & Design Services — 2D, 3D, BIM, Structural, MEP, Plan Stamping"
+        description="Explore Drafinity's full range of services: 2D drafting, 3D rendering, BIM modeling, structural & MEP drafting, site plans, construction documents, and 50-state plan stamping."
+        path="/services"
+        keywords="drafting services, 3D rendering services, BIM modeling, structural drafting, MEP drafting, plan stamping, site plans, construction documents"
+        schema={[localBusinessSchema, breadcrumbSchema([{name:'Home',path:'/'},{name:'Services',path:'/services'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="services" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">

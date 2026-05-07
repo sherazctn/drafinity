@@ -38,6 +38,8 @@ import render3d12 from "@/assets/render-3d-12.jpg";
 import render3d13 from "@/assets/render-3d-13.jpg";
 import render3d14 from "@/assets/render-3d-14.jpg";
 import render3d15 from "@/assets/render-3d-15.jpg";
+import SEO from "@/components/SEO";
+import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 const categories = ["All", "Luxury Rendering", "3D Renovation Projects", "3D Rendering", "Interior Visualization", "Construction Documents", "2D Floor Plans", "BIM Modeling", "Plan Stamping"];
 
@@ -113,6 +115,13 @@ const Portfolio = () => {
 
   return (
     <main>
+      <SEO
+        title="Portfolio — 500+ Drafting, 3D Rendering & BIM Projects"
+        description="Browse Drafinity's portfolio of 500+ completed projects: residential floor plans, luxury 3D renderings, commercial BIM models, and renovation drawings across all 50 US states."
+        path="/portfolio"
+        keywords="drafting portfolio, 3D rendering examples, BIM project gallery, architectural portfolio"
+        schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Portfolio',path:'/portfolio'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 relative overflow-hidden">
         <div className="absolute inset-0 blueprint-grid" />
         <PageHeroAnimation page="portfolio" />

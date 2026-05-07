@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import SEO from "@/components/SEO";
+import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 const posts = [
   { slug: "what-is-plan-stamping", title: "What is Plan Stamping & Why It Matters", excerpt: "Plan stamping is the process of having a licensed professional review and certify your construction documents. Learn why it's essential for getting permits approved across all US states.", category: "Compliance", date: "January 15, 2026", readTime: "5 min read" },
@@ -15,6 +17,12 @@ const posts = [
 const Blog = () => {
   return (
     <main>
+      <SEO
+        title="Blog — Drafting, BIM, Permits & Construction Insights"
+        description="Read Drafinity's blog for expert insights on architectural drafting, BIM modeling, building codes, permits, 3D rendering, and the latest AEC industry trends."
+        path="/blog"
+        schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Blog',path:'/blog'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="blog" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">

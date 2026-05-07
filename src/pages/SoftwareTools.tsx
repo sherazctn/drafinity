@@ -5,6 +5,8 @@ import { getSoftwareLogo } from "@/lib/softwareLogos";
 import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Brain, Cpu, Workflow, Layers, Zap, Globe } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
+import SEO from "@/components/SEO";
+import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 const softwareCategories = [
   { label: "CAD & Drafting", tools: [
@@ -87,6 +89,13 @@ const SoftwareTools = () => {
 
   return (
     <main>
+      <SEO
+        title="Software & Tools — AutoCAD, Revit, V-Ray, Lumion, ETABS & More"
+        description="Drafinity uses industry-leading drafting and design software: AutoCAD, Revit, ArchiCAD, SketchUp, V-Ray, Lumion, ETABS, SAP2000, BIM 360, and more for precision deliverables."
+        path="/software"
+        keywords="AutoCAD drafting, Revit BIM, V-Ray rendering, Lumion, ETABS, structural software, design tools"
+        schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Software',path:'/software'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="software" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
