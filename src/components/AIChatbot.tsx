@@ -119,8 +119,14 @@ const AIChatbot = () => {
                   <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 ${msg.role === "user" ? "bg-foreground text-background" : "bg-muted"}`}>
                     {msg.role === "user" ? <User className="w-3 h-3" /> : <Bot className="w-3 h-3" />}
                   </div>
-                  <div className={`max-w-[80%] rounded-xl px-3 py-2 text-xs leading-relaxed ${msg.role === "user" ? "bg-foreground text-background" : "bg-muted text-foreground"}`}>
-                    {msg.content}
+                  <div className={`max-w-[85%] rounded-xl px-3 py-2 text-xs leading-relaxed ${msg.role === "user" ? "bg-foreground text-background" : "bg-muted text-foreground"}`}>
+                    {msg.role === "assistant" ? (
+                      <div className="prose prose-xs dark:prose-invert max-w-none prose-headings:font-heading prose-headings:mt-2 prose-headings:mb-1 prose-p:my-1.5 prose-ul:my-1.5 prose-ol:my-1.5 prose-li:my-0.5 prose-strong:text-foreground prose-a:text-foreground prose-a:underline prose-code:text-[10px] prose-code:bg-background/60 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none prose-blockquote:border-l-2 prose-blockquote:border-foreground/40 prose-blockquote:pl-2 prose-blockquote:italic prose-table:text-[10px]">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{msg.content}</ReactMarkdown>
+                      </div>
+                    ) : (
+                      msg.content
+                    )}
                   </div>
                 </div>
               ))}
