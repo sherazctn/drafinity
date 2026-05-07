@@ -3,6 +3,8 @@ import { Target, Heart, Zap, Award, ShieldCheck, Handshake } from "lucide-react"
 import AnimatedIcon from "@/components/AnimatedIcon";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import SEO from "@/components/SEO";
+import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 const missionValues = [
   { icon: Target, animation: "pulse" as const, title: "Precision First", description: "Every measurement, every line, every detail is verified for absolute precision. We believe that accuracy in documentation prevents costly errors in construction." },
@@ -23,6 +25,12 @@ const commitments = [
 const Mission = () => {
   return (
     <main>
+      <SEO
+        title="Our Mission — Precision, Speed, Compliance"
+        description="Drafinity's mission is to deliver permit-ready, code-compliant drafting and plan stamping services with unmatched precision and 24-hour quote turnaround in all 50 states."
+        path="/mission"
+        schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Mission',path:'/mission'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="about" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">

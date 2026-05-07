@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import SEO from "@/components/SEO";
+import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 const allServices = [
   "2D Floor Plans", "Structural Drafting", "Site Plans", "MEP Drafting",
@@ -58,6 +60,12 @@ const Partners = () => {
 
   return (
     <main>
+      <SEO
+        title="Partners — Licensed Architects & Engineers in All 50 States"
+        description="Drafinity partners with licensed architects and Professional Engineers across all 50 US states to deliver stamped, permit-ready drawings nationwide."
+        path="/partners"
+        schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Partners',path:'/partners'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="about" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">

@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Search, FileText, AlertTriangle, CheckCircle, Building2, Shield } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import SEO from "@/components/SEO";
+import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 interface StatePermitInfo {
   name: string;
@@ -414,6 +416,12 @@ const Legal = () => {
 
   return (
     <main>
+      <SEO
+        title="Legal — Privacy Policy & Terms of Service"
+        description="Drafinity LLC's privacy policy, terms of service, and legal information."
+        path="/legal"
+        schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Legal',path:'/legal'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="services" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">

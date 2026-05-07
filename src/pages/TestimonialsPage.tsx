@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import SEO from "@/components/SEO";
+import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 const testimonials = [
   { quote: "Drafinity delivered our complete set of construction documents ahead of schedule. Their attention to detail saved us from costly revisions during permitting.", name: "Michael Chen", role: "General Contractor, NYC" },
@@ -21,6 +23,12 @@ const testimonials = [
 const TestimonialsPage = () => {
   return (
     <main>
+      <SEO
+        title="Client Testimonials — 100% Satisfaction Across 500+ Projects"
+        description="Read what 237+ clients say about Drafinity's drafting, 3D rendering, BIM, and plan stamping services. 4.9/5 average rating across 500+ completed projects."
+        path="/testimonials"
+        schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Testimonials',path:'/testimonials'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="about" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">

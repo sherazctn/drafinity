@@ -3,6 +3,8 @@ import { Eye, Lightbulb, Globe, Rocket, TrendingUp, Users } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
 import CTASection from "@/components/CTASection";
 import PageHeroAnimation from "@/components/PageHeroAnimation";
+import SEO from "@/components/SEO";
+import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 const visionPoints = [
   { icon: Eye, animation: "pulse" as const, title: "Industry Leadership", description: "To be the most trusted name in architectural drafting and design services across the United States, setting new standards for quality, speed, and innovation." },
@@ -16,6 +18,12 @@ const visionPoints = [
 const Vision = () => {
   return (
     <main>
+      <SEO
+        title="Our Vision — AI-Forward Architectural Drafting"
+        description="Drafinity's vision: redefining architectural drafting with AI-driven precision, automation, and accessibility for builders, architects, and developers across the USA."
+        path="/vision"
+        schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Vision',path:'/vision'}])]}
+      />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
         <PageHeroAnimation page="about" />
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
