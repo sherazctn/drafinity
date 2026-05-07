@@ -1,0 +1,45 @@
+# Drafinity LLC
+
+> Drafinity LLC is a USA-certified architectural drafting, 3D rendering, BIM modeling, structural drafting, and plan stamping firm headquartered in Albuquerque, New Mexico, serving all 50 US states since 2015. We deliver permit-ready, code-compliant plans for residential, commercial, and industrial projects with AI-enhanced workflows for faster turnaround.
+
+## Company Facts
+- **Legal name**: Drafinity LLC
+- **Founded**: 2015
+- **Headquarters**: 1209 Mountain Road Pl NE, Albuquerque, NM 87110, USA
+- **Service area**: All 50 United States
+- **Phone**: +1 (917) 728-1625
+- **Email**: info@drafinity.us
+- **Website**: https://drafinity.us
+- **Business hours**: Mon–Fri 9 AM – 6 PM, Sat 10 AM – 4 PM (MT)
+- **Projects completed**: 500+
+- **Client satisfaction**: 100%
+- **Quote turnaround**: Free quote within 24 hours
+
+## Services
+- 2D Architectural Drafting (floor plans, elevations, sections, site plans, as-builts)
+- 3D Modeling & Photorealistic Rendering (V-Ray, Lumion, Enscape)
+- BIM Modeling in Autodesk Revit (LOD 100–500), clash detection, BIM 360
+- Structural Drafting (foundations, framing, steel, concrete, wood) — stamped by licensed PEs
+- MEP Drafting (mechanical, electrical, plumbing, HVAC load calcs)
+- Plan Stamping & Permit Expediting in all 50 US states
+- Construction Documents (permit-ready, IBC/IRC/ADA compliant)
+- Material Estimation & Quantity Takeoffs
+- Interior Design & Visualization
+- AI-Enhanced Generative Design & Automated Code Checking
+
+## Software & Tools We Use
+AutoCAD, Revit, ArchiCAD, SketchUp, 3ds Max, V-Ray, Lumion, Enscape, BIM 360, Navisworks, Bluebeam, ETABS, SAP2000, RISA-3D, STAAD.Pro, Tekla Structures, Civil 3D, MicroStation.
+
+## Why Choose Drafinity
+- Licensed architects and Professional Engineers (PEs) in all 50 states
+- 100% permit-ready, code-compliant deliverables
+- Free quotes delivered within 24 hours
+- AI-augmented workflows deliver projects up to 3× faster
+- 500+ successful projects, 100% client satisfaction since 2015
+- Transparent communication and dedicated project managers
+
+## Contact
+- Email: info@drafinity.us
+- Phone: +1 (917) 728-1625
+- Address: 1209 Mountain Road Pl NE, Albuquerque, NM 87110, USA
+- Website: https://drafinity.us/contact

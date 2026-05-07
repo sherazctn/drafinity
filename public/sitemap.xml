@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://drafinity.us/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://drafinity.us/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drafinity.us/vision</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://drafinity.us/mission</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://drafinity.us/services</loc><changefreq>weekly</changefreq><priority>0.95</priority></url>
+  <url><loc>https://drafinity.us/portfolio</loc><changefreq>weekly</changefreq><priority>0.85</priority></url>
+  <url><loc>https://drafinity.us/software</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://drafinity.us/tools</loc><changefreq>monthly</changefreq><priority>0.75</priority></url>
+  <url><loc>https://drafinity.us/partners</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://drafinity.us/testimonials</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://drafinity.us/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://drafinity.us/contact</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://drafinity.us/legal</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
+</urlset>
