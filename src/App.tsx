@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -37,6 +37,24 @@ const PageFallback = () => (
   </div>
 );
 
+const DeferredChatbot = () => {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const idle = (window as any).requestIdleCallback || ((cb: any) => setTimeout(cb, 2500));
+    const handle = idle(() => setShow(true));
+    return () => {
+      const cancel = (window as any).cancelIdleCallback;
+      if (cancel) cancel(handle); else clearTimeout(handle);
+    };
+  }, []);
+  if (!show) return null;
+  return (
+    <Suspense fallback={null}>
+      <AIChatbot />
+    </Suspense>
+  );
+};
+
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
@@ -66,9 +84,7 @@ const App = () => (
             </Routes>
           </Suspense>
           <Footer />
-          <Suspense fallback={null}>
-            <AIChatbot />
-          </Suspense>
+          <DeferredChatbot />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

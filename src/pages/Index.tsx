@@ -1,17 +1,22 @@
+import { lazy, Suspense } from "react";
 import Hero from "@/components/Hero";
-import CounterStats from "@/components/CounterStats";
-import TrustBadges from "@/components/TrustBadges";
-import ServiceBlocks from "@/components/ServiceBlocks";
-import TrendingServices from "@/components/TrendingServices";
-import WhyChooseUs from "@/components/WhyChooseUs";
-import ProcessSection from "@/components/ProcessSection";
-import PortfolioPreview from "@/components/PortfolioPreview";
-import Testimonials from "@/components/Testimonials";
-import FAQSection from "@/components/FAQSection";
-import CTASection from "@/components/CTASection";
-import PartnerMap from "@/components/PartnerMap";
 import SEO from "@/components/SEO";
 import { organizationSchema, localBusinessSchema, websiteSchema, faqSchema, homeFAQs } from "@/lib/seoSchemas";
+
+// Lazy-load everything below the fold so the hero paints fast
+const CounterStats = lazy(() => import("@/components/CounterStats"));
+const TrustBadges = lazy(() => import("@/components/TrustBadges"));
+const ServiceBlocks = lazy(() => import("@/components/ServiceBlocks"));
+const TrendingServices = lazy(() => import("@/components/TrendingServices"));
+const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
+const ProcessSection = lazy(() => import("@/components/ProcessSection"));
+const PortfolioPreview = lazy(() => import("@/components/PortfolioPreview"));
+const Testimonials = lazy(() => import("@/components/Testimonials"));
+const FAQSection = lazy(() => import("@/components/FAQSection"));
+const CTASection = lazy(() => import("@/components/CTASection"));
+const PartnerMap = lazy(() => import("@/components/PartnerMap"));
+
+const SectionFallback = () => <div className="h-32" />;
 
 const Index = () => {
   return (
@@ -24,26 +29,28 @@ const Index = () => {
         schema={[organizationSchema, localBusinessSchema, websiteSchema, faqSchema(homeFAQs)]}
       />
       <Hero />
-      <CounterStats />
-      <TrustBadges />
-      <div className="section-divider" />
-      <ServiceBlocks />
-      <div className="section-divider" />
-      <TrendingServices />
-      <div className="section-divider" />
-      <WhyChooseUs />
-      <div className="section-divider" />
-      <ProcessSection />
-      <div className="section-divider" />
-      <PortfolioPreview />
-      <div className="section-divider" />
-      <Testimonials />
-      <div className="section-divider" />
-      <PartnerMap />
-      <div className="section-divider" />
-      <FAQSection />
-      <div className="section-divider" />
-      <CTASection />
+      <Suspense fallback={<SectionFallback />}>
+        <CounterStats />
+        <TrustBadges />
+        <div className="section-divider" />
+        <ServiceBlocks />
+        <div className="section-divider" />
+        <TrendingServices />
+        <div className="section-divider" />
+        <WhyChooseUs />
+        <div className="section-divider" />
+        <ProcessSection />
+        <div className="section-divider" />
+        <PortfolioPreview />
+        <div className="section-divider" />
+        <Testimonials />
+        <div className="section-divider" />
+        <PartnerMap />
+        <div className="section-divider" />
+        <FAQSection />
+        <div className="section-divider" />
+        <CTASection />
+      </Suspense>
     </main>
   );
 };
