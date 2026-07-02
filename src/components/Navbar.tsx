@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -17,7 +19,7 @@ const serviceItems = [
   { label: "BIM Modeling", slug: "bim-modeling" },
   { label: "Construction Documents", slug: "construction-documents" },
   { label: "Material Estimation", slug: "material-estimation" },
-  { label: "Plan Stamping", slug: "plan-stamping" },
+  { label: "Licensed Review Coordination", slug: "plan-stamping" },
   { label: "Permit Expediting", slug: "permit-expediting" },
 ];
 
