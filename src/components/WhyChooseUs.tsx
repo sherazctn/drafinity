@@ -1,14 +1,16 @@
+// ============= Full file contents =============
+
 import { motion } from "framer-motion";
 import { Shield, Award, Clock, Lock, Users, CheckCircle } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
 
 const pillars = [
-  { icon: Award, animation: "pulse" as const, title: "USA Certified", description: "Licensed professionals delivering code-compliant, permit-ready plans across all 50 states." },
-  { icon: Clock, animation: "rotate" as const, title: "Since 2015", description: "Nearly a decade of trusted experience in drafting, design, and plan stamping services." },
-  { icon: Shield, animation: "glow" as const, title: "Quality Assured", description: "Rigorous quality control processes ensure accuracy and compliance in every deliverable." },
+  { icon: Award, animation: "pulse" as const, title: "Experienced Team", description: "Skilled drafters and documentation specialists delivering precise, well-coordinated drawings for projects of all scales. Service availability depends on project location, project type, and applicable local requirements." },
+  { icon: Clock, animation: "rotate" as const, title: "Since 2015", description: "Nearly a decade of trusted experience in CAD drafting, BIM modeling, 3D visualization, and building documentation support services." },
+  { icon: Shield, animation: "glow" as const, title: "Quality Assured", description: "Rigorous quality control processes ensure accuracy and coordination in every deliverable." },
   { icon: Lock, animation: "bounce" as const, title: "Secure & Confidential", description: "Your project data is protected with enterprise-grade security and strict confidentiality." },
   { icon: Users, animation: "wave" as const, title: "Dedicated Team", description: "A specialized team assigned to your project for consistent communication and results." },
-  { icon: CheckCircle, animation: "float" as const, title: "Zero-Revision Guarantee", description: "Our multi-step QC process ensures plans are right the first time, saving you time and money." },
+  { icon: CheckCircle, animation: "float" as const, title: "Zero-Revision Guarantee", description: "Our multi-step QC process ensures drawings are right the first time, saving you time and money." },
 ];
 
 const WhyChooseUs = () => {
@@ -48,7 +50,7 @@ const WhyChooseUs = () => {
                 className="text-muted-foreground leading-relaxed mb-6"
               >
                 We combine industry expertise with cutting-edge AI technology to
-                deliver plans that exceed expectations. Every project is handled with
+                deliver documentation that exceeds expectations. Every project is handled with
                 the precision, intelligence, and care it deserves.
               </motion.p>
               <motion.p
@@ -59,7 +61,7 @@ const WhyChooseUs = () => {
                 className="text-muted-foreground leading-relaxed mb-6"
               >
                 At Drafinity, we don't just create drawings — we build confidence. Our clients
-                trust us because we understand the stakes: every dimension matters, every code
+                trust us because we understand the stakes: every dimension matters, every
                 requirement counts, and every deadline is non-negotiable. From residential
                 renovations to multi-million dollar commercial developments, we deliver the same
                 level of meticulous attention to detail.
@@ -71,7 +73,7 @@ const WhyChooseUs = () => {
                 transition={{ delay: 0.3 }}
                 className="text-muted-foreground leading-relaxed mb-6"
               >
-                Our team of certified drafters, designers, and engineers brings together decades
+                Our team of skilled drafters and documentation specialists brings together decades
                 of combined experience across residential, commercial, industrial, and institutional
                 projects. We stay ahead by investing in AI-enhanced workflows, the latest CAD and
                 BIM technology, continuous professional development, and rigorous quality management systems.
@@ -83,10 +85,10 @@ const WhyChooseUs = () => {
                 transition={{ delay: 0.35 }}
                 className="text-muted-foreground leading-relaxed"
               >
-                Whether you're an architect looking for reliable outsourcing, a contractor
-                needing fast permit-ready plans, or a developer managing multiple projects
+                Whether you're a licensed professional looking for reliable drafting support, a contractor
+                needing permit drawing preparation assistance, or a developer managing multiple projects
                 simultaneously — Drafinity is the partner you can count on to deliver
-                exceptional results, on time, every time.
+                exceptional documentation support, on time, every time.
               </motion.p>
             </div>
 
