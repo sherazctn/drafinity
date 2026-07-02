@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { motion } from "framer-motion";
 import { Award, Users, Shield, Cpu, Target, Globe } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
@@ -9,17 +11,17 @@ import { organizationSchema, breadcrumbSchema } from "@/lib/seoSchemas";
 const stats = [
   { value: "2015", label: "Founded" },
   { value: "500+", label: "Projects Completed" },
-  { value: "50", label: "States Covered" },
+  { value: "Multi-State", label: "Service Reach" },
   { value: "100%", label: "Client Satisfaction" },
 ];
 
 const values = [
-  { icon: Award, animation: "pulse" as const, title: "Certified Excellence", description: "Every deliverable is certified by licensed professionals, ensuring compliance with local and national building codes." },
+  { icon: Award, animation: "pulse" as const, title: "Quality Excellence", description: "Every deliverable goes through rigorous internal quality checks, ensuring consistency and accuracy across all drawings and documentation." },
   { icon: Users, animation: "wave" as const, title: "Client-Centric Approach", description: "We tailor our services to your unique project needs, providing dedicated support from start to finish." },
-  { icon: Shield, animation: "glow" as const, title: "Uncompromising Quality", description: "Multi-stage quality assurance checks guarantee accuracy, consistency, and compliance in every drawing." },
+  { icon: Shield, animation: "glow" as const, title: "Uncompromising Quality", description: "Multi-stage quality assurance checks guarantee accuracy, consistency, and attention to detail in every drawing." },
   { icon: Cpu, animation: "rotate" as const, title: "AI-Enhanced Technology", description: "We leverage AI-powered drafting tools, automated code checking, and intelligent BIM workflows to deliver faster, more accurate results." },
   { icon: Target, animation: "bounce" as const, title: "Precision-Driven", description: "Every measurement, every line, every detail is verified for absolute precision in all deliverables." },
-  { icon: Globe, animation: "float" as const, title: "Nationwide Coverage", description: "We serve clients across all 50 states with consistent quality and rapid turnaround times." },
+  { icon: Globe, animation: "float" as const, title: "Broad Service Reach", description: "We serve clients across many locations with consistent quality and rapid turnaround times. Service availability depends on project location, project type, and applicable local requirements." },
 ];
 
 const softwareTools = ["AutoCAD", "Revit", "ArchiCAD", "SketchUp Pro", "V-Ray", "Lumion", "Bluebeam Revu", "Adobe Creative Suite"];
@@ -29,18 +31,18 @@ const timelineEvents = [
   { year: "2017", event: "Expanded to 3D rendering & visualization" },
   { year: "2019", event: "Achieved 200+ project milestone" },
   { year: "2021", event: "Launched BIM modeling services" },
-  { year: "2023", event: "Nationwide plan stamping coverage" },
-  { year: "2025", event: "AI-enhanced workflows & 500+ projects across 50 states" },
+  { year: "2023", event: "Expanded drafting and documentation support coverage" },
+  { year: "2025", event: "AI-enhanced workflows & 500+ projects completed" },
 ];
 
 const About = () => {
   return (
     <main>
       <SEO
-        title="About Drafinity LLC — USA Certified Drafting Firm Since 2015"
-        description="Learn about Drafinity LLC, a USA-certified drafting and plan stamping firm based in Albuquerque, NM. 500+ projects, 100% client satisfaction, AI-enhanced workflows since 2015."
+        title="About Drafinity LLC — USA Drafting & Documentation Support Since 2015"
+        description="Learn about Drafinity LLC, a USA-based drafting and design documentation support company in Albuquerque, NM. 500+ projects, 100% client satisfaction, AI-enhanced workflows since 2015."
         path="/about"
-        keywords="about Drafinity, drafting company, architectural firm USA, certified drafting service"
+        keywords="about Drafinity, drafting company, drafting support USA, building documentation support"
         schema={[organizationSchema, breadcrumbSchema([{name:'Home',path:'/'},{name:'About',path:'/about'}])]}
       />
       <section className="pt-32 pb-20 lg:pt-40 lg:pb-28 blueprint-grid relative overflow-hidden">
@@ -51,7 +53,7 @@ const About = () => {
             We Turn Concepts Into<br /><span className="text-gradient-highlight">Permit-Ready Plans</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Drafinity LLC is a USA-based drafting and design firm specializing in AI-enhanced, precision-driven architectural plans, 3D visualization, and certified plan stamping. Since 2015, we've partnered with architects, contractors, and developers to deliver exceptional quality powered by cutting-edge technology.
+            Drafinity LLC is a USA-based drafting and design documentation support company specializing in AI-enhanced, precision-driven building documentation, 3D visualization, and permit drawing preparation support. Since 2015, we've partnered with contractors, designers, and developers to deliver exceptional quality powered by cutting-edge technology.
           </motion.p>
         </div>
       </section>

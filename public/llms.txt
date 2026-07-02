@@ -1,12 +1,12 @@
 # Drafinity LLC
 
-> Drafinity LLC is a USA-certified architectural drafting, 3D rendering, BIM modeling, structural drafting, and plan stamping firm headquartered in Albuquerque, New Mexico, serving all 50 US states since 2015. We deliver permit-ready, code-compliant plans for residential, commercial, and industrial projects with AI-enhanced workflows for faster turnaround.
+> Drafinity LLC is a professional drafting support, 3D rendering, BIM modeling, and building documentation support company headquartered in Albuquerque, New Mexico, serving clients across the United States since 2015. We deliver construction documentation, permit drawing preparation support, and design visualization services for residential, commercial, and industrial projects using AI-enhanced workflows for faster turnaround.
 
 ## Company Facts
 - **Legal name**: Drafinity LLC
 - **Founded**: 2015
 - **Headquarters**: 1209 Mountain Road Pl NE, Albuquerque, NM 87110, USA
-- **Service area**: All 50 United States
+- **Service area**: United States (availability depends on project requirements and applicable local rules)
 - **Phone**: +1 (917) 728-1625
 - **Email**: info@drafinity.us
 - **Website**: https://drafinity.us
@@ -16,13 +16,13 @@
 - **Quote turnaround**: Free quote within 24 hours
 
 ## Services
-- 2D Architectural Drafting (floor plans, elevations, sections, site plans, as-builts)
+- 2D Drafting Support (floor plans, elevations, sections, site plans, as-builts)
 - 3D Modeling & Photorealistic Rendering (V-Ray, Lumion, Enscape)
 - BIM Modeling in Autodesk Revit (LOD 100–500), clash detection, BIM 360
-- Structural Drafting (foundations, framing, steel, concrete, wood) — stamped by licensed PEs
-- MEP Drafting (mechanical, electrical, plumbing, HVAC load calcs)
-- Plan Stamping & Permit Expediting in all 50 US states
-- Construction Documents (permit-ready, IBC/IRC/ADA compliant)
+- Structural Drafting Support (foundations, framing, steel, concrete, wood)
+- MEP Drafting Support (mechanical, electrical, plumbing, HVAC load calcs)
+- Licensed Review Coordination Support & Permit Expediting
+- Construction Documentation Support (permit drawing preparation, IBC/IRC/ADA reference)
 - Material Estimation & Quantity Takeoffs
 - Interior Design & Visualization
 - AI-Enhanced Generative Design & Automated Code Checking
@@ -31,8 +31,8 @@
 AutoCAD, Revit, ArchiCAD, SketchUp, 3ds Max, V-Ray, Lumion, Enscape, BIM 360, Navisworks, Bluebeam, ETABS, SAP2000, RISA-3D, STAAD.Pro, Tekla Structures, Civil 3D, MicroStation.
 
 ## Why Choose Drafinity
-- Licensed architects and Professional Engineers (PEs) in all 50 states
-- 100% permit-ready, code-compliant deliverables
+- Professional drafting and documentation support for a wide range of project types
+- Permit drawing preparation support — licensed review and approval by client's chosen licensed professional
 - Free quotes delivered within 24 hours
 - AI-augmented workflows deliver projects up to 3× faster
 - 500+ successful projects, 100% client satisfaction since 2015

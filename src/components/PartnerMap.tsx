@@ -3,12 +3,12 @@ import { useState } from "react";
 import { USAMap, USAStateAbbreviation } from "@mirawision/usa-map-react";
 
 const allServices = [
-  "2D Floor Plans", "3D Rendering", "Plan Stamping", "Structural Drafting",
+  "2D Floor Plans", "3D Rendering", "Permit Drawing Preparation", "Structural Drafting",
   "MEP Drafting", "Site Plans", "BIM Modeling", "Interior Visualization",
   "Construction Documents", "Landscape Design", "Material Estimation",
   "Permit Expediting", "BIM Coordination & Clash Detection",
-  "Code Compliance Review", "As-Built Documentation",
-  "Structural Analysis & Value Engineering",
+  "Code Reference Documentation", "As-Built Documentation",
+  "Structural Drafting & Documentation",
 ];
 
 const serviceStates: USAStateAbbreviation[] = [
@@ -93,13 +93,13 @@ const PartnerMap = () => {
       <div className="container mx-auto px-4 lg:px-8">
         <div className="text-center mb-16">
           <motion.span initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground mb-4 block">
-            Nationwide Coverage
+            Remote Drafting Support
           </motion.span>
           <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} className="text-3xl lg:text-5xl font-heading font-bold mb-4">
             States We Serve
           </motion.h2>
           <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} className="text-muted-foreground max-w-xl mx-auto">
-            Professional drafting, design, and plan stamping services available across the United States
+            Drafinity provides remote drafting, BIM modeling, and construction documentation support. Where a licensed professional review is required, that responsibility rests with the client's designated licensed professional.
           </motion.p>
         </div>
 
@@ -131,20 +131,20 @@ const PartnerMap = () => {
 
                       {/* Service type label */}
                       <p className="text-[10px] font-heading uppercase tracking-wider mb-2 px-2 py-0.5 rounded inline-block" style={{ background: isHQ ? "hsla(0,65%,55%,0.2)" : "hsla(0,0%,100%,0.1)" }}>
-                        {isHQ ? "★ Native Services" : isService ? "Partner Service" : isComingSoon ? "Coming Soon" : "Contact for Availability"}
+                        {isHQ ? "★ HQ — Drafting Support" : isService ? "Coverage Area" : isComingSoon ? "Coming Soon" : "Contact for Availability"}
                       </p>
 
                       {/* Partner info */}
                       {isService && !isHQ && (
                         <div className="mb-2">
                           <p className="text-[10px] text-primary-foreground/50">Partner: <span className="text-primary-foreground/70 italic">Coming Soon</span></p>
-                          <p className="text-[10px] text-primary-foreground/50">License: <span className="text-primary-foreground/70">(TBD)</span></p>
+                          
                         </div>
                       )}
                       {isHQ && (
                         <div className="mb-2">
                           <p className="text-[10px] text-primary-foreground/50">Drafinity LLC — Registered</p>
-                          <p className="text-[10px] text-primary-foreground/50">License: <span className="text-primary-foreground/70">(NM-REG-2024)</span></p>
+                          <p className="text-[10px] text-primary-foreground/50">Drafinity LLC · Drafting & Documentation</p>
                         </div>
                       )}
 
@@ -180,11 +180,11 @@ const PartnerMap = () => {
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 1 }} className="flex flex-wrap items-center justify-center gap-6 mt-8">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full" style={{ background: "hsl(0, 60%, 55%)" }} />
-            <span className="text-xs text-muted-foreground">Native Services (New Mexico)</span>
+            <span className="text-xs text-muted-foreground">Drafinity HQ (New Mexico)</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded border" style={{ background: "hsl(0, 0%, 90%)", borderColor: "hsl(0, 0%, 70%)" }} />
-            <span className="text-xs text-muted-foreground">Partner Service</span>
+            <span className="text-xs text-muted-foreground">Coverage Area</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded border" style={{ background: "hsl(0, 0%, 95%)", borderColor: "hsl(0, 0%, 80%)" }} />
@@ -194,16 +194,16 @@ const PartnerMap = () => {
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-background border border-border rounded-lg p-6">
-            <h4 className="text-sm font-heading font-bold mb-2">Professional Engineering</h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">PE-stamped plans available across all active states for structural, mechanical, and civil engineering.</p>
+            <h4 className="text-sm font-heading font-bold mb-2">Technical Drafting Support</h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">Structural, MEP, and civil drafting documentation support prepared for review by the client's licensed professional of record.</p>
           </div>
           <div className="bg-background border border-border rounded-lg p-6">
-            <h4 className="text-sm font-heading font-bold mb-2">Registered Architect</h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">RA-certified architectural plan review and stamping for residential and commercial projects.</p>
+            <h4 className="text-sm font-heading font-bold mb-2">Design Documentation Support</h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">Building design documentation prepared to support your design team or licensed professional of record on residential and commercial projects.</p>
           </div>
           <div className="bg-background border border-border rounded-lg p-6">
-            <h4 className="text-sm font-heading font-bold mb-2">Code Compliance</h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">IBC, IRC, ADA, OSHA, and local jurisdiction code compliance review included with every plan set.</p>
+            <h4 className="text-sm font-heading font-bold mb-2">Code Reference & Documentation</h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">Construction documents prepared with reference to IBC, IRC, ADA, and OSHA standards. Formal code compliance determination is performed by the client's licensed professional of record.</p>
           </div>
         </motion.div>
       </div>

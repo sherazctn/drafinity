@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { motion } from "framer-motion";
 import { Eye, Lightbulb, Globe, Rocket, TrendingUp, Users } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
@@ -7,11 +9,11 @@ import SEO from "@/components/SEO";
 import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 const visionPoints = [
-  { icon: Eye, animation: "pulse" as const, title: "Industry Leadership", description: "To be the most trusted name in architectural drafting and design services across the United States, setting new standards for quality, speed, and innovation." },
-  { icon: Globe, animation: "float" as const, title: "Nationwide Accessibility", description: "Making world-class drafting and design services accessible to every architect, contractor, and developer in all 50 states through our expanding partner network." },
-  { icon: Rocket, animation: "bounce" as const, title: "AI-Powered Future", description: "Leading the integration of Artificial Intelligence, machine learning, and generative design into every phase of architectural documentation — from automated code checking to intelligent clash detection." },
+  { icon: Eye, animation: "pulse" as const, title: "Industry Leadership", description: "To be a trusted partner for drafting, BIM, visualization, and design documentation support across the United States, setting new standards for quality, speed, and innovation." },
+  { icon: Globe, animation: "float" as const, title: "Broad Accessibility", description: "Making world-class drafting and design documentation support accessible to contractors, designers, and developers wherever they build. Service availability depends on project location, project type, and applicable local requirements." },
+  { icon: Rocket, animation: "bounce" as const, title: "AI-Powered Future", description: "Leading the integration of Artificial Intelligence, machine learning, and generative design into every phase of building documentation — from automated code checking to intelligent clash detection." },
   { icon: TrendingUp, animation: "wave" as const, title: "Sustainable Growth", description: "Building a company that grows sustainably by investing in our people, AI infrastructure, and processes while maintaining the highest standards of quality." },
-  { icon: Users, animation: "glow" as const, title: "Community Impact", description: "Contributing to safer, more beautiful built environments by ensuring every project we touch meets the highest standards of code compliance and design excellence." },
+  { icon: Users, animation: "glow" as const, title: "Community Impact", description: "Contributing to safer, more functional built environments by ensuring every project we support is prepared with the highest standards of drafting care and documentation accuracy." },
   { icon: Lightbulb, animation: "rotate" as const, title: "Innovation Culture", description: "Fostering a culture where AI, automation, and human expertise work together — empowering every team member to deliver faster, smarter, and more accurate results than ever before." },
 ];
 
@@ -19,8 +21,8 @@ const Vision = () => {
   return (
     <main>
       <SEO
-        title="Our Vision — AI-Forward Architectural Drafting"
-        description="Drafinity's vision: redefining architectural drafting with AI-driven precision, automation, and accessibility for builders, architects, and developers across the USA."
+        title="Our Vision — AI-Forward Drafting & Documentation Support"
+        description="Drafinity's vision: redefining drafting and design documentation support with AI-driven precision, automation, and accessibility for builders, designers, and developers across the USA."
         path="/vision"
         schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Vision',path:'/vision'}])]}
       />
@@ -29,10 +31,10 @@ const Vision = () => {
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground mb-4 block">Our Vision</motion.span>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-4xl lg:text-6xl font-heading font-bold mb-6 max-w-3xl">
-            Building the Future of<br /><span className="text-gradient-highlight">Architectural Services</span>
+            Building the Future of<br /><span className="text-gradient-highlight">Design Documentation Support</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            We envision a world where AI and human expertise converge to create precise, code-compliant, and beautifully crafted architectural documentation — delivered faster and more affordably than ever before.
+            We envision a world where AI and human expertise converge to create precise, code-aware, and professionally prepared building documentation and drafting support — delivered faster and more affordably than ever before.
           </motion.p>
         </div>
       </section>
@@ -43,7 +45,7 @@ const Vision = () => {
           <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
             <Eye className="w-12 h-12 mx-auto mb-6 text-muted-foreground/40" />
             <blockquote className="text-2xl lg:text-3xl font-heading font-bold leading-relaxed mb-6">
-              "To revolutionize the AEC industry by harnessing the power of AI, automation, and human craftsmanship to deliver unmatched precision, speed, and innovation — making world-class architectural services accessible to all."
+              "To revolutionize the AEC industry by harnessing the power of AI, automation, and human craftsmanship to deliver unmatched precision, speed, and innovation — making world-class drafting and documentation support services accessible to all."
             </blockquote>
             <p className="text-sm text-muted-foreground">— Drafinity LLC Leadership Team</p>
           </motion.div>

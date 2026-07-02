@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, ArrowUpRight, Clock } from "lucide-react";
 import logo from "@/assets/drafinity-logo.png";
@@ -22,7 +24,7 @@ const resourceLinks = [
 const serviceLinks = [
   { label: "2D Floor Plans", href: "/services/2d-floor-plans" },
   { label: "3D Rendering", href: "/services/3d-rendering" },
-  { label: "Plan Stamping", href: "/services/plan-stamping" },
+  { label: "Licensed Review Coordination", href: "/services/plan-stamping" },
   { label: "BIM Modeling", href: "/services/bim-modeling" },
   { label: "Structural Drafting", href: "/services/structural-drafting" },
   { label: "MEP Drafting", href: "/services/mep-drafting" },
@@ -39,8 +41,7 @@ const Footer = () => {
           <div className="lg:col-span-4">
             <img src={logo} alt="Drafinity LLC" className="h-7 w-auto invert dark:invert-0 mb-4" />
             <p className="text-sm text-primary-foreground/60 leading-relaxed max-w-xs mb-6">
-              USA Certified Drafting, 3D Design & Plan Stamping Experts. Delivering
-              permit-ready, precision-driven plans since 2015.
+              Professional Drafting, BIM, 3D Visualization & Documentation Support. Precision-driven building documentation since 2015.
             </p>
             <div className="space-y-3">
               <a href="tel:+19177281625" className="flex items-center gap-3 text-sm text-primary-foreground/60 hover:text-primary-foreground transition-colors">
@@ -121,9 +122,12 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-primary-foreground/50">© 2015 – 2026 Drafinity LLC. All rights reserved.</p>
             <div className="flex items-center gap-6">
-              <span className="text-xs text-primary-foreground/50">USA Certified · Precision-Driven · Since 2015</span>
+              <span className="text-xs text-primary-foreground/50">Drafting & Documentation Support · Precision-Driven · Since 2015</span>
             </div>
           </div>
+          <p className="text-xs text-primary-foreground/50 mt-4 leading-relaxed">
+            Drafinity LLC provides drafting, BIM, visualization, and documentation support services. Drafinity LLC is not a licensed architecture or engineering firm in jurisdictions where such licensure is required and does not independently provide regulated architecture, engineering, signing, sealing, stamping, or code approval services. Projects requiring licensed professional review must be reviewed and approved by the appropriate licensed professional.
+          </p>
         </div>
       </div>
     </footer>

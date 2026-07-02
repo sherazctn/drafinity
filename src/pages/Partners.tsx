@@ -10,7 +10,7 @@ import { breadcrumbSchema } from "@/lib/seoSchemas";
 
 const allServices = [
   "2D Floor Plans", "Structural Drafting", "Site Plans", "MEP Drafting",
-  "3D Rendering", "BIM Modeling", "Plan Stamping", "Permit Expediting",
+  "3D Rendering", "BIM Modeling", "Permit Drawing Preparation", "Permit Expediting",
   "Construction Documents", "Material Estimation", "Interior Visualization",
 ];
 
@@ -39,7 +39,7 @@ const featuredPartners = [
     state: "California",
     license: "LIC-10274",
     address: "114 Main Street, California",
-    services: ["Site Plans", "MEP Drafting", "Construction Documents", "Plan Stamping", "Permit Expediting"],
+    services: ["Site Plans", "MEP Drafting", "Construction Documents", "Permit Drawing Preparation", "Permit Expediting"],
     isNative: false,
   },
 ];
@@ -61,8 +61,8 @@ const Partners = () => {
   return (
     <main>
       <SEO
-        title="Partners — Licensed Architects & Engineers in All 50 States"
-        description="Drafinity partners with licensed architects and Professional Engineers across all 50 US states to deliver stamped, permit-ready drawings nationwide."
+        title="Partners — Drafting & Documentation Support Partner Network"
+        description="Drafinity works with a network of partners to provide drafting, BIM modeling, 3D visualization, and construction documentation support. Service availability depends on project location, project type, and applicable local requirements."
         path="/partners"
         schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Partners',path:'/partners'}])]}
       />
@@ -71,10 +71,10 @@ const Partners = () => {
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground mb-4 block">Our Network</motion.span>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="text-3xl lg:text-6xl font-heading font-bold mb-6 max-w-3xl">
-            Licensed Partners<br /><span className="text-gradient-highlight">Across 50 States</span>
+            Documentation Support<br /><span className="text-gradient-highlight">Partner Network</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-base lg:text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Our nationwide network of licensed professionals ensures your projects meet local codes and regulations in every state.
+            Our partner network provides drafting, BIM, 3D visualization, and construction documentation support. Service availability depends on project location, project type, and applicable local requirements.
           </motion.p>
         </div>
       </section>

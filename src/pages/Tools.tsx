@@ -526,10 +526,10 @@ const Tools = () => {
       <Helmet>
         <title>Free Construction Calculators & AEC Tools | Drafinity LLC</title>
         <meta name="description" content="All free tools for basic use for industry ease. 24+ free construction calculators: concrete, mortgage, stair, roof pitch, HVAC, electrical load, plumbing, flooring, tile, rebar, paint, drywall, insulation, fence, mulch, cost per sq ft and more." />
-        <meta name="keywords" content="free construction calculator, concrete calculator, mortgage calculator, stair calculator, roof pitch calculator, HVAC calculator, electrical load calculator, plumbing calculator, flooring calculator, tile calculator, rebar calculator, paint calculator, drywall calculator, building tools, AEC tools, architecture tools, fence calculator, mulch calculator, cost per square foot" />
+        <meta name="keywords" content="free construction calculator, concrete calculator, mortgage calculator, stair calculator, roof pitch calculator, HVAC calculator, electrical load calculator, plumbing calculator, flooring calculator, tile calculator, rebar calculator, paint calculator, drywall calculator, building tools, AEC tools, building design tools, fence calculator, mulch calculator, cost per square foot" />
         <link rel="canonical" href="https://drafinity.lovable.app/tools" />
         <meta property="og:title" content="Free Construction Calculators & AEC Tools | Drafinity" />
-        <meta property="og:description" content="All free tools for basic use for industry ease. 24+ professional-grade calculators for architects, engineers, contractors, and homeowners." />
+        <meta property="og:description" content="All free tools for basic use for industry ease. 24+ professional-grade calculators for designers, engineers, contractors, and homeowners." />
         <meta property="og:type" content="website" />
       </Helmet>
 
@@ -541,7 +541,7 @@ const Tools = () => {
             All Free Tools for<br /><span className="text-gradient-highlight">Basic Use for Industry Ease</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-base lg:text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            {tools.length} free professional-grade calculators and tools for architects, engineers, contractors, and homeowners. No signup required — instantly calculate materials, costs, and design parameters for your next project.
+            {tools.length} free professional-grade calculators and tools for designers, engineers, contractors, and homeowners. No signup required — instantly calculate materials, costs, and design parameters for your next project.
           </motion.p>
         </div>
       </section>
@@ -670,7 +670,7 @@ const Tools = () => {
               >
                 <h2 className="text-2xl lg:text-3xl font-heading font-bold mb-6">Professional Construction Calculators — Built for the Industry</h2>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                  Drafinity's free construction calculators help architects, engineers, contractors, and homeowners estimate materials, plan designs, and ensure code compliance. From concrete volume and stair dimensions to HVAC tonnage and electrical load sizing — all calculations follow industry standards including IRC, IECC, and NEC codes.
+                  Drafinity's free construction calculators help designers, engineers, contractors, and homeowners estimate materials, plan designs, and ensure code compliance. From concrete volume and stair dimensions to HVAC tonnage and electrical load sizing — all calculations follow industry standards including IRC, IECC, and NEC codes.
                 </p>
                 <h3 className="text-lg font-heading font-semibold mb-3">Why Use Our Free Tools?</h3>
                 <ul className="text-sm text-muted-foreground space-y-2 mb-6">

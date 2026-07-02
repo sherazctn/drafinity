@@ -41,7 +41,7 @@ import render3d15 from "@/assets/render-3d-15.jpg";
 const allProjects = [
   { image: luxury1, title: "Palm Vista Modern Residence", category: "Luxury Rendering", result: "Pre-sold 8 units before construction" },
   { image: luxury2, title: "Skyline Mixed-Use Complex", category: "Luxury Rendering", result: "Secured $12M development funding" },
-  { image: luxury3, title: "Greenfield Contemporary Villa", category: "Luxury Rendering", result: "Featured in Architectural Digest" },
+  { image: luxury3, title: "Greenfield Contemporary Villa", category: "Luxury Rendering", result: "Featured in a leading design publication" },
   { image: luxury4, title: "Emerald Terrace Townhouse", category: "Luxury Rendering", result: "Won Best Residential Design 2023" },
   { image: luxury5, title: "Grand Luxe Shopping Mall", category: "Luxury Rendering", result: "Attracted 3 anchor tenants pre-lease" },
   { image: luxury6, title: "Marina Bay Waterfront Township", category: "Luxury Rendering", result: "Government approval in 45 days" },

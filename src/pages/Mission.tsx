@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { motion } from "framer-motion";
 import { Target, Heart, Zap, Award, ShieldCheck, Handshake } from "lucide-react";
 import AnimatedIcon from "@/components/AnimatedIcon";
@@ -9,25 +11,25 @@ import { breadcrumbSchema } from "@/lib/seoSchemas";
 const missionValues = [
   { icon: Target, animation: "pulse" as const, title: "Precision First", description: "Every measurement, every line, every detail is verified for absolute precision. We believe that accuracy in documentation prevents costly errors in construction." },
   { icon: Heart, animation: "wave" as const, title: "Client Success", description: "Our clients' success is our success. We go beyond deliverables to become true partners in your projects, offering guidance, expertise, and unwavering support." },
-  { icon: Zap, animation: "bounce" as const, title: "Speed Without Compromise", description: "We've built systems and workflows that allow us to deliver faster than industry averages without ever compromising on quality or code compliance." },
-  { icon: Award, animation: "glow" as const, title: "Excellence in Every Detail", description: "From the first sketch to the final stamped document, we maintain the highest standards of professional excellence across every deliverable." },
-  { icon: ShieldCheck, animation: "rotate" as const, title: "Code Compliance Guaranteed", description: "Every plan we produce is reviewed against current local, state, and national building codes — ensuring first-time permit approvals." },
+  { icon: Zap, animation: "bounce" as const, title: "Speed Without Compromise", description: "We've built systems and workflows that allow us to deliver faster than industry averages without ever compromising on quality or documentation accuracy." },
+  { icon: Award, animation: "glow" as const, title: "Excellence in Every Detail", description: "From the first sketch to the final deliverable, we maintain the highest standards of professional excellence across every drawing and document." },
+  { icon: ShieldCheck, animation: "rotate" as const, title: "Code Awareness in Documentation", description: "Every plan we prepare is cross-referenced against current local, state, and national building codes to support first-time permit approvals." },
   { icon: Handshake, animation: "float" as const, title: "Transparent Partnership", description: "We believe in clear communication, honest timelines, and transparent pricing. No hidden fees, no surprises — just reliable, professional service." },
 ];
 
 const commitments = [
   { metric: "24hr", label: "Quote Turnaround", description: "Every project inquiry receives a detailed quote within one business day." },
-  { metric: "100%", label: "Code Compliance", description: "All deliverables are reviewed for compliance with applicable building codes." },
+  { metric: "100%", label: "Quality Review", description: "All deliverables are reviewed for accuracy and consistency before delivery." },
   { metric: "3x", label: "Quality Checks", description: "Triple-stage quality assurance on every drawing before delivery." },
-  { metric: "50", label: "States Covered", description: "Licensed professionals available in all 50 US states." },
+  { metric: "Multi-State", label: "Service Reach", description: "Drafting support available for projects in many locations. Service availability depends on project location, project type, and applicable local requirements." },
 ];
 
 const Mission = () => {
   return (
     <main>
       <SEO
-        title="Our Mission — Precision, Speed, Compliance"
-        description="Drafinity's mission is to deliver permit-ready, code-compliant drafting and plan stamping services with unmatched precision and 24-hour quote turnaround in all 50 states."
+        title="Our Mission — Precision, Speed, Documentation Quality"
+        description="Drafinity's mission is to deliver permit drawing preparation support and building documentation with unmatched precision and 24-hour quote turnaround. Service availability depends on project location and applicable requirements."
         path="/mission"
         schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Mission',path:'/mission'}])]}
       />
@@ -39,7 +41,7 @@ const Mission = () => {
             Empowering Builders With<br /><span className="text-gradient-highlight">Precision & Trust</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Our mission is to empower architects, contractors, and developers with AI-enhanced, precision-driven architectural documentation — blending cutting-edge technology with expert craftsmanship to deliver permit-ready plans on time, every time.
+            Our mission is to empower homeowners, contractors, designers, and developers with AI-enhanced, precision-driven building documentation and drafting support — blending cutting-edge technology with expert craftsmanship to deliver permit drawing packages on time, every time.
           </motion.p>
         </div>
       </section>
@@ -50,7 +52,7 @@ const Mission = () => {
           <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }}>
             <Target className="w-12 h-12 mx-auto mb-6 text-muted-foreground/40" />
             <blockquote className="text-2xl lg:text-3xl font-heading font-bold leading-relaxed mb-6">
-              "To deliver the highest quality drafting, design, and documentation services that help our clients build safer, smarter, and more beautiful structures — while making the permit process seamless and stress-free."
+              "To deliver the highest quality drafting, design documentation, and drawing support services that help our clients build safer, smarter, and more functional structures — while making the permit preparation process seamless and stress-free."
             </blockquote>
             <p className="text-sm text-muted-foreground">— Drafinity LLC</p>
           </motion.div>

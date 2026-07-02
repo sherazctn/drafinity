@@ -8,11 +8,11 @@ import { breadcrumbSchema } from "@/lib/seoSchemas";
 const posts = [
   { slug: "ai-drafting-2026", title: "How AI Is Quietly Rewriting the Drafting Workflow in 2026", excerpt: "From auto-dimensioning to instant code checks, AI copilots are reshaping how drafters move from sketch to permit set. Here's what's actually working on real projects this quarter — and what's still hype.", category: "AI & Automation", date: "May 6, 2026", readTime: "6 min read" },
   { slug: "revit-2026-features", title: "Revit 2026: The Five Updates Drafting Teams Should Care About", excerpt: "Autodesk's latest release ships smarter MEP routing, faster large-model performance, and tighter Revit-to-IFC handoff. We break down which features pay back the upgrade cost in week one.", category: "Technology", date: "May 3, 2026", readTime: "7 min read" },
-  { slug: "energy-code-2026-changes", title: "2026 Energy Code Changes Every Architect Should Plan For", excerpt: "Updated IECC envelope rules, new air-leakage thresholds, and stricter window U-values are landing across multiple states. A practical checklist so your next permit set doesn't get red-lined.", category: "Compliance", date: "May 1, 2026", readTime: "8 min read" },
-  { slug: "adu-permit-trends", title: "Why ADU Permit Demand Is Surging — And How to Draft for It", excerpt: "Backyard cottages, garage conversions, and detached suites are dominating residential queues in 2026. Learn the drafting standards, setback nuances, and stamping shortcuts that move ADUs through plan check fast.", category: "Industry Trends", date: "April 28, 2026", readTime: "5 min read" },
+  { slug: "energy-code-2026-changes", title: "2026 Energy Code Changes Every Design Team Should Plan For", excerpt: "Updated IECC envelope rules, new air-leakage thresholds, and stricter window U-values are landing across multiple states. A practical checklist so your next permit set doesn't get red-lined.", category: "Compliance", date: "May 1, 2026", readTime: "8 min read" },
+  { slug: "adu-permit-trends", title: "Why ADU Permit Demand Is Surging — And How to Draft for It", excerpt: "Backyard cottages, garage conversions, and detached suites are dominating residential queues in 2026. Learn the drafting standards, setback nuances, and documentation approaches that help move ADU permit sets through plan check efficiently.", category: "Industry Trends", date: "April 28, 2026", readTime: "5 min read" },
   { slug: "bim-coordination-clash-free", title: "Clash-Free BIM: A Modern Coordination Playbook for Small Teams", excerpt: "You don't need a 50-seat BIM department to deliver clash-free models. Inside: lightweight Navisworks workflows, federated model rules, and review cadences that scale with mid-market firms.", category: "BIM", date: "April 25, 2026", readTime: "6 min read" },
-  { slug: "what-is-plan-stamping", title: "What is Plan Stamping & Why It Matters", excerpt: "Plan stamping is the process of having a licensed professional review and certify your construction documents. Learn why it's essential for getting permits approved across all US states.", category: "Compliance", date: "January 15, 2026", readTime: "5 min read" },
-  { slug: "top-cad-tools", title: "Top 5 CAD Tools for Accurate Plans in 2026", excerpt: "From AutoCAD to Revit, we break down the best CAD software for architectural drafting. Compare features, pricing, and workflows to find the right tool for your projects.", category: "Technology", date: "January 8, 2026", readTime: "7 min read" },
+  { slug: "what-is-plan-stamping", title: "What is Licensed Plan Review & Why It Matters for Your Project", excerpt: "Licensed plan review is the process by which a licensed professional of record reviews and certifies construction documents. Learn why it's a key step in the permit approval process and how thorough drafting support helps prepare your documents for that review.", category: "Compliance", date: "January 15, 2026", readTime: "5 min read" },
+  { slug: "top-cad-tools", title: "Top 5 CAD Tools for Accurate Plans in 2026", excerpt: "From AutoCAD to Revit, we break down the best CAD software for building design drafting and documentation. Compare features, pricing, and workflows to find the right tool for your projects.", category: "Technology", date: "January 8, 2026", readTime: "7 min read" },
   { slug: "prepare-sketches", title: "How to Prepare Sketches for Drafting Services", excerpt: "Getting the most out of your drafting service starts with good preparation. Here's how to create effective hand sketches that communicate your design intent clearly.", category: "Tips", date: "December 20, 2025", readTime: "4 min read" },
   { slug: "bim-vs-cad", title: "BIM vs. CAD: Which Is Right for Your Project?", excerpt: "Building Information Modeling and traditional CAD serve different purposes. We explain when to use each approach and how they can work together for optimal results.", category: "Technology", date: "December 10, 2025", readTime: "6 min read" },
   { slug: "permit-process-guide", title: "A Complete Guide to the Building Permit Process", excerpt: "Navigating the building permit process can be complex. This comprehensive guide walks you through every step, from initial application to final inspection.", category: "Compliance", date: "November 28, 2025", readTime: "8 min read" },
@@ -24,7 +24,7 @@ const Blog = () => {
     <main>
       <SEO
         title="Blog — Drafting, BIM, Permits & Construction Insights"
-        description="Read Drafinity's blog for expert insights on architectural drafting, BIM modeling, building codes, permits, 3D rendering, and the latest AEC industry trends."
+        description="Read Drafinity's blog for expert insights on drafting support, BIM modeling, building codes, permits, 3D rendering, and the latest design and construction industry trends."
         path="/blog"
         schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Blog',path:'/blog'}])]}
       />
@@ -36,7 +36,7 @@ const Blog = () => {
             Insights &<br /><span className="text-gradient-highlight">Industry Knowledge</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Expert articles on drafting, CAD technology, compliance, and best practices for the architecture and construction industry.
+            Expert articles on drafting support, CAD technology, compliance, and best practices for the design and construction industry.
           </motion.p>
         </div>
       </section>
