@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { motion, useAnimationFrame } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import { useRef, useState } from "react";
@@ -14,7 +16,7 @@ const testimonials = [
     role: "Interior Designer, LA",
   },
   {
-    quote: "We've relied on Drafinity for plan stamping across multiple states. Fast turnaround, always compliant, always professional.",
+    quote: "We've relied on Drafinity for drafting and documentation support across multiple projects. Fast turnaround, always thorough, always professional.",
     name: "James Rodriguez",
     role: "Development Firm Owner, FL",
   },
@@ -26,10 +28,10 @@ const testimonials = [
   {
     quote: "From initial sketches to permit-ready documents in under a week. The speed and quality are unmatched in the industry.",
     name: "Emily Parker",
-    role: "Architect, Chicago",
+    role: "Designer, Chicago",
   },
   {
-    quote: "We needed plans stamped across 15 states for a retail rollout. Drafinity handled it flawlessly — all permits approved first submission.",
+    quote: "We needed coordinated drawing packages for a retail rollout across 15 locations. Drafinity handled it flawlessly — all submissions approved first round.",
     name: "David Kim",
     role: "Retail Developer, CA",
   },

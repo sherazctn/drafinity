@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import CTASection from "@/components/CTASection";
@@ -8,16 +10,16 @@ import { breadcrumbSchema } from "@/lib/seoSchemas";
 const testimonials = [
   { quote: "Drafinity delivered our complete set of construction documents ahead of schedule. Their attention to detail saved us from costly revisions during permitting.", name: "Michael Chen", role: "General Contractor, NYC" },
   { quote: "The 3D renderings were exceptional — our clients were able to visualize the project perfectly before construction even began. Outstanding work.", name: "Sarah Williams", role: "Interior Designer, LA" },
-  { quote: "We've relied on Drafinity for plan stamping across multiple states. Fast turnaround, always compliant, always professional.", name: "James Rodriguez", role: "Development Firm Owner, FL" },
+  { quote: "We've relied on Drafinity for drafting and documentation support across multiple projects. Fast turnaround, always thorough, always professional.", name: "James Rodriguez", role: "Development Firm Owner, FL" },
   { quote: "Their BIM modeling caught clashes that would have cost us over $200K in change orders. Drafinity is now our go-to for every project.", name: "Robert Martinez", role: "Project Manager, TX" },
-  { quote: "From initial sketches to permit-ready documents in under a week. The speed and quality are unmatched in the industry.", name: "Emily Parker", role: "Architect, Chicago" },
-  { quote: "We needed plans stamped across 15 states for a retail rollout. Drafinity handled it flawlessly — all permits approved first submission.", name: "David Kim", role: "Retail Developer, CA" },
+  { quote: "From initial sketches to permit-ready documents in under a week. The speed and quality are unmatched in the industry.", name: "Emily Parker", role: "Designer, Chicago" },
+  { quote: "We needed coordinated drawing packages for a retail rollout across 15 locations. Drafinity handled it flawlessly — all submissions approved first round.", name: "David Kim", role: "Retail Developer, CA" },
   { quote: "The structural drafting precision was remarkable. Our engineers praised the quality and it passed review without a single comment.", name: "Amanda Foster", role: "Structural Engineer, Denver" },
-  { quote: "Drafinity's MEP coordination eliminated all conflicts before we even broke ground. The BIM model was incredibly detailed.", name: "Thomas Wright", role: "MEP Contractor, Seattle" },
+  { quote: "Drafinity's coordination documentation eliminated all conflicts before we even broke ground. The BIM model was incredibly detailed.", name: "Thomas Wright", role: "MEP Contractor, Seattle" },
   { quote: "As a small developer, I need reliable partners. Drafinity has been exactly that — responsive, professional, and always on time.", name: "Lisa Chang", role: "Residential Developer, Portland" },
-  { quote: "The permit expediting service saved us 6 weeks on our timeline. They knew exactly what each jurisdiction required.", name: "Kevin O'Brien", role: "Construction Manager, Boston" },
+  { quote: "The permit drawing preparation saved us 6 weeks on our timeline. They knew exactly what each jurisdiction required.", name: "Kevin O'Brien", role: "Construction Manager, Boston" },
   { quote: "Their interior visualizations helped us sell 80% of units before construction completed. The quality was photographic.", name: "Rachel Green", role: "Marketing Director, Miami" },
-  { quote: "I've worked with many drafting firms. Drafinity is the only one that consistently delivers permit-ready plans on the first submission.", name: "Mark Johnson", role: "Architect, San Francisco" },
+  { quote: "I've worked with many drafting firms. Drafinity is the only one that consistently delivers permit-ready drawing packages on the first submission.", name: "Mark Johnson", role: "Designer, San Francisco" },
 ];
 
 const TestimonialsPage = () => {
@@ -25,7 +27,7 @@ const TestimonialsPage = () => {
     <main>
       <SEO
         title="Client Testimonials — 100% Satisfaction Across 500+ Projects"
-        description="Read what 237+ clients say about Drafinity's drafting, 3D rendering, BIM, and plan stamping services. 4.9/5 average rating across 500+ completed projects."
+        description="Read what 237+ clients say about Drafinity's drafting, 3D rendering, BIM, and design documentation support services. 4.9/5 average rating across 500+ completed projects."
         path="/testimonials"
         schema={[breadcrumbSchema([{name:'Home',path:'/'},{name:'Testimonials',path:'/testimonials'}])]}
       />
@@ -37,7 +39,7 @@ const TestimonialsPage = () => {
             What Our Clients<br /><span className="text-gradient-highlight">Say About Us</span>
           </motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="text-lg text-muted-foreground max-w-2xl leading-relaxed">
-            Hear from architects, contractors, and developers who trust Drafinity for their most important projects.
+            Hear from homeowners, contractors, designers, and developers who trust Drafinity for their most important projects.
           </motion.p>
         </div>
       </section>

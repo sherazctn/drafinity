@@ -11,7 +11,7 @@ import { breadcrumbSchema } from "@/lib/seoSchemas";
 const softwareCategories = [
   { label: "CAD & Drafting", tools: [
     { name: "AutoCAD", description: "Industry-standard 2D and 3D CAD design software for precise floor plans, site plans, and detailed construction drawings.", use: "Floor Plans, Site Plans, Details" },
-    { name: "ArchiCAD", description: "Powerful BIM software for architectural design with comprehensive building models and integrated documentation.", use: "Architectural Design, Documentation" },
+    { name: "ArchiCAD", description: "Powerful BIM software for building design documentation with comprehensive building models and integrated project documentation.", use: "Building Design, Documentation" },
     { name: "DraftSight", description: "Professional-grade 2D/3D CAD solution for creating, editing, and reviewing DWG files with precision.", use: "2D Drafting, DWG Editing" },
     { name: "MicroStation", description: "Advanced CAD platform for infrastructure design, from roads to buildings, used by top engineering firms.", use: "Infrastructure, Civil Design" },
   ]},
@@ -23,11 +23,11 @@ const softwareCategories = [
   ]},
   { label: "3D Visualization & Rendering", tools: [
     { name: "SketchUp Pro", description: "Intuitive 3D modeling software for rapid design exploration, excellent for conceptual design and client presentations.", use: "Concept Design, Massing Studies" },
-    { name: "V-Ray", description: "Professional rendering engine producing photorealistic images with industry-leading quality for architectural visualization.", use: "Photorealistic Rendering" },
+    { name: "V-Ray", description: "Professional rendering engine producing photorealistic images with industry-leading quality for building and design visualization.", use: "Photorealistic Rendering" },
     { name: "Lumion", description: "Real-time 3D visualization software with vast material and object libraries for quick, high-quality renderings and animations.", use: "Real-time Rendering, Animations" },
     { name: "Enscape", description: "Real-time rendering and VR plugin that integrates directly with Revit, SketchUp, and ArchiCAD.", use: "Real-time Walkthroughs, VR" },
-    { name: "3ds Max", description: "Professional 3D modeling, animation, and rendering software for complex architectural visualizations.", use: "3D Modeling, Animation" },
-    { name: "Twinmotion", description: "Real-time immersive 3D visualization tool based on Unreal Engine for high-quality architectural presentations.", use: "Immersive Presentations" },
+    { name: "3ds Max", description: "Professional 3D modeling, animation, and rendering software for complex building and design visualizations.", use: "3D Modeling, Animation" },
+    { name: "Twinmotion", description: "Real-time immersive 3D visualization tool based on Unreal Engine for high-quality building and design presentations.", use: "Immersive Presentations" },
   ]},
   { label: "Documentation & Review", tools: [
     { name: "Bluebeam Revu", description: "PDF markup and collaboration tool designed for AEC professionals, streamlining document review and quality control.", use: "Plan Review, Markup, QC" },
@@ -50,7 +50,7 @@ const modernMethods = [
   { icon: Brain, animation: "pulse" as const, title: "AI-Enhanced Drafting", description: "We leverage AI-powered tools for intelligent object recognition, automated dimensioning, and predictive design suggestions — reducing turnaround time by up to 40%." },
   { icon: Cpu, animation: "rotate" as const, title: "Generative Design", description: "Using computational algorithms to explore thousands of design variations based on constraints — optimizing for cost, materials, and structural performance simultaneously." },
   { icon: Workflow, animation: "bounce" as const, title: "Digital Twin Technology", description: "Creating real-time digital replicas of buildings that synchronize with construction data, enabling live monitoring and predictive maintenance from day one." },
-  { icon: Layers, animation: "wave" as const, title: "Cloud-Based BIM Collaboration", description: "Real-time multi-discipline coordination in the cloud — architects, engineers, and contractors work on the same live model with zero file conflicts." },
+  { icon: Layers, animation: "wave" as const, title: "Cloud-Based BIM Collaboration", description: "Real-time multi-discipline coordination in the cloud — designers, engineers, and contractors work on the same live model with zero file conflicts." },
   { icon: Zap, animation: "glow" as const, title: "Automated Code Checking", description: "AI-driven compliance verification against IBC, IRC, ADA, and local codes — catching violations before they reach the permit office." },
   { icon: Globe, animation: "float" as const, title: "VR/AR Design Reviews", description: "Immersive virtual walkthroughs let clients experience their building before construction starts — reducing change orders by up to 60%." },
 ];

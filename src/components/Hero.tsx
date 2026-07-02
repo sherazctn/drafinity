@@ -1,3 +1,5 @@
+// ============= Full file contents =============
+
 import { Link } from "react-router-dom";
 import { Phone, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -8,7 +10,7 @@ import BlueprintAnimation from "@/components/BlueprintAnimation";
 const headingLines = [
   { line1: "Precision Drafting", line2: "& 3D Design", icon: "✏️" },
   { line1: "Permit-Ready Plans", line2: "You Can Trust", icon: "📋" },
-  { line1: "AI-Enhanced", line2: "Architecture", icon: "🤖" },
+  { line1: "AI-Enhanced", line2: "BIM & CAD Support", icon: "🤖" },
   { line1: "From Concept", line2: "To Construction", icon: "🏗️" },
 ];
 
@@ -73,7 +75,7 @@ const Hero = () => {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-flex items-center gap-2 text-xs font-heading uppercase tracking-[0.2em] text-muted-foreground border border-border rounded-full px-4 py-1.5 mb-8">
               <motion.span animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 2, repeat: Infinity }} className="w-1.5 h-1.5 rounded-full bg-foreground" />
-              USA Certified Since 2015 • AI-Enhanced
+              Drafting & Documentation Support Since 2015 • AI-Enhanced
             </span>
           </motion.div>
 
@@ -117,8 +119,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="text-lg lg:text-xl text-muted-foreground max-w-2xl mb-12 leading-relaxed"
           >
-            Delivering permit-ready, AI-enhanced precision plans with secure quality.
-            Certified drafting, 3D rendering & plan stamping you can trust.
+            Delivering precision drafting, AI-enhanced BIM modeling, 3D rendering, and building documentation support for homeowners, contractors, designers, developers, and licensed professionals.
           </motion.p>
 
           <motion.div
